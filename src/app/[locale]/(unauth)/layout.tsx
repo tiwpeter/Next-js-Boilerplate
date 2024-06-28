@@ -117,7 +117,44 @@ export default function Layout(props: { children: React.ReactNode }) {
                     <span>Home</span>
                   )}
                 </li>
+                {/* ------------------------------------- */}
+                <li className="border-t border-b">
+                   {/* Home */}
+                <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
+                  <span className="icon">📌</span>
+                  {isMenuOpen ? (
+                    <Link href="/" passHref>
+                      <span
+                        className="border-none text-gray-700 hover:text-gray-900 block py-2"
+                        onClick={closeMenu}
+                      >
+                        {t('home_link')}
+                      </span>
+                    </Link>
+                  ) : (
+                    <span>Home</span>
+                  )}
+                </li>
                 {/* Home */}
+                 {/* Home */}
+                 <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
+                  <span className="icon">📌</span>
+                  {isMenuOpen ? (
+                    <Link href="/" passHref>
+                      <span
+                        className="border-none text-gray-700 hover:text-gray-900 block py-2"
+                        onClick={closeMenu}
+                      >
+                        {t('home_link')}
+                      </span>
+                    </Link>
+                  ) : (
+                    <span>Home</span>
+                  )}
+                </li>
+                {/* Home */}
+                </li>
+                {/* ------------------------------------- */}
               </ul>
             </div>
             {/* ตัวย่อ */}
