@@ -29,35 +29,35 @@ export default function Layout(props: { children: React.ReactNode }) {
               menu
             </i>
           </div>
-        <div className="bg-red-500">
-          <ul>
-            <li>
-              <span className="icon">📌</span>
-              {isMenuOpen ? (
-                <Link href="/" passHref>
-                  <span
-                    className="border-none text-gray-700 hover:text-gray-900 cursor-pointer"
+          <div className={`bg-red-500 ${isMenuOpen ? 'w-299' : 'w-5'}`}>
+            <ul className="pl-0">
+              <li>
+                <span className="icon">📌</span>
+                {isMenuOpen ? (
+                  <Link href="/" passHref>
+                    <span
+                      className="border-none text-gray-700 hover:text-gray-900 cursor-pointer block px-4 py-2"
+                      onClick={closeMenu}
+                    >
+                      {t('home_link')}
+                    </span>
+                  </Link>
+                ) : null}
+              </li>
+              <li>
+                <span className="icon">📌</span>
+                {isMenuOpen ? (
+                  <Link
+                    href="/about/"
+                    className="border-none text-gray-700 hover:text-gray-900"
                     onClick={closeMenu}
                   >
-                    {t('home_link')}
-                  </span>
-                </Link>
-              ) : null}
-            </li>
-            <li>
-              <span className="icon">📌</span>
-              {isMenuOpen ? (
-                <Link
-                  href="/about/"
-                  className="border-none text-gray-700 hover:text-gray-900"
-                  onClick={closeMenu}
-                >
-                  {t('about_link')}
-                </Link>
-              ) : null}
-            </li>
-          </ul>
-      </div>
+                    {t('about_link')}
+                  </Link>
+                ) : null}
+              </li>
+            </ul>
+          </div>
         </>
       }
     >
