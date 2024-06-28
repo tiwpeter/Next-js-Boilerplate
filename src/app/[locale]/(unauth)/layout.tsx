@@ -35,22 +35,6 @@ export default function Layout(props: { children: React.ReactNode }) {
             <div className={`bg-red-500 ${isMenuOpen ? 'w-299' : 'w-10'}`}>
               <ul className="pl-0">
                 {/* ตัวย่อ */}
-                <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2 h-40' : ''}`}>
-                  <span className="icon">📌</span>
-                  {isMenuOpen ? (
-                    <Link href="/" passHref>
-                      <span
-                        className="border-none text-gray-700 hover:text-gray-900 block py-2"
-                        onClick={closeMenu}
-                      >
-                        {t('home_link')}
-                      </span>
-                    </Link>
-                  ) : (
-                    <span>Home</span>
-                  )}
-                </li>
-                {/* Home */}
                 <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
                   <span className="icon">📌</span>
                   {isMenuOpen ? (
@@ -66,7 +50,23 @@ export default function Layout(props: { children: React.ReactNode }) {
                     <span>Home</span>
                   )}
                 </li>
-                {/* Home */}
+                {/* About */}
+                <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
+                  <span className="icon">📌</span>
+                  {isMenuOpen ? (
+                    <Link href="/about/" passHref>
+                      <span
+                        className="border-none text-gray-700 hover:text-gray-900 block py-2"
+                        onClick={closeMenu}
+                      >
+                        {t('about_link')}
+                      </span>
+                    </Link>
+                  ) : (
+                    <span>About</span>
+                  )}
+                </li>
+                {/* About */}
                 {/* Home */}
                 <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
                   <span className="icon">📌</span>
