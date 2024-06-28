@@ -13,6 +13,10 @@ export default function Layout(props: { children: React.ReactNode }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <BaseTemplate
       leftNav={
@@ -26,33 +30,31 @@ export default function Layout(props: { children: React.ReactNode }) {
             </i>
           </div>
 
-          {/* ใช้เงื่อนไขเพื่อตรวจสอบว่าเมนูเปิดหรือปิด */}
           <ul>
             <li>
-            <span className="icon">📌</span>
+              <span className="icon">📌</span>
               {isMenuOpen ? (
                 <Link href="/" passHref>
-                  <span className="border-none text-gray-700 hover:text-gray-900 cursor-pointer">
+                  <span
+                    className="border-none text-gray-700 hover:text-gray-900 cursor-pointer"
+                    onClick={closeMenu}
+                  >
                     {t('home_link')}
                   </span>
                 </Link>
               ) : null}
-              {/* ในกรณีที่ต้องการเพิ่มเมนูอื่น ๆ สามารถเพิ่มได้ต่อไป */}
             </li>
             <li>
-              
+              <span className="icon">📌</span>
               {isMenuOpen ? (
-                 <li>
-                              <span className="icon">📌</span>
-                 <Link
-                   href="/about/"
-                   className="border-none text-gray-700 hover:text-gray-900"
-                 >
-                   {t('about_link')}
-                 </Link>
-               </li>
+                <Link
+                  href="/about/"
+                  className="border-none text-gray-700 hover:text-gray-900"
+                  onClick={closeMenu}
+                >
+                  {t('about_link')}
+                </Link>
               ) : null}
-              {/* ในกรณีที่ต้องการเพิ่มเมนูอื่น ๆ สามารถเพิ่มได้ต่อไป */}
             </li>
           </ul>
         </>
