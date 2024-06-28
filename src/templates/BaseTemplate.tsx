@@ -1,12 +1,19 @@
+"use client"
 import { useTranslations } from 'next-intl';
 import { AppConfig } from '@/utils/AppConfig';
+import { useState } from 'react';
 
 const BaseTemplate = (props: {
   leftNav: React.ReactNode;
   rightNav?: React.ReactNode;
   children: React.ReactNode;
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = useTranslations('BaseTemplate');
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="w-full px-1 text-gray-700 antialiased">
@@ -17,16 +24,30 @@ const BaseTemplate = (props: {
               {AppConfig.name}
             </h1>
             <div>
-              <i className="material-icons icon-va-8 p-lnr-8">menu</i>
+              <i
+                className="material-icons icon-va-8 p-lnr-8 cursor-pointer"
+                onClick={toggleMenu}
+              >
+                menu
+              </i>
             </div>
             <h2 className="text-xl">{t('description')}</h2>
           </div>
         </header>
 
-        <main>
-          {props.leftNav && <aside>{props.leftNav}</aside>}
-          <section>{props.children}</section>
-          {props.rightNav && <aside>{props.rightNav}</aside>}
+        <main className="bg-blue-200">
+          {/* Always show rightNav */}
+          <aside>{props.rightNav}</aside>
+
+          {/* Show leftNav and children only when isMenuOpen is true */}
+          {isMenuOpen && (
+            <nav>
+              <ul>
+                {props.leftNav}
+              </ul>
+              <section>{props.children}</section>
+            </nav>
+          )}
         </main>
       </div>
     </div>
@@ -34,41 +55,3 @@ const BaseTemplate = (props: {
 };
 
 export { BaseTemplate };
-{/* 
-          <div className="flex justify-between">
-            <nav>
-              <ul className="flex flex-wrap gap-x-5 text-xl">
-                {props.leftNav}
-              </ul>
-            </nav>
-
-            <nav>
-              <ul className="flex flex-wrap gap-x-5 text-xl">
-                {props.rightNav}
-              </ul>
-            </nav>
-          </div>
-  */}
-
-
-/**
- * 
-        <main>{props.children}</main>
-
-        <footer className="border-t border-gray-300 py-8 text-center text-sm">
-          © Copyright {new Date().getFullYear()} {AppConfig.name}.
-          {` ${t('made_with')} `}
-          <a
-            href="https://creativedesignsguru.com"
-            className="text-blue-700 hover:border-b-2 hover:border-blue-700"
-          >
-            CreativeDesignsGuru
-          </a>
-          .
-          {/*
-           * PLEASE READ THIS SECTION
-           * I'm an indie maker with limited resources and funds, I'll really appreciate if you could have a link to my website.
-           * The link doesn't need to appear on every pages, one link on one page is enough.
-           * For example, in the `About` page. Thank you for your support, it'll mean a lot to me.
-           */
-       /*    </footer> */
