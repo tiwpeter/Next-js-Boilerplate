@@ -22,14 +22,14 @@ export default function Layout(props: { children: React.ReactNode }) {
       leftNav={
         <>
           <div>
-            <i
-              className="material-icons icon-va-8 p-lnr-8 cursor-pointer"
+            <i 
+              className="material-icons icon-va-8 p-lnr-8 cursor-pointer flex"
               onClick={toggleMenu}
             >
               menu
             </i>
           </div>
-
+        <div className="bg-red-500">
           <ul>
             <li>
               <span className="icon">📌</span>
@@ -57,6 +57,7 @@ export default function Layout(props: { children: React.ReactNode }) {
               ) : null}
             </li>
           </ul>
+      </div>
         </>
       }
     >
