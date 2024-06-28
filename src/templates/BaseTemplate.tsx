@@ -36,18 +36,13 @@ const BaseTemplate = (props: {
         </header>
 
         <main className="bg-blue-200">
-          {/* Always show rightNav */}
-          <aside>{props.rightNav}</aside>
 
-          {/* Show leftNav and children only when isMenuOpen is true */}
-          {isMenuOpen && (
-            <nav>
-              <ul>
-                {props.leftNav}
-              </ul>
+          <aside>{props.rightNav}</aside>
+            <>
+              <aside>{props.leftNav}</aside>
               <section>{props.children}</section>
-            </nav>
-          )}
+            </>
+
         </main>
       </div>
     </div>
