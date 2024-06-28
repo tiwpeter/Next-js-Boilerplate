@@ -1,5 +1,4 @@
 import { useTranslations } from 'next-intl';
-
 import { AppConfig } from '@/utils/AppConfig';
 
 const BaseTemplate = (props: {
@@ -17,9 +16,25 @@ const BaseTemplate = (props: {
             <h1 className="text-3xl font-bold text-gray-900">
               {AppConfig.name}
             </h1>
+            <div>
+              <i className="material-icons icon-va-8 p-lnr-8">menu</i>
+            </div>
             <h2 className="text-xl">{t('description')}</h2>
           </div>
+        </header>
 
+        <main>
+          {props.leftNav && <aside>{props.leftNav}</aside>}
+          <section>{props.children}</section>
+          {props.rightNav && <aside>{props.rightNav}</aside>}
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export { BaseTemplate };
+{/* 
           <div className="flex justify-between">
             <nav>
               <ul className="flex flex-wrap gap-x-5 text-xl">
@@ -33,8 +48,11 @@ const BaseTemplate = (props: {
               </ul>
             </nav>
           </div>
-        </header>
+  */}
 
+
+/**
+ * 
         <main>{props.children}</main>
 
         <footer className="border-t border-gray-300 py-8 text-center text-sm">
@@ -52,11 +70,5 @@ const BaseTemplate = (props: {
            * I'm an indie maker with limited resources and funds, I'll really appreciate if you could have a link to my website.
            * The link doesn't need to appear on every pages, one link on one page is enough.
            * For example, in the `About` page. Thank you for your support, it'll mean a lot to me.
-           */}
-        </footer>
-      </div>
-    </div>
-  );
-};
-
-export { BaseTemplate };
+           */
+       /*    </footer> */
