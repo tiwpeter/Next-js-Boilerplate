@@ -17,7 +17,7 @@ export async function generateMetadata(props: { params: { locale: string } }) {
 export default function Index() {
   return (
     <>
-      <h1>Announce</h1>
+      {/**<h1>Announce</h1> */}
       
     </>
   );

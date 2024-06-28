@@ -40,13 +40,17 @@ export default function Layout(props: { children: React.ReactNode }) {
               {/* ในกรณีที่ต้องการเพิ่มเมนูอื่น ๆ สามารถเพิ่มได้ต่อไป */}
             </li>
             <li>
-            <span className="icon">📌</span>
+              
               {isMenuOpen ? (
-                <Link href="/" passHref>
-                  <span className="border-none text-gray-700 hover:text-gray-900 cursor-pointer">
-                    {t('home_link')}
-                  </span>
-                </Link>
+                 <li>
+                              <span className="icon">📌</span>
+                 <Link
+                   href="/about/"
+                   className="border-none text-gray-700 hover:text-gray-900"
+                 >
+                   {t('about_link')}
+                 </Link>
+               </li>
               ) : null}
               {/* ในกรณีที่ต้องการเพิ่มเมนูอื่น ๆ สามารถเพิ่มได้ต่อไป */}
             </li>

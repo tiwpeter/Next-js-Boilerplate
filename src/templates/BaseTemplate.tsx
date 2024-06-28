@@ -35,7 +35,7 @@ const BaseTemplate = (props: {
           </div>
         </header>
 
-        <main className="bg-blue-200">
+        <main className="bg-blue-200 flex h-screen">
 
           <aside>{props.rightNav}</aside>
             <>
