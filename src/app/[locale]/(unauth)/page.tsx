@@ -77,12 +77,34 @@ export default function Index() {
         </div>
 
         <div className='flex bg-red-500 h-[285.7px] w-[1080px] border border-black'>
-          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '88px', height:'99px' }}>ssw</div>
-          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '88px', height:'99px' }}>ssw</div>
+          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '539px', height:'99px' }}>ssw</div>
+          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '539px', height:'99px' }}>ssw</div>
         </div>
 
-      </div>
+        {/*Pantip Pick */}
+        <div className='border border-gray-500 rounded-lg p-2 mt-6'>
+          <h1>Pantip Pick </h1>
+       </div>
+        <div className='flex'>
+          
+          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '711px', height:'99px' }}>
+              dwdw
+          </div>
+          
+          <div className='bg-red-500 rounded-lg p-2 border border-black ml-6' style={{ width: '345px', height:'99px' }}>
+            dwdw
+           </div>
+
+          {/* more */}
+          <div className='border border-gray-500 rounded-lg p-2'>
+          
+
+       </div>
       
+
+        </div>
+      </div>
+     
     </>
   );
 }
