@@ -1,10 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // Define settings for your API request (specific to your example)
-const settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://pantip.com/api/forum-service/home/get_suggest_topic_popular",
+const pantipApiSettings = {
   "method": "POST",
   "headers": {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
@@ -22,24 +19,25 @@ const settings = {
     "Sec-Fetch-Site": "same-origin",
     "TE": "trailers"
   },
-  "data": {
-    "type": "room",
-    "limit": "1"
-  }
+  body: new URLSearchParams({ type: 'room', limit: '1' }),
+  // ตั้งค่า URL ของ Pantip API ที่ต้องการเรียกใช้
+  // ตรงนี้ควรจะเป็น URL ที่ใช้สำหรับการเรียก API ของ Pantip
+  "baseUrl": "https://pantip.com/api/forum-service/home/get_suggest_topic_popular",
 };
 
-// Define a service using a base URL and expected endpoints (example with Pokemon API)
-export const pokemonApi = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pantip.com/api/forum-service/home/get_suggest_topic_popular' }),
+// Define a service using a base URL and expected endpoints (example with Pantip API)
+export const pantipApi = createApi({
+  reducerPath: 'pantipApi',
+  baseQuery: fetchBaseQuery(pantipApiSettings),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-        //กำหนด endpoint ที่ต้องการสร้างใน Redux Toolkit Query API ซึ่งจะทำให้ง่ายต่อการทำ asynchronous data fetching
-      query: () => `th/pokemonApi`,
+    getSuggestedTopics: builder.query({
+      query: () => ({
+        // ต้องการส่งออกข้อมูลที่ได้จากการเรียก API
+      }),
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery } = pokemonApi;
+export const { useGetSuggestedTopicsQuery } = pantipApi;
