@@ -1,0 +1,110 @@
+.card-image{
+  position: relative;
+  height: 150px;
+  width: 150px;
+  /*border: ;*/
+}
+
+
+.slide-contianer{
+  max-height: 1120px;
+  width: 100%;
+  background-color: grey;
+  padding: 40px 0;
+}
+
+
+/*protant*/
+.img-content,
+.card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+.img-content{
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+}
+.ovelay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4070F4;
+  border-radius: 25px 25px 0 25px;
+}
+
+.ovelay::before,
+.ovelay::after{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: #4070F4;
+}
+.ovelay::after{
+  border-radius: 0 25px 0 0;
+  background-color: #FFF;
+}
+
+.slide-content{
+  margin: 0 40px;
+}
+
+
+.card{
+  border-radius: 25px;
+  background-color: #fff;
+  width: 320px;
+}
+
+.card-img .card-image{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.name{
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+
+.des{
+  font-size: 14px;
+  font-weight: 500;
+  color: #707070;
+}
+
+
+.button{
+  border: none;
+  font-size: 16px;
+  color: #FFF;
+  padding: 8px 16px;
+  background-color: #4070F4;
+  border-radius: 6px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover{
+  background: #265DE2;
+}
+
+/*
+body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #efefef;*/

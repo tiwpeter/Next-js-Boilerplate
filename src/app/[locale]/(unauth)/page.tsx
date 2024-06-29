@@ -1,6 +1,20 @@
 import { getTranslations } from 'next-intl/server';
 
-import { Sponsors } from '@/components/Sponsors';
+// Import Swiper core and required modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+
+import './scoll.css';
+<script src='./scoll.js'></script>
+
+// Install Swiper modules
+SwiperCore.use([Navigation, Pagination]);
 
 export async function generateMetadata(props: { params: { locale: string } }) {
   const t = await getTranslations({
@@ -17,6 +31,7 @@ export async function generateMetadata(props: { params: { locale: string } }) {
 export default function Index() {
   return (
     <>
+    
       <div className='bg-red-500' style={{ width: '1080px', height:'185px' }}>
         <div className='border border-gray-500 rounded-lg p-2'>
           <h1>Announce</h1>
@@ -57,14 +72,38 @@ export default function Index() {
 </div>
   
         </div>
+
         {/*Highlight */}
-        <div className='border border-gray-500 rounded-lg p-2 mt-6'>
-          <h1>Highlight</h1>
+        <div className="slide-contianer swiper">
+          <div className="slide-content">
+            <div className="card-wrapper swiper-wrapper">
+              <div className="card swiper-slide">
+              <div className="img-content">
+                <span className='ovelay'></span>
+
+                <div className="card-image">
+                  <img src="https://ptcdn.info/home_highlight/2024-06/665e86cecaac0a8d7a784b57_ftj2m89oih_400.png" alt="" className="card-img" />
+                </div>
+              </div>
+
+              <div className="card-content">
+                <h2 className='name'>Dep</h2>
+                <p className='des'>sadasdwsfww</p>
+                <button className="button">View More</button>
+              </div>
+
+              </div>
+            </div>
+          </div>
+          <div className="swiper-button-next"></div>
+          <div className="swiper-button-prev"></div>
+          <div className="swiper-pagination"></div>
         </div>
 
-        <div  className='bg-red-500 h-[285.7px] w-[1080px]">'>
+        {/*Highlight */}
 
-        </div>
+
+
 
         {/*Pantip Realtime */}
         <div className='border border-gray-500 rounded-lg p-2 mt-6'>
