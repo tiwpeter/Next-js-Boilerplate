@@ -16,23 +16,36 @@ const App = () => {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div className="App">
-      <h1>Suggested Topics</h1>
-      {data && Array.isArray(data) && (
-        <ul>
-          {data.map((topic) => (
-            <li key={topic.id}>
-              <h2>{topic.title}</h2>
-              {/* แสดงข้อมูลอื่น ๆ ตามต้องการ */}
-            </li>
-          ))}
-        </ul>
-      )}
-      {/* Console log to inspect data */}
-      {console.log('Data from API:', data)}
-    </div>
+//เราใช้ data.data.map เนื่องจากข้อมูลจะถูกจัดเก็บภายใต้ property data ซึ่งเป็นลำดับที่เราต้องการเข้าถึง.
+//สำหรับแต่ละห้อง (room) เราแสดงชื่อห้องทั้งภาษาไทยและภาษาอังกฤษ.
+//สำหรับแต่ละหัวข้อ (topic) ภายในห้องนั้น ๆ เราแสดงหัวข้อ (topic_title) พร้อมกับข้อมูลเพิ่มเติมเช่นจำนวนวิว (views) และจำนวนความคิดเห็น (comments) ตามต้องการ.
+
+return (
+  <div className="App">
+    <h1>Suggested Topics</h1>
+    {data && (
+      <ul>
+        {data.data.map((room) => (
+          <li key={room.room_id}>
+            <h2>{room.room_name_th}</h2>
+            <ul>
+              {room.topics.map((topic) => (
+                <li key={topic.topic_id}>
+                  <h3>{topic.topic_title}</h3>
+                  {/* แสดงข้อมูลเพิ่มเติมที่เกี่ยวข้องกับ topic ตามต้องการ */}
+                  <p>Views: {topic.views}</p>
+                  <p>Comments: {topic.comments}</p>
+                  {/* แสดงข้อมูลเพิ่มเติมที่เกี่ยวข้องกับ topic ตามต้องการ */}
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
   );
-}
+};
+
 
 export default App;
