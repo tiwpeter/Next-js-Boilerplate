@@ -60,7 +60,9 @@ const BaseTemplate = (props: {
           <aside>{props.rightNav}</aside>
             <>
               <aside>{props.leftNav}</aside>
-              <section>{props.children}</section>
+              <section className="flex items-center justify-center w-full h-full">
+                
+                {props.children}</section>
             </>
 
         </main>

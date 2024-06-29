@@ -21,7 +21,8 @@ export default function Layout(props: { children: React.ReactNode }) {
     <BaseTemplate
       leftNav={
         <>
-          <div className="bg-gray-300 w-60 h-80">
+        {/*w-60 */}
+          <div className="bg-gray-300 h-80">
             <div>
               <i
                 className="material-icons icon-va-8 p-lnr-8 cursor-pointer flex"
@@ -35,7 +36,7 @@ export default function Layout(props: { children: React.ReactNode }) {
             <div className={`bg-red-500 ${isMenuOpen ? 'w-299' : 'w-10'}`}>
               <ul className="pl-0">
                 {/* ตัวย่อ */}
-                <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2' : ''}`}>
+                <li className={`${isMenuOpen ? 'flex items-center gap-2 mb-2 w-80' : ''}`}>
                   <span className="icon">📌</span>
                   {isMenuOpen ? (
                     <Link href="/" passHref>
