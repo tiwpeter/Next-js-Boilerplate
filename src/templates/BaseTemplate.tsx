@@ -55,7 +55,7 @@ const BaseTemplate = (props: {
 
 
 
-        <main className="bg-blue-200 flex h-screen">
+        <main className="bg-blue-200 flex h-[1300px]">
 
           <aside>{props.rightNav}</aside>
             <>
