@@ -85,24 +85,16 @@ export default function Index() {
         <div className='border border-gray-500 rounded-lg p-2 mt-6'>
           <h1>Pantip Pick </h1>
        </div>
-        <div className='flex'>
-          
-          <div className='bg-red-500 rounded-lg p-2 border border-black' style={{ width: '711px', height:'99px' }}>
-              dwdw
-          </div>
-          
-          <div className='bg-red-500 rounded-lg p-2 border border-black ml-6' style={{ width: '345px', height:'99px' }}>
-            dwdw
-           </div>
 
-          {/* more */}
-          <div className='border border-gray-500 rounded-lg p-2'>
-          
+       <div className='flex justify-between'>
+      <div className='flex flex-col'>
+        <div className='border border-black'>l</div>
+        <div className='border border-black'>l</div>
+      </div>
+      <div className='border border-black'>r</div>
+    </div>
 
-       </div>
-      
 
-        </div>
       </div>
      
     </>
