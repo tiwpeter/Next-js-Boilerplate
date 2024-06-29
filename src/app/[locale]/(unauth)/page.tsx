@@ -31,33 +31,29 @@ export default function Index() {
           <h1>เลือกห้อง</h1>
         </div>
         <div>
-        <div className="relative overflow-x-auto flex" style={{ width: '1200px', height: '120px' }}>
+        <div className="relative overflow-x-auto flex" style={{ width: '1080px', height: '120px' }}>
     {/* เนื้อหาของคุณที่ต้องการให้เกินพอร์ตวิว */}
     <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '500px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
     <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
     <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-    <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
 
     {/* ปุ่มเลื่อนไปทางขวา */}
-    <div className="absolute inset-y-0 right-0 flex items-center justify-center bg-white shadow-md" style={{ zIndex: '2' }}>
-        <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg">
+    <div className="absolute inset-y-0 right-0 flex items-center justify-center bg-white shadow-md" style={{ zIndex: '2', width: '300px' }}>
+    <div className="flex items-center gap-4">
+        <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
         </button>
+
+        <button className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="h-6 w-6 mr-2 stroke-current">
+                <path fill="none" d="M7 16H3m26 0H15M29 6h-4m-8 0H3m26 20h-4M7 16a4 4 0 1 0 8 0 4 4 0 0 0-8 0zM17 6a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 20a4 4 0 1 0 8 0 4 4 0 0 0-8 0zm0 0H3"></path>
+            </svg>
+            ตัวกรอง
+        </button>
     </div>
+</div>
 </div>
   
         </div>
