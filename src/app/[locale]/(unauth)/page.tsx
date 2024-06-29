@@ -38,25 +38,41 @@ export default function Index() {
 
   return (
     <>
-      <div className='bg-red-500' style={{ width: '1080px', height: '185px' }}>
-        <div className='border border-gray-500 rounded-lg p-2'>
-          <h1>Announce</h1>
+      <div className='' style={{ width: '1080px', height: '185px' }}>
+      <div className='border border-gray-500 rounded-lg p-2 shadow-md' style={{ backgroundColor: 'transparent' }}>
+      <h1>Announce</h1>
         </div>
         <ul>
-          <li className='border border-gray-500 rounded-lg p-2'>asdas</li>
-          <li className='border border-gray-500 rounded-lg p-2'>asdas</li>
-          <li className='border border-gray-500 rounded-lg p-2'>asdas</li>
+          <li className='border-b border-gray-500 p-2'> 🎧 3 อันดับกระทู้ฮิตบนพันทิป ประจำวันที่ 27 มิถุนายน 📊</li>
+          <li className='border-b border-gray-500 p-2'>ต้อนรับฟุตบอลยูโร 2024 ด้วย  ⚽ ขวัญใจแฟนบอลตลอดการแข่งขัน</li>
+          <li className='border-b border-gray-500 p-2'>Pantip Point 💰</li>
         </ul>
         {/* เลือกห้อง */}
         <div className='border border-gray-500 rounded-lg p-2 mt-6'>
           <h1>เลือกห้อง</h1>
         </div>
         <div>
-          <div className="relative overflow-x-auto flex" style={{ width: '1080px', height: '120px' }}>
-            {/* เนื้อหาของคุณที่ต้องการให้เกินพอร์ตวิว */}
-            <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '500px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-            <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
-            <div className='flex-shrink-0 bg-red-500 rounded-lg p-2 mb-2 mr-2' style={{ width: '88px', height: '99px', border: '2px solid black', zIndex: '1' }}>ssw</div>
+        <div className="relative overflow-x-auto flex" style={{ width: '1080px', height: '120px', marginTop: '10px' }}>
+        {/* เนื้อหาของคุณที่ต้องการให้เกินพอร์ตวิว */}
+          <div className='flex-shrink-0 rounded-lg p-2 mb-2 mr-2' style={{ width: '89px', height: '99px', border: '2px solid black', zIndex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+             <div>
+                <div>
+    <img src="https://a0.muscache.com/pictures/732edad8-3ae0-49a8-a451-29a8010dcc0c.jpg" alt=""
+         style={{ width: '40px', height: '40px', filter: 'brightness(0) invert(1) saturate(0)' }} />
+</div>            
+                  <h2>ก้นครัว</h2>
+              </div>
+          </div>
+      {/* เนื้อหาของคุณที่ต้องการให้เกินพอร์ตวิว */}
+      <div className='flex-shrink-0 rounded-lg p-2 mb-2 mr-2' style={{ width: '89px', height: '99px', border: '2px solid black', zIndex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+             <div>
+                <div>
+                   <img src="https://ptcdn.info/mobile/icon_room/pt-forum-korea.svg" alt="" style={{ width: '40px', height: '40px', filter: 'brightness(0) invert(1)' }} />
+              </div>              
+                  <h2>กรุงโซล</h2>
+              </div>
+          </div>
+{/* เนื้อหาของคุณที่ต้องการให้เกินพอร์ตวิว */}
 
             {/* ปุ่มเลื่อนไปทางขวา */}
             <div className="absolute inset-y-0 right-0 flex items-center justify-center bg-white shadow-md" style={{ zIndex: '2', width: '300px' }}>
