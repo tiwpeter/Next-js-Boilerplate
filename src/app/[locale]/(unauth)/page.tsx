@@ -17,7 +17,16 @@ export async function generateMetadata(props: { params: { locale: string } }) {
 export default function Index() {
   return (
     <>
-      {/**<h1>Announce</h1> */}
+      <div className='bg-red-500' style={{ width: '1080px', height:'185px' }}>
+        <div className='border border-gray-500 rounded-lg p-4'>
+          <h1>home</h1>
+        </div>
+        <ul>
+          <li className='border border-gray-500 rounded-lg p-4'>asdas</li>
+          <li className='border border-gray-500 rounded-lg p-4'>asdas</li>
+          <li className='border border-gray-500 rounded-lg p-4'>asdas</li>
+        </ul>
+      </div>
       
     </>
   );
