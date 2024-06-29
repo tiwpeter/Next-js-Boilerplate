@@ -25,26 +25,31 @@ return (
     <h1>Suggested Topics</h1>
     {data && (
       <ul>
-        {data.data.map((room) => (
-          <li key={room.room_id}>
-            <h2>{room.room_name_th}</h2>
-            <ul>
-              {room.topics.map((topic) => (
-                <li key={topic.topic_id}>
-                  <h3>{topic.topic_title}</h3>
-                  {/* แสดงข้อมูลเพิ่มเติมที่เกี่ยวข้องกับ topic ตามต้องการ */}
-                  <p>Views: {topic.views}</p>
-                  <p>Comments: {topic.comments}</p>
-                  {/* แสดงข้อมูลเพิ่มเติมที่เกี่ยวข้องกับ topic ตามต้องการ */}
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        {data.data.map((room) => {
+          console.log('Room:', room); // แสดงข้อมูลของแต่ละห้อง
+          return (
+            <li key={room.room_id}>
+              <h2>{room.room_name_th}</h2>
+              <ul>
+                {room.topics.map((topic) => {
+                  console.log('Topic:', topic); // แสดงข้อมูลของแต่ละหัวข้อ
+                  return (
+                    <li key={topic.topic_id}>
+                      <h3>{topic.topic_title}</h3>
+                      <p>Views: {topic.views}</p>
+                      <p>Comments: {topic.comments}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          );
+        })}
       </ul>
     )}
   </div>
-  );
+);
+
 };
 
 
