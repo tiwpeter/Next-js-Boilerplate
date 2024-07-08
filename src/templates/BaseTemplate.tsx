@@ -45,7 +45,7 @@ const BaseTemplate = (props: {
         <main className="bg-blue-200 flex h-[1600px]">
             <>
               <section className="flex justify-center w-full h-full">
-                
+                {/*connect page unauth = layout */}
                 {props.children}</section>
             </>
 

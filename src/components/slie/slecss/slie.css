@@ -1,0 +1,41 @@
+/*main wrappper*/
+.antasin{
+    background: aqua;
+    width: 1102px; 
+    height: 285px;
+    position: relative;
+
+}
+
+/*main corp carousel*/
+.antasin .fle
+{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 1) - 12px);
+    border-radius: 8px;
+  /*  gap: 30px; */
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+    /*hide scoll*/
+    scrollbar-width: none;  /*สำหรับ Firefox */
+  }
+
+/*mian img*/
+.fle .lo{
+    scroll-snap-align: start;
+    height: 342px;
+    list-style: none;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    cursor: pointer;
+    padding-bottom: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;    
+}  
