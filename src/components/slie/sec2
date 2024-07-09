@@ -1,0 +1,7 @@
+slie smoot
+
+translate with
+/* transition = smoot*/
+  transition: translate 300ms ease-in-out;
+
+  style={{ translate: `${  -100 * imageIndex}%`}}

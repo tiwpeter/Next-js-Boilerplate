@@ -22,12 +22,34 @@ export function ImageSlider({ imageUrls }: ImageSliderProps) {
   };
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" ,  position :"relative"}}>
-      <Image
-        src={imageUrls[imageIndex]}
-        className="img-slieder-img"
+    //adjust smoot
+    //คุณต้องใช้ transform ใน CSS ในการเลื่อนรูปภาพให้สามารถไปในทิศทางต่างๆ
+    <div style={{ 
+      position: "relative",
+       width: "100%",
+        height: "100%" , 
+        }}
+        >
+     <div style={{
+      width:"100%", 
+      height:"100%", 
+      display:"flex", 
+      overflow: "hidden" 
+      }}
+      >
         
-      />
+      {imageUrls.map(url => (
+        <Image
+        key={url}
+        src={url}
+        className="img-slieder-img"
+        // translate slie smoot
+        style={{ translate: `${  -100 * imageIndex}%`}}
+        />
+      ))}
+     </div>
+     
+      
       
       <button onClick={showPrevImage}
       className="btn-slider" style={{left:0}}><ArrowBigLeft /></button>
