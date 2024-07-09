@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowBigLeft, ArrowBigRight } from 'lucide-react';
+import { useState } from "react";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import Image from 'next/image';
 
 type ImageSliderProps = {
@@ -22,28 +22,39 @@ export function ImageSlider({ imageUrls }: ImageSliderProps) {
   };
 
   return (
-    <div className="image-slider">
-      {imageUrls.map((url, index) => (
+    //adjust smoot
+    //คุณต้องใช้ transform ใน CSS ในการเลื่อนรูปภาพให้สามารถไปในทิศทางต่างๆ
+    <div style={{ 
+      position: "relative",
+       width: "100%",
+        height: "100%" , 
+        }}
+        >
+     <div style={{
+      width:"100%", 
+      height:"100%", 
+      display:"flex", 
+      overflow: "hidden" 
+      }}
+      >
+        
+      {imageUrls.map(url => (
         <Image
-          key={url}
-          src={url}
-          className="img-slider-img"
-          style={{
-            transform: `translateX(${index === imageIndex ? 0 : -100}%)`,
-            transition: 'transform 300ms ease-in-out',
-          }}
-          width={400} // Adjust width as needed
-          height={300} // Adjust height as needed
-          objectFit="cover"
+        key={url}
+        src={url}
+        className="img-slieder-img"
+        // translate slie sm
+        style={{ translate: `${  -300 * imageIndex}%`}}
         />
       ))}
-
-      <button onClick={showPrevImage} className="btn-slider" style={{ left: 0 }}>
-        <ArrowBigLeft />
-      </button>
-      <button onClick={showNextImage} className="btn-slider" style={{ right: 0 }}>
-        <ArrowBigRight />
-      </button>
+     </div>
+     
+      
+      
+      <button onClick={showPrevImage}
+      className="btn-slider" style={{left:0}}><ArrowBigLeft /></button>
+      <button onClick={showNextImage} 
+      className="btn-slider"style={{right:0}}><ArrowBigRight /></button>
     </div>
   );
 }
