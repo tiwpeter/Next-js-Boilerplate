@@ -24,28 +24,20 @@ export function ImageSlider({ imageUrls }: ImageSliderProps) {
   return (
     //adjust smoot
     //คุณต้องใช้ transform ใน CSS ในการเลื่อนรูปภาพให้สามารถไปในทิศทางต่างๆ
-    <div style={{ 
-      position: "relative",
-       width: "100%",
-        height: "100%" , 
-        }}
-        >
-     <div style={{
-      width:"100%", 
-      height:"100%", 
-      display:"flex", 
-      overflow: "hidden" 
-      }}
-      >
+    <div className="image-slider-cop">
+      {/*width:"100%",height:"100%",  */}
+     <div style={{display:"flex",overflow: "hidden" }}>
         
       {imageUrls.map(url => (
+          
         <Image
         key={url}
         src={url}
         className="img-slieder-img"
         // translate slie sm
-        style={{ translate: `${  -300 * imageIndex}%`}}
+        style={{ translate: `${  -100 * imageIndex}%`}}
         />
+
       ))}
      </div>
      

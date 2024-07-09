@@ -1,10 +1,16 @@
+.image-slider-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 *,
 *::before,
 *::after{
   box-sizing: border-box;
 }
 
-.img-slieder-img{
+.img-slieder-img {
   width: calc(100% / 3);
   height: auto;
   object-fit: cover;
@@ -13,26 +19,9 @@
   transition: translate 300ms ease-in-out;
 }
 
-.btn-slider{
-  all:unset;
-  display: block;
-  position: absolute;
-  top: 0; /*top0 + bottom0 = center*/
-  bottom: 0;
-  padding: 1rem;
-  cursor: pointer;
-  /*effect delay*/
-  transition: background-color 100ms ease-in-out;
-}
-/** hover tone*/
-
-.btn-slider:hover{
-  background-color: rgb(0,0,0,0.2);
-}
-
-.btn-slider > * {
-  stroke: wheat; /* กำหนดสีของเส้นขอบ (stroke) เป็น wheat */
-  fill: black; /* กำหนดสีของพื้นที่ภายใน (fill) เป็นดำ */
-  width: 2rem;
-  height: 2rem;
+.image-slider-cop{
+  position: relative;
+  width: 557px;
+  height: 300px;
+  border: 2px solid red;
 }

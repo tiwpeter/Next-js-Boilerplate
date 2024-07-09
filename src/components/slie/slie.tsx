@@ -7,6 +7,7 @@ import studen4 from './students/Nia_Adebayo.jpg'
 import studen5 from './students/Rigo_Louie.jpg'
 import { ImageSlider } from './ImageSlider';
 import './sle2css/img-slieder.css';
+import './sle2css/btn.css';
 
 function SlieData() {
   const data = [studen1,studen2,studen3,studen4,studen5
@@ -25,11 +26,7 @@ function SlieData() {
   */
 
     return (
-      <div style={{ 
-        maxWidth:"1200px",
-        width:"100%",
-        apectRadio: "10/6", //height:"500px",//on apectRadio
-        margin: "0 auto"}}>
+      <div className='image-slider-container'>
     <ImageSlider imageUrls={data}/>
     </div>
   );
