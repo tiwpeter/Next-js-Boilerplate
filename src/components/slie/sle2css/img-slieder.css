@@ -1,3 +1,20 @@
+
+.image-slider-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.image-slider {
+  display: flex;
+  overflow: hidden;
+}
+.image-slider img {
+  width: calc(100% / 3);
+  height: auto;
+  object-fit: cover;
+}
+
 *,
 *::before,
 *::after{
@@ -12,6 +29,7 @@
   /**/
   flex-shrink: 0;
   flex-wrap: 0;
+  
   /* transition = smoot*/
   transition: translate 300ms ease-in-out;
 }
