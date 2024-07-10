@@ -1,0 +1,58 @@
+/* opo.css */
+.keen-slider {
+  position: relative;
+  display: flex;
+}
+
+.keen-slider__slide {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* แสดง 4 คอลัมน์ */
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.keen-slider__slide div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* จัดกึ่งกลางแนวนอน */
+}
+
+.keen-slider__slide img {
+  width: 170px;
+  height: 128px;
+}
+
+.keen-slider__slide p {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.sw {
+  margin: auto;
+  position: relative;
+}
+
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.slider-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.slider-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

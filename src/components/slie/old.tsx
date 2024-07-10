@@ -1,8 +1,10 @@
+/*
 "use client"
 import React from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import './opo.css'; // นำเข้าไฟล์ CSS ที่สร้างขึ้นใหม่
+import Image from 'next/image'; // นำเข้า Image จาก next/image
 
 const SampleKeenSlider = () => {
   const [sliderRef, slider] = useKeenSlider({
@@ -36,7 +38,7 @@ const SampleKeenSlider = () => {
           <div key={index} className="keen-slider__slide">
             {chunk.map(image => (
               <div key={image.id}>
-                <img src={image.url} alt={`Slide ${image.id}`} />
+                <Image src={image.url} alt={`Slide ${image.id}`} width={170} height={128} /> 
                 <p>{image.name}</p>
               </div>
             ))}
@@ -51,4 +53,4 @@ const SampleKeenSlider = () => {
   );
 };
 
-export default SampleKeenSlider;
+export default SampleKeenSlider;*/
