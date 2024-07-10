@@ -2,6 +2,8 @@ import { getTranslations } from 'next-intl/server';
 
 import { Sponsors } from '@/components/Sponsors';
 import SlieData from '@/components/slie/slie';
+import Pantiprealtime from '@/components/pantiprealtime/page';
+import PantipPickTag from '@/components/pantitink/page';
 
 export async function generateMetadata(props: { params: { locale: string } }) {
   const t = await getTranslations({
@@ -19,6 +21,10 @@ export default function Index() {
   return (
     <>{/*component */}
      <SlieData/>
+     
+     <Pantiprealtime/>
+     
+     <PantipPickTag/>
     </>
   );
 }
