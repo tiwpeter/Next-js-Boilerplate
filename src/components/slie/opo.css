@@ -2,12 +2,18 @@
 .keen-slider {
   position: relative;
   display: flex;
+  width: 982px;
+}
+
+.keen-slider__slide {
+  padding: 10px; /* เพิ่ม padding เพื่อให้คอลัมน์ภายใน Grid มีการเว้นระยะห่าง */
+  min-width: 1078px;
 }
 
 .keen-slider__slide {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* แสดง 4 คอลัมน์ */
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(170px, 1fr)); /* กำหนดให้มี 4 คอลัมน์ที่มีขนาดไม่น้อยกว่า 250px และเป็น 1fr สำหรับคอลัมน์ที่เหลือ */
+  gap: 0px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -16,19 +22,38 @@
 .keen-slider__slide div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+ /* justify-content: center;*/
   align-items: center;
   text-align: center; /* จัดกึ่งกลางแนวนอน */
+  height: 218px;
 }
 
 .keen-slider__slide img {
-  width: 170px;
+  width: 229px;
   height: 128px;
 }
 
 .keen-slider__slide p {
   margin-top: 10px;
   font-size: 1rem;
+}
+
+
+
+
+/**span*/
+.keen-slider__slide p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* จำกัดจำนวนบรรทัดไม่เกิน 2 บรรทัด */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.slide-item p {
+  width: 197px; /* กำหนดความกว้างของข้อความ */
+  margin: 0; /* ลบ margin เพื่อให้ไม่มีระยะห่าง */
+  word-wrap: break-word; /* ข้อความหยุดเรียนในข้อความยาวๆ */
+  text-align: left; /* จัดข้อความชิดซ้าย */
 }
 
 .sw {
@@ -56,3 +81,5 @@
 .slider-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+
