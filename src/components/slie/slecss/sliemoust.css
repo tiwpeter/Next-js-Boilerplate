@@ -1,0 +1,22 @@
+/*drag and drop drag and drop คือการคลิกที่วัตถุค้างเอาไว้ แล้วลากไปวางยังพื้นที่ ที่ต้องการ 
+โดยการลากไปวางนั้นวัตถุจะเคลื่อนที่ตามเคอร์เซอร์เมาส์ไปด้วย*/
+
+.fle :where(.card, .img) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fle.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+}
+
+.fle.dragging .card {
+    cursor: grab;
+    user-select: none;
+}
+/*hide scoll*/
+.fle::-webkit-scrollbar{
+    display: none;
+}

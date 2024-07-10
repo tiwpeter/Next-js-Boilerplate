@@ -1,0 +1,29 @@
+/*rigth left*/
+.antasin i {
+    height: 50px;
+    width: 50px;
+    background: #fff;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 3px 6px rgb(0, 0, 0,0.23);
+
+}
+
+/* icon move in div*/
+.antasin i:first-child{
+    left: -22px;
+}
+
+.antasin i:last-child{
+    right: -22px;
+}
+
+/**/
+.antasin .fle.dragging {
+    scroll-behavior: auto; /* ปรับ scroll-behavior กลับเป็น auto ในขณะที่ลาก */
+}

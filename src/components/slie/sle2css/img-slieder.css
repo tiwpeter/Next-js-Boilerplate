@@ -1,0 +1,27 @@
+.image-slider-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+.img-slieder-img {
+  width: calc(100% / 3);
+  height: auto;
+  object-fit: cover;
+  
+  /* transition = smoot*/
+  transition: translate 300ms ease-in-out;
+}
+
+.image-slider-cop{
+  position: relative;
+  width: 557px;
+  height: 300px;
+  border: 2px solid red;
+}
