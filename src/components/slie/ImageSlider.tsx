@@ -8,7 +8,7 @@ const SampleKeenSlider = () => {
   const [sliderRef, slider] = useKeenSlider({
     loop: true,
     slidesPerView: 1, // Show one grid slide at a time
-    spacing: 10,
+    spacing: 10, //padding
     drag: true, // เปิดใช้งานการเลื่อนด้วยการลาก
   });
 
@@ -22,11 +22,15 @@ const SampleKeenSlider = () => {
     { id: 7, url: 'https://example.com/image7.jpg', name: 'Image 7' },
     { id: 8, url: 'https://example.com/image8.jpg', name: 'Image 8' },
     { id: 9, url: 'https://example.com/image9.jpg', name: 'Image 9' },
+    
   ];
 
   const chunks = [];
   for (let i = 0; i < images.length; i += 4) {
+    //slie
+    
     chunks.push(images.slice(i, i + 4));
+    // display
   }
 
   return (
