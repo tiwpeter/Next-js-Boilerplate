@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PantipPick = () => {
   const data = [
@@ -13,13 +13,19 @@ const PantipPick = () => {
     { id: 9, url: 'https://example.com/image9.jpg', name: 'Image 9' },
   ];
 
+  const [showMore, setShowMore] = useState(false);
+
+  const handleMore = () => {
+    setShowMore(true); // เปลี่ยน state เมื่อคลิก "more"
+  };
+
   return (
-    <section className="dw container mx-auto" style={{ height: '430px', background: 'aliceblue',overflow: "hidden" }}>
+    <section className="dw container mx-auto" style={{ height: '430px', background: 'aliceblue', overflow: 'hidden' }}>
       <table className="table-auto w-full border-collapse border border-black">
         <tbody>
-          <tr style={{display: "grid"}}>
-            {data.map(item => (
-              <td key={item.id} className="boxslie border p-2">
+          <tr style={{ display: 'grid' }}>
+            {data.map((item, index) => (
+              <td key={item.id} className="boxslie border p-2" style={{ display: showMore || index < 4 ? 'block' : 'none' }}>
                 <div className="flex">
                   <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} />
                   <span>{item.name}</span>
@@ -29,6 +35,11 @@ const PantipPick = () => {
           </tr>
         </tbody>
       </table>
+      {!showMore && (
+        <div className="mt-3" style={{ background: '#7f99ff', display: 'flex', minHeight: '43px', padding: '12px 16px', position: 'relative', whiteSpace: 'normal', width: '1102px' }}>
+          <button onClick={handleMore}>More</button>
+        </div>
+      )}
     </section>
   );
 };
