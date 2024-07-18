@@ -1,5 +1,6 @@
 import React from 'react';
 // Import your CSS file here import './Pagepantip.css'; 
+import './font.css'; 
 
 const Pagepantip = () => {
   // Define your images array
@@ -16,24 +17,60 @@ const Pagepantip = () => {
   ];
 
   return (
-    <section className="dw container mx-auto" style={{ height: '430px', background: 'aliceblue' }}>
-      <table className="table-auto w-full border-collapse border border-black">
-        <tbody className="flex flex-wrap" style={{width: "1080px;"}}>
-          {data.map(item => (
-            <tr key={item.id} className="boxslie border p-2 w-1/2">
-              <td className="flex" style={{ width: '100%' }}>
-                <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} />
-                <span>{item.name}</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <section
+  className="dw container mx-auto"
+  style={{
+    height: '430px',
+    background: 'aliceblue',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width:'1078px'
+  }}
+>
+      <ul className="flex flex-wrap" style={{ width: '1080px' }}>
+        {data.map(item => (
+          <li key={item.id} className="boxslie border p-2 flex items-start" style={{ width: '50%' }}>
+            <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} />
+
+            <div className="flex flex-col justify-between h-full" style={{width: "428px"}}>
+                
+              <div className="mb-4"> {/* Adjust the margin-bottom as needed */}
+                <h2>{item.name}</h2>
+              </div>
+
+              <div className="flex justify-between items-center">
+  <div className="flex">
+    <h5 className="text-center">สมาชิกหมายเลข 7793648</h5>
+    <h5 className="text-center" style={{ marginLeft: '6px' }}>
+      21 ชั่วโมง
+    </h5>
+  </div>
+
+  <div className="pt-list-item__stats">
+    <span style={{ fontSize: '.75rem', marginRight: '16px' }}>
+      <i className="">message</i>
+      29
+    </span>
+
+    <span style={{ fontSize: '.75rem' }}>
+      <i className="">add_box</i>
+      7
+    </span>
+  </div>
+</div>
+
+            </div>
+
+          </li>
+        ))}
+      </ul>
     </section>
   );
 };
 
 export default Pagepantip;
+
 /*
 <section class="dw container mx-auto" style="height: 430px;background: aliceblue;">
             <table class="table-auto w-full border-collapse border border-black">

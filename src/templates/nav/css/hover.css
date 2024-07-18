@@ -1,13 +1,13 @@
 /* styles.css */
-span {
+h2 {
   color: gray; /* สีตัวอักษรปกติเป็นสีเทา */
   cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อเอาเมาส์มาชี้ */
 }
 
-span:hover {
+h2:hover {
   color: rgb(0, 0, 0); /* สีเมื่อเอาเมาส์ชี้ */
 }
 
-span:active {
+h2:active {
   color: rgb(0, 0, 0);  /* สีเมื่อคลิก */
 }
