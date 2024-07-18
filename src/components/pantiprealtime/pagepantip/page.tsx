@@ -1,6 +1,9 @@
 import React from 'react';
 // Import your CSS file here import './Pagepantip.css'; 
 import './font.css'; 
+import MessageIcon from '@mui/icons-material/Message';
+import { SvgIcon } from '@mui/material';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const Pagepantip = () => {
   // Define your images array
@@ -47,14 +50,14 @@ const Pagepantip = () => {
     </h5>
   </div>
 
-  <div className="pt-list-item__stats">
-    <span style={{ fontSize: '.75rem', marginRight: '16px' }}>
-      <i className="">message</i>
-      29
-    </span>
+  <div className="pt-list-item__stats flex">
+      <span style={{ fontSize: '.75rem', marginRight: '16px', display: 'flex', alignItems: 'center' }}>
+        <SvgIcon component={MessageIcon} style={{ fontSize: '1rem', marginRight: '8px' }} />
+        29
+      </span>
 
-    <span style={{ fontSize: '.75rem' }}>
-      <i className="">add_box</i>
+      <span style={{ fontSize: '.75rem', marginRight: '16px', display: 'flex', alignItems: 'center' }}>
+    <SvgIcon component={AddBoxIcon} style={{ fontSize: '1rem', marginRight: '8px' }} />
       7
     </span>
   </div>
