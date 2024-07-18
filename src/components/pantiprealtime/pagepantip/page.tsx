@@ -40,7 +40,7 @@ const Pagepantip = () => {
               </div>
 
               <div className="flex justify-between items-center">
-  <div className="flex">
+              <div className="flex items-end">
     <h5 className="text-center">สมาชิกหมายเลข 7793648</h5>
     <h5 className="text-center" style={{ marginLeft: '6px' }}>
       21 ชั่วโมง
