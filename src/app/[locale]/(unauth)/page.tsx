@@ -1,38 +1,28 @@
-import { getTranslations } from 'next-intl/server';
+"use client";
 
-import { Sponsors } from '@/components/Sponsors';
+import React from 'react';
 import SlieData from '@/components/slie/slie';
 import Pantiprealtime from '@/components/pantiprealtime/page';
 import PantipPickTag from '@/components/pantipink/page';
-import PanTipTagRealTime from '@/components/old/pantiptagrealtime/page';
 import PantipTagreal from '@/components/pantiptagrealtime/page';
+import { Provider } from 'react-redux';
+import { store } from '../../../features/storemore';
 
-export async function generateMetadata(props: { params: { locale: string } }) {
-  const t = await getTranslations({
-    locale: props.params.locale,
-    namespace: 'Index',
-  });
-
-  return {
-    title: t('meta_title'),
-    description: t('meta_description'),
-  };
-}
-
-export default function Index() {
+const ClientComponent = () => {
   return (
-    <>{/*component */}
-     <SlieData/>
-     
-     <Pantiprealtime/>
-     
-     <PantipPickTag/>
-
-     {/*pantiptagrealtime */}
-     <PantipTagreal/>
+    <>
+      <SlieData />
+      <Pantiprealtime />
+      <PantipPickTag />
+      <Provider store={store}>
+        <PantipTagreal />
+      </Provider>
     </>
   );
-}
+};
+
+export default ClientComponent;
+
 
 
 /*

@@ -42,7 +42,7 @@ const BaseTemplate = (props: {
     <StickyNav/>
 
 {/*component*/}
-        <main className="bg-blue-200 flex h-[1600px]">
+        <main className="bg-blue-200 flex h-[3200px]">
             <>
               <section className="flex justify-center w-full h-full">
                 {/*connect page unauth = layout */}
