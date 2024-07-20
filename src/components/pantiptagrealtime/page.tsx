@@ -65,9 +65,9 @@ const PantipTagreal = () => {
           <TagSwitcher />
           <TagSwitcher />
           <TagSwitcher />
+
         </div>
 
-        <PageTagRealtime />
       </div>
     </section>
   );

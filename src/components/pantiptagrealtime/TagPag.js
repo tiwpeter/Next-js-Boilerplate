@@ -32,7 +32,7 @@ const TagPage = ({ tag }) => {
   console.log('Items for tag:', tag, itemsForTag);
 
   // Calculate section height based on number of items
-  const sectionHeight = `${itemsForTag.length * 110}px`; // Assuming each item height is 110px
+  const sectionHeight = `${itemsForTag.length * 82}px`; // Assuming each item height is 110px
 
   return (
     <div>
@@ -44,21 +44,22 @@ const TagPage = ({ tag }) => {
           <tbody>
             <tr style={{ display: 'grid' }}>
               {itemsForTag.map((item, index) => (
-                <td key={item.id} className="boxslie border p-2">
+                <td key={item.id} className="boxslie border p-2" style={{height:"82px"}}>
                   <div className="flex">
                     {/* Uncomment the image tag if needed */}
-                    {/* <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} /> */}
-                    <span key={`${item.title}-${index}`}>{item.title}</span>
+                     <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} />
+                    <h2 className='font-h2' key={`${item.title}-${index}`}>{item.title}</h2>
                   </div>
                 </td>
               ))}
             </tr>
           </tbody>
         </table>
-        {status !== 'loading' && (
+        
+      </section>
+      {status !== 'loading' && (
           <LoadMoreButton onClick={loadMoreData} />
         )}
-      </section>
     </div>
   );
 };
