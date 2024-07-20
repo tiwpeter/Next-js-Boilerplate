@@ -51,7 +51,7 @@ const TagPage = ({ tag }) => {
   console.log('Items for tag:', tag, itemsForTag);
 
   // Calculate section height based on number of items
-  const sectionHeight = `${itemsForTag.length * 82}px`; // Assuming each item height is 110px
+  const sectionHeight = `${itemsForTag.length * 86}px`; // Assuming each item height is 110px
 
   return (
     <div>
