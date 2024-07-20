@@ -21,36 +21,39 @@ const getRandomTag = (usedTags) => {
   return unusedTags[randomIndex];
 };
 
-const TagSwitcher = () => {
+const TagSwitcher = ({  }) => {
   const [currentTag, setCurrentTag] = useState('');
 
   useEffect(() => {
+    // Function to switch to a new tag
     const switchTag = () => {
-      const storedTags = JSON.parse(localStorage.getItem('Tags')) || [];
+      const storedTags = JSON.parse(localStorage.getItem( 'Tags')) || [];
       const newTag = getRandomTag(storedTags);
-
+      
       if (newTag) {
         const updatedTags = [...storedTags, newTag];
         localStorage.setItem('Tags', JSON.stringify(updatedTags));
         setCurrentTag(newTag);
       } else {
         // Reset if all tags have been shown
-        localStorage.removeItem('Tags');
+        localStorage.removeItem( 'Tags');
         setCurrentTag(tags[0]);
       }
     };
 
+    // Switch tag on component mount
     switchTag();
   }, []);
 
   return (
-    <div>
-      <div className="mt-5" style={{ backgroundColor: "#7f99ff", display: "flex", minHeight: "43px", padding: "12px 16px", position: "relative", whiteSpace: "normal" }}>
+    <div className='AW'> 
+      <div className="mt-5" style={{backgroundColor: "#7f99ff", display: "flex", minHeight: "43px", padding: "12px 16px", position: "relative", whiteSpace: "normal"}}>
         <h3>{currentTag}</h3>
       </div>
       <TagPag tag={currentTag} />
     </div>
   );
+
 };
 
 const PantipTagreal = () => {
