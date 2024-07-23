@@ -19,7 +19,8 @@ const BaseTemplate = (props: {
             <nav>
               <ul className="flex flex-wrap gap-x-5 text-xl">
              {props.leftNav}
-                dw
+                
+                
               </ul>
             </nav>
 

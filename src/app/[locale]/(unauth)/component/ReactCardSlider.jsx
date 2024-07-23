@@ -51,7 +51,6 @@ const ReactCardSlider = (props) => {
                                 <a className="slider-card">
                                     <div className="slider-card-image" style={{ backgroundImage: `url(${slide.image})`, backgroundSize: 'cover' }}></div>
                                     <p className="slider-card-title">{slide.name}</p>
-                                    <p className="slider-card-description">{slide.description}</p>
                                 </a>
                             </Link>
                         )
