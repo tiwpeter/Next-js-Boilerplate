@@ -2,7 +2,7 @@
 import React from 'react';
 import Pagepantip from './pagepantip/page';
 
-const PantipColum = () => {
+const Pantiprealtime = () => {
   return (
   <div className="copmain" style={{width: "1078px"}}>
     <div className="mt-3" style={{ background: '#7f99ff', display: 'flex', minHeight: '43px', padding: '12px 16px', position: 'relative', whiteSpace: 'normal', width: '1078px' }}>
@@ -13,4 +13,4 @@ const PantipColum = () => {
   )
 };
 
-export default PantipColum;
+export default Pantiprealtime;

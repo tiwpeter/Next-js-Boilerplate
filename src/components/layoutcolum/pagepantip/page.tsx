@@ -73,3 +73,27 @@ const Pagepantip = () => {
 };
 
 export default Pagepantip;
+
+/*
+<section class="dw container mx-auto" style="height: 430px;background: aliceblue;">
+            <table class="table-auto w-full border-collapse border border-black">
+                <!-- First few rows -->
+                <tr>
+                    <td class="boxslie border  p-2" style="width: 539px;">
+                        <div class="flex ">
+                            <img src="https://ptcdn.info/bingsu/upload/202406/jtoud1j6d4pb.png" alt="Placeholder Image" class="mr-2 w-12 h-12" style="width: 86px;height: 64px;">
+                            <span>ต้อนรับฟุตบอลยูโร 2024 ด้วย “เกมบอล” ขวัญใจแฟนบอลตลอดการแข่งขัน</span>
+                        </div>
+                    </td>
+                    <td class="boxslie border  p-2">
+                        <div class="flex ">
+                            <img src="https://f.ptcdn.info/721/084/000/ly7h0s9giFu6J8D3a6E-s.jpg" alt="Placeholder Image" class="mr-2 w-12 h-12" style="width: 86px;height: 64px;">
+                            <span>ข้าราชการกระทรวง ยุติธรรมระดับสูง พยายามปล้ำ ข้าราชการหญิง ที่มีลูก2  บนรถไฟนอน ขณะไปสัมนา พังทั้งระบบ-เงินภาษีจ่าย
+                                
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Hidden rows -->
+
+*/
