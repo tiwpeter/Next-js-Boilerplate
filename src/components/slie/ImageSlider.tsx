@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Slider.css';
+import './buttoncolor.css'
+
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import Link from 'next/link';
 
@@ -41,9 +43,11 @@ const ReactCardSlider = (props) => {
     return (
         <div id="main-slider-container">
             {!isAtStart && (
+              <div >
                 <MdChevronLeft size={40} className="slider-icon left" onClick={slideLeft} />
+              </div>
             )}
-            <div id="slider">
+            <div className='sliecolor' id="slider">
                 {
                     props.slides.map((slide, index) => {
                         return (
@@ -58,7 +62,9 @@ const ReactCardSlider = (props) => {
                 }
             </div>
             {!isAtEnd && (
+              <div >
                 <MdChevronRight size={40} className="slider-icon right" onClick={slideRight} />
+              </div>
             )}
         </div>
     );

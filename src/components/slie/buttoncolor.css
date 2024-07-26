@@ -83,3 +83,28 @@
 }
 
 
+/***/
+
+
+.sliecolor::before,
+.sliecolor::after{
+  background: linear-gradient(to right, rgba(255,255,255,1) 0%,
+  rgba(255,255,255,0)100%);
+  content: '';
+  height: 100%;
+  position: absolute;
+  width: 15%;
+  z-index:1;
+
+}
+
+.sliecolor::before{
+  left: 0;
+  top: 0;
+}
+.sliecolor::after{
+  right: 0;
+  top: 0;
+  transform: rotateZ('100deg');
+  z-index:1;
+}
