@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactCardSlider from './ImageSlider';
+import Product from "../../app/[locale]/(unauth)/room/taginslie/page"
+
 const data = [
   { id: 1, image: 'https://ptcdn.info/doodle/2024/66668549caac0a7c9b16ead7_8t0jwfcpbp.png', name: 'ก้นครัว ' ,link: '/room/'},
   { id: 2, image: 'https://ptcdn.info/home_highlight/2022-10/633b8e4a00d01f12500f33e6_hvzb60o1p0_400.jpg', name: 'ก้นครัว' ,link: '#'},
@@ -14,11 +16,11 @@ const data = [
 ];
 const Sli = () => (
 
-
-
-
+  
 
   <div className="Sli">
+      <Product/>
+
     <div className="mt-5" style={{ background: '#7f99ff', display: 'flex', minHeight: '43px', padding: '12px 16px', position: 'relative', whiteSpace: 'normal', width: '1102px' }}>
       <h3>Highlight</h3>
     </div>
