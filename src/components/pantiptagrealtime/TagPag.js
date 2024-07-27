@@ -27,28 +27,28 @@ const TagPage = ({ tag }) => {
 
 
   useEffect(() => {
-    console.log('Fetching data for tag:', tag);
+    //console.log('Fetching data for tag:', tag);
     const currentPage = page[tag] || 1;
-    console.log('Current page for tag:', tag, currentPage);
+   // console.log('Current page for tag:', tag, currentPage);
     if (tag) {
       dispatch(fetchData({ tag, page: currentPage }));
     }
   }, [dispatch, tag, page[tag]]);
 
   const loadMoreData = () => {
-    console.log('Load more data for tag:', tag);
+   // console.log('Load more data for tag:', tag);
     const currentPage = page[tag] || 1;
-    console.log('Current page before dispatch:', currentPage);
+    //console.log('Current page before dispatch:', currentPage);
     if (tag) {
       dispatch(fetchData({ tag, page: currentPage + 1 }));
       dispatch(increaseVisibleCount(tag));
     } else {
-      console.error('Tag is undefined or invalid');
+    //  console.error('Tag is undefined or invalid');
     }
   };
 
   const itemsForTag = items[tag] || [];
-  console.log('Items for tag:', tag, itemsForTag);
+ // console.log('Items for tag:', tag, itemsForTag);
 
   // Calculate section height based on number of items
   const sectionHeight = `${itemsForTag.length * 86}px`; // Assuming each item height is 110px

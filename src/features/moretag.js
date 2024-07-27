@@ -24,15 +24,15 @@ const dataSlice = createSlice({
     increaseVisibleCount: (state, action) => {
       const tag = action.payload;
       state.page[tag] = (state.page[tag] || 1) + 1;
-      console.log('Page increased for tag:', tag, 'to:', state.page[tag]);
+     // console.log('Page increased for tag:', tag, 'to:', state.page[tag]);
     },
     setTag: (state, action) => {
       const tag = action.payload;
       state.selectedTag = tag;
       state.page[tag] = 1; // รีเซ็ตหน้าเมื่อแท็กเปลี่ยน
       state.status = 'idle';
-      console.log('Tag set to:', tag);
-      console.log('Page reset to:', state.page[tag]);
+     // console.log('Tag set to:', tag);
+    //  console.log('Page reset to:', state.page[tag]);
     },
   },
   extraReducers: (builder) => {
@@ -43,8 +43,8 @@ const dataSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         const { tag, data } = action.payload;
-        console.log('Data fetch succeeded for tag:', tag);
-        console.log('Fetched data:', data);
+        //console.log('Data fetch succeeded for tag:', tag);
+        //console.log('Fetched data:', data);
         if (!state.items[tag]) {
           state.items[tag] = [];
         }

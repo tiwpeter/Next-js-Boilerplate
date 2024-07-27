@@ -13,6 +13,7 @@ export async function generateStaticParams() {
   async function getProducts(ids){
     const promises = []
     for (const id of ids) {
+      //http://127.0.0.1:5000/api/data?tag=${tag}&page=${page}
         const res = fetch(`https://dummyjson.com/products/${id}`);
         promises.push(res)
     }

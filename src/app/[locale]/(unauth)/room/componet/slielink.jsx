@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 
-export default function ProductButton({ id }) {
+export default function ProductButton({ tag }) {
     return (
-        <Link href={`/room/taginslie/${id}`} style={{ 
+        <Link href={`/room/taginslie/${tag}`} style={{ 
             display: 'inline-block', 
             padding: '10px 20px', 
             border: '1px solid black', 
