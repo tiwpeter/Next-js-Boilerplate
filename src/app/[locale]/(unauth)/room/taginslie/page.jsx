@@ -36,7 +36,7 @@ export default function Products() {
     //console.log({products})
     return (
         <>
-            <h1>Products</h1>
+            <h1>ProductsID</h1>
             
         </>
     );

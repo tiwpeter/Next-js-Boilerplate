@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import Announce from './componet/Announce';
 
 // use redux
 
@@ -22,7 +23,8 @@ export default function About() {
   return (
     <>
      <div>
-          Tag
+          Layout Link
+          <Announce/>
      </div>
     </>
   );
