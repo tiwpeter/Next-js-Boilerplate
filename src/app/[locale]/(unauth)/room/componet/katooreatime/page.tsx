@@ -15,7 +15,7 @@ const Katooreatime = () => {
       {/*<!--startmore--> */}
         <div style={{width: "713px;"}}>
         <div className="mt-5" style={{backgroundColor: "#7f99ff", display: "flex", minHeight: "43px", padding: "12px 16px", position: "relative", whiteSpace: "normal"}}>
-          <h3>      ktoo realtime          </h3>
+          <h3>      กระทู้ล่าสุด         </h3>
       </div>
         <KatooCurent/>
         </div>
