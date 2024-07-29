@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import Product from '../componet/detailslie';
 
 async function getProducts() {
   try {
