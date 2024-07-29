@@ -1,7 +1,6 @@
-"use client"
 import React, { useState } from 'react';
 
-const DetailAnuo = () => {
+const PantipPick = () => {
   const data = [
     { id: 1, url: 'https://ptcdn.info/doodle/2024/66668549caac0a7c9b16ead7_8t0jwfcpbp.png', name: '[Pantip Point] น้องเพี้ยนชวนแชร์ภาพไอเทมรับหน้าฝน ที่ต้องพกติดกระเป๋า! 🌧️💧☂️' },
     { id: 2, url: 'https://ptcdn.info/home_highlight/2022-10/633b8e4a00d01f12500f33e6_hvzb60o1p0_400.jpg', name: 'ต้อนรับฟุตบอลยูโร 2024 ด้วย “เกมบอล”' },
@@ -21,13 +20,14 @@ const DetailAnuo = () => {
   };
 
   return (
-    <section className="dw container mx-auto" style={{  background: 'aliceblue', overflow: 'hidden',width: '1112px' }}>
+    <section className="dw container mx-auto" style={{ height: '430px', background: 'aliceblue', overflow: 'hidden' }}>
       <table className="table-auto w-full border-collapse border border-black">
         <tbody>
           <tr style={{ display: 'grid' }}>
             {data.map((item, index) => (
-              <td key={item.id} className="boxslie border p-2" style={{ display: showMore || index < 4 ? 'block' : 'none' , height: "45px"}}>
+              <td key={item.id} className="boxslie border p-2" style={{ display: showMore || index < 4 ? 'block' : 'none' }}>
                 <div className="flex">
+                  <img src={item.url} alt="Placeholder Image" className="mr-2 w-12 h-12" style={{ width: '86px', height: '64px' }} />
                   <span>{item.name}</span>
                 </div>
               </td>
@@ -35,8 +35,13 @@ const DetailAnuo = () => {
           </tr>
         </tbody>
       </table>
+      {!showMore && (
+        <div className="mt-3" style={{ background: '#7f99ff', display: 'flex', minHeight: '43px', padding: '12px 16px', position: 'relative', whiteSpace: 'normal', width: '1102px' }}>
+          <button onClick={handleMore}>More</button>
+        </div>
+      )}
     </section>
   );
 };
 
-export default DetailAnuo;
+export default PantipPick;

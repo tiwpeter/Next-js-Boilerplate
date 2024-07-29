@@ -2,6 +2,9 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Announce from './componet/Announce';
+import KatooPage from './componet/katoo';
+import PantipPickTag from '@/components/pantipink/page';
+import Katooreatime from './componet/katooreatime/page';
 
 // use redux
 
@@ -25,6 +28,8 @@ export default function About() {
      <div>
           Layout Link
           <Announce/>
+          <KatooPage/>
+          <Katooreatime/>
      </div>
     </>
   );

@@ -1,0 +1,38 @@
+.fontKatoo{
+  
+font-size: .75rem;
+line-height: 1.5;
+white-space: nowrap;
+}
+
+.fontKatoo{
+  cursor: pointer;
+  color: #fbc02d;
+}
+
+.fontKatoo a:hover {
+  text-decoration: underline;
+}
+
+
+
+body {
+  color: rgba(233,229,246,.87);
+  font-family: Roboto,RobotoDraft,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mv{
+  display: flex; /* ใช้ Flexbox เพื่อจัดกลุ่มคอลัมน์ */
+  flex-wrap: wrap; /* ให้คอลัมน์ยืดหยุ่นและไปลงแถวถ้าจำเป็น */
+  margin: 0;
+  padding-top: 20px; /* ปรับค่าตามความต้องการของคุณ */
+  position: relative;
+}
+
+.ova{
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(233,229,246,.08);
+  min-height: 36px;
+}
