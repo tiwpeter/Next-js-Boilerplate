@@ -60,6 +60,7 @@ const Nav = () => {
     <nav className="h-20 flex items-center justify-between" style={{ padding: '10px 15%' }}>
       {/* Scroll */}
       <div className="w-[503px]">
+       
         <Image
           src="/icon/PantipLogo.png"
           alt="Pantip Logo"
@@ -71,6 +72,7 @@ const Nav = () => {
       <div className="flex items-center justify-center w-full h-12">
         <div className="teepuk flex gap-4" id="teepuk">
           <div className="flex items-center justify-center w-16 h-11 gap-2.5">
+           
             <img 
               src="https://pantip.com/static/images/pantip_icon/icon-add_post.png" 
               alt="" 
@@ -98,19 +100,28 @@ const Nav = () => {
       </div>
       <div className="flex items-center justify-end w-[503px]">
         <div className="flex items-center justify-center w-38 h-10">
-          ให้เช่าที่พักกับ Airbnb
+          {/*Iconmessege */}
+        <img 
+              src="/icon/messeage/comment.png" 
+              alt="ร" 
+              className="world-icon" 
+              style={{ width: 16, height: 16 }} 
+            />
         </div>
         <div className="flex items-center justify-center w-10 h-10">
           <div>
+            
+             {/*Icon Bell */}
             <img 
-              src="/icon/world.png" 
-              alt="" 
+              src="/icon/messeage/bell.png" 
+              alt="ร" 
               className="world-icon" 
               style={{ width: 16, height: 16 }} 
             />
           </div>
         </div>
         <div>
+           
           <img 
             src="/icon/profile-user.png" 
             className="user-pic" 
@@ -122,13 +133,30 @@ const Nav = () => {
       <div className="sub-menu-wrap " id="subMenu">
         <div className="sub-menu">
           <div className="user-info">
-            <h2>James Ald</h2>
+            <a href="#" className="sub-menulink">
+              <p>ลงทะเบียน</p>
+              <span></span>
+            </a>
           </div>
-          <hr />
+          
           <a href="#" className="sub-menulink">
-            <p>Logout</p>
+            <p>เข้าสู่ระบบ</p>
             <span></span>
           </a>
+
+          <hr />
+          
+          <a href="#" className="sub-menulink">
+            <p>แลกพอยต์</p>
+            <span></span>
+          </a>
+          
+          <a href="#" className="sub-menulink">
+            <p>กิจกรรมพันธิป</p>
+            <span></span>
+          </a>
+
+
         </div>
       </div>
     </nav>
