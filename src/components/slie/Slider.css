@@ -38,6 +38,9 @@
   text-align: center;
  /* background-color: white; /* Optional: Add background color if needed */
  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow if needed */
+ z-index: 3;
+ position: relative;
+
 }
 
 
@@ -76,10 +79,12 @@
 
 .slider-icon.left {
   left: 0;
+  top: 22px;
 }
 
 .slider-icon.right {
   right: 0;
+  top: 22px;
 }
 
 .slider-icon.left:hover, .slider-icon.right:hover {
