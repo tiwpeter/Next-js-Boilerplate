@@ -10,11 +10,11 @@ import './pagetag/css/te.css'
 
 const PantipPickTag = () => {
   return (
-  <section className="flex">
+  <section className="flex w-[711px]">
     {/*<!--startmore--> */}
       <div style={{width: "713px;"}}>
       <div className="mt-5" style={{backgroundColor: "#7f99ff", display: "flex", minHeight: "43px", padding: "12px 16px", position: "relative", whiteSpace: "normal"}}>
-        <h3>Pantip Pickwww</h3>
+        <h3>Pantip </h3>
     </div>
       <PantipPick/>
       </div>

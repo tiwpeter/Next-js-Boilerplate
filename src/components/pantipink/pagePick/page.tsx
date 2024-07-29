@@ -20,7 +20,10 @@ const PantipPick = () => {
   };
 
   return (
-    <section className="dw container mx-auto" style={{ height: '430px', background: 'aliceblue', overflow: 'hidden' }}>
+    <section className="dw container mx-auto w-[711px]" style={{ 
+      height: '430px', background: 'aliceblue', overflow: 'hidden'
+      , 
+      }}>
       <table className="table-auto w-full border-collapse border border-black">
         <tbody>
           <tr style={{ display: 'grid' }}>
