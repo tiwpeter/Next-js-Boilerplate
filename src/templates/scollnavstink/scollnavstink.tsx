@@ -11,7 +11,7 @@ const StickyNav = () => {
     if (stickyTop) {
       stickyTop.style.position = 'fixed';
       stickyTop.style.top = '-25px';
-      stickyTop.style.zIndex = '10'; // Use camel case for zIndex
+      stickyTop.style.zIndex = '9'; // Use camel case for zIndex
     } else {
       console.error("Element with id 'sticky-top' not found.");
     }

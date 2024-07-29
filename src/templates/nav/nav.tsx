@@ -3,6 +3,8 @@ import Image from 'next/image';
 import './css/hover.css';
 import './css/teepuk.css';
 import './css/dropmenu.css';
+import './css/border.css';
+import './css/boxing.css';
 
 
 const Nav = () => {
@@ -120,42 +122,71 @@ const Nav = () => {
             />
           </div>
         </div>
-        <div>
-           
+
+        <div className='boxing'>
+          <div>
+          <img 
+            src="/line/menu.png" 
+            className="user-pic" 
+            onClick={togglemenu} // Attach togglemenu function to onClick event
+            style={{ width: 16, height: 16 }} 
+            alt="" 
+          />
+          </div>
+
+          <div>
           <img 
             src="/icon/profile-user.png" 
             className="user-pic" 
             onClick={togglemenu} // Attach togglemenu function to onClick event
             alt="" 
           />
+          </div>
         </div>
+
       </div>
       <div className="sub-menu-wrap " id="subMenu">
         <div className="sub-menu">
-          <div className="user-info">
-            <a href="#" className="sub-menulink">
-              <p>ลงทะเบียน</p>
-              <span></span>
-            </a>
+        <div className='bordercuser' >
+       
+        <div >
+            <p>ลงทะเบียน</p>
+          </div>
           </div>
           
-          <a href="#" className="sub-menulink">
+          <div className='bordercuser' >
+       
+        <div >
             <p>เข้าสู่ระบบ</p>
-            <span></span>
-          </a>
+          </div>
+          </div>
 
           <hr />
-          
-          <a href="#" className="sub-menulink">
-            <p>แลกพอยต์</p>
-            <span></span>
-          </a>
-          
-          <a href="#" className="sub-menulink">
-            <p>กิจกรรมพันธิป</p>
-            <span></span>
-          </a>
 
+          <div className='bordercuser' >
+          <img 
+            src="/icon/messeage/comment.png" 
+            alt="ร" 
+            className="world-icon" 
+            style={{ width: 16, height: 16 }} 
+          />
+          <div style={{ marginLeft: '8px' }}>
+            <p>แลกพอยต์</p>
+          </div>
+
+        </div>
+        
+        <div className='bordercuser' >
+        <img 
+            src="/icon/patip/ic-stars-black-outline_512px.png" 
+            alt="ร" 
+            className="coloricon" 
+            style={{ width: 20, height: 20 }} 
+          />
+        <div style={{ marginLeft: '8px' }}>
+            <p>กิจกรรมพันธิป</p>
+          </div>
+</div>
 
         </div>
       </div>

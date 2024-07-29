@@ -10,17 +10,20 @@
   overflow: hidden; /* hide drop*/
   transition: max-height 0.5s;
   
+  
 }
 
 .sub-menu-wrap.open-menu{
   max-height: 400px;/* ขยายเมื่อเปิดเมนู */
   /*max-width: 400px;/* eoro*/
+
 }
 
 .sub-menu{
   background: #fff;
   padding: 20px;
-  margin: 10px;
+  width: 236px;
+  margin-left: 12px;
 }
 
 .user-info{
