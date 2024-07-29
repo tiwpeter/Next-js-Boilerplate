@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Slider.css';
+import './cuserlink.css'
 import './buttoncolor.css'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import Link from 'next/link';
@@ -7,6 +8,7 @@ import Link from 'next/link';
 const ReactCardSlider = (props) => {
     const [isAtStart, setIsAtStart] = useState(true);
     const [isAtEnd, setIsAtEnd] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null); // State for active card
 
     const slideLeft = () => {
         var slider = document.getElementById("slider");
@@ -46,6 +48,10 @@ const ReactCardSlider = (props) => {
         return () => slider.removeEventListener('scroll', checkScrollPosition);
     }, []);
 
+    const handleClick = (index) => {
+        setActiveIndex(index);
+    };
+
     return (
         <div id="main-slider-container">
             {!isAtStart && (
@@ -57,7 +63,10 @@ const ReactCardSlider = (props) => {
                 {
                     props.slides.map((slide, index) => (
                         <Link href={slide.link} key={index} legacyBehavior>
-                            <a className="slider-card">
+                            <a 
+                              className={`slider-card ${activeIndex === index ? 'active' : ''}`} 
+                              onClick={() => handleClick(index)}
+                            >
                                 <div className="slider-card-image" style={{ backgroundImage: `url(${slide.image})`, backgroundSize: 'cover' }}></div>
                                 <p className="slider-card-title">{slide.name}</p>
                             </a>
