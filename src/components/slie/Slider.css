@@ -1,6 +1,6 @@
 #main-slider-container {
   width: 1080px;
-  height: 90px;
+  height: 78px;
   position: relative;
   display: flex;
   align-items: center;
@@ -25,8 +25,8 @@
 }
 
 .slider-card {
-  width: 117px;
-  height: 131px;
+  /*width: 117px;*/
+  height: 78px;
   border-radius: 10px;
   display: inline-flex;
   flex-direction: column;
@@ -36,8 +36,8 @@
   margin-right: 20px; /* Adjust the margin as needed */
   cursor: pointer;
   text-align: center;
-  background-color: white; /* Optional: Add background color if needed */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow if needed */
+ /* background-color: white; /* Optional: Add background color if needed */
+ /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow if needed */
 }
 
 

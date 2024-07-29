@@ -3,6 +3,7 @@ import React from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
 import './css/iconslie.css'; // Assuming this imports your custom CSS
+import Sli from '@/components/slie/slie';
 
 const Room = () => {
   const [sliderRef, slider] = useKeenSlider({
@@ -32,24 +33,7 @@ const Room = () => {
 
   return (
     <div className="sw" style={{ width: '1096px' }}>
-      <div className="sw" style={{ width: '100%', background: 'aquamarine', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div ref={sliderRef} className="keen-slider">
-          {chunks.map((chunk, index) => (
-            <div key={index} className="keenIcon-slider__slide">
-              {chunk.map(image => (
-                <div className="slide-icon" key={image.id}>
-                  <img src={image.url} alt={`Slide ${image.id}`} />
-                  <p>{image.name}</p>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="slider-controls">
-        <button className="slider-button" onClick={() => slider.current?.prev()}>{"<"}</button>
-        <button className="slider-button" onClick={() => slider.current?.next()}>{">"}</button>
-      </div>
+      <Sli/>
     </div>
   );
 };

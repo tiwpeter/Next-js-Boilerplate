@@ -12,18 +12,24 @@ const data = [
   { id: 7, image: 'https://a0.muscache.com/pictures/bcd1adc0-5cee-4d7a-85ec-f6730b0f8d0c.jpg', name: 'ก้นครัว' ,link: '#'},
   { id: 8, image: 'https://example.com/image8.jpg', name: 'ก้นครัว' ,link: '#'},
   { id: 9, image: 'https://example.com/image9.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 4, image: 'https://f.ptcdn.info/770/084/000/lyekkvfciohloZSbA1b-s.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 5, image: 'https://example.com/image5.jpg', name: 'ก้นครัว ',link: '#' },
+  { id: 6, image: 'https://example.com/image6.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 7, image: 'https://a0.muscache.com/pictures/bcd1adc0-5cee-4d7a-85ec-f6730b0f8d0c.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 8, image: 'https://example.com/image8.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 9, image: 'https://example.com/image9.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 6, image: 'https://example.com/image6.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 7, image: 'https://a0.muscache.com/pictures/bcd1adc0-5cee-4d7a-85ec-f6730b0f8d0c.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 8, image: 'https://example.com/image8.jpg', name: 'ก้นครัว' ,link: '#'},
+  { id: 9, image: 'https://example.com/image9.jpg', name: 'ก้นครัว' ,link: '#'},
   
 ];
 const Sli = () => (
 
   
 
-  <div className="Sli">
-      <Product/>
-
-    <div className="mt-5" style={{ background: '#7f99ff', display: 'flex', minHeight: '43px', padding: '12px 16px', position: 'relative', whiteSpace: 'normal', width: '1102px' }}>
-      <h3>Highlight</h3>
-    </div>
+  <div className="Slieroom">
+      
     <ReactCardSlider slides={data} />
   </div>
 );
