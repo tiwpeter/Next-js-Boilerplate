@@ -57,7 +57,7 @@
   background-position: center;
 }
 
-.slider-icon.left, .slider-icon.right {
+.slider-icon-secod.left, .slider-icon-secod.right {
   background: white;
   border-radius: 100%;
   position: absolute;
@@ -67,16 +67,16 @@
   z-index: 3; /* Ensure slider icons are above other content */
 }
 
-.slider-icon.left {
+.slider-icon-secod.left {
   left: 0;
-  top: 22px;
+  top: 108px;
 }
 
-.slider-icon.right {
+.slider-icon-secod.right  {
   right: 0;
-  top: 22px;
+  top: 108px;
 }
 
-.slider-icon.left:hover, .slider-icon.right:hover {
+.slider-icon-secod.left:hover, .slider-icon-secod.right:hover {
   opacity: 1;
 }

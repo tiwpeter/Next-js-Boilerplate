@@ -54,7 +54,7 @@ const Slidersecod = (props) => {
         <div>
           <MdChevronLeft
             size={40}
-            className="slider-icon left"
+            className="slider-icon-secod left"
             onClick={slideLeftsecod}
           />
         </div>
@@ -82,7 +82,7 @@ const Slidersecod = (props) => {
         <div>
           <MdChevronRight
             size={40}
-            className="slider-icon right"
+            className="slider-icon-secod right"
             onClick={slideRightsecod}
           />
         </div>
