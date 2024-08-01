@@ -33,6 +33,13 @@ const SecodSlie = () => {
       name: 'ก้นครัว',
       link: '#',
     },
+    {
+      id: 5,
+      image:
+        'https://ptcdn.info/home_highlight/2022-10/633b8e4a00d01f12500f33e6_hvzb60o1p0_400.jpg',
+      name: 'wd',
+      link: '/room/',
+    },
   ];
 
   return (

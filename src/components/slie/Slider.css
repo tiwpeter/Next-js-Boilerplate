@@ -21,9 +21,8 @@
 #slider::-webkit-scrollbar {
   display: none;
 }
-
-.slider-card-secod {
-  height: 285px;
+.slider-card {
+  height: 78px;
   border-radius: 10px;
   display: inline-flex;
   flex-direction: column;
