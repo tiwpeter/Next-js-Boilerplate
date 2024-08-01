@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import './css/navtick.css';
 import './warper/styls.css';
+
+import React, { useEffect, useState } from 'react';
+
 import Room from './room/room';
 
 const StickyNav = () => {
@@ -16,10 +18,10 @@ const StickyNav = () => {
       console.error("Element with id 'sticky-top' not found.");
     }
   };
-  
+
   const resetBoxes = () => {
     const stickyTop = document.getElementById('sticky-top');
-    
+
     // Check if stickyTop is not null before resetting styles
     if (stickyTop) {
       stickyTop.style.position = '';
@@ -32,7 +34,8 @@ const StickyNav = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+      const scrollPosition =
+        window.scrollY || document.documentElement.scrollTop;
       if (scrollPosition > 0) {
         setIsScrolled(true);
       } else {
@@ -59,7 +62,7 @@ const StickyNav = () => {
   return (
     <div className="sticky-top" id="sticky-top">
       <div className="wrappper">
-        <Room/>
+        <Room />
       </div>
     </div>
   );

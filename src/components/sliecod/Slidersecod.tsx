@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-const ReactCardSlider = (props) => {
+const Slidersecod = (props) => {
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null); // State for active card
@@ -43,7 +43,7 @@ const ReactCardSlider = (props) => {
   };
 
   useEffect(() => {
-    const slider = document.getElementById('slider');
+    const slider = document.getElementById('slider-secod');
     slider.addEventListener('scroll', checkScrollPosition);
     checkScrollPosition(); // Initial check
     return () => slider.removeEventListener('scroll', checkScrollPosition);
@@ -54,7 +54,7 @@ const ReactCardSlider = (props) => {
   };
 
   return (
-    <div id="main-slider-container">
+    <div id="main-slider-Secod">
       {!isAtStart && (
         <div>
           <MdChevronLeft
@@ -64,21 +64,21 @@ const ReactCardSlider = (props) => {
           />
         </div>
       )}
-      <div className="sliecolor" id="slider">
+      <div className="sliecolor" id="slider-secod">
         {props.slides.map((slide, index) => (
           <Link href={slide.link} key={index} legacyBehavior>
             <a
-              className={`slider-card ${activeIndex === index ? 'active' : ''}`}
+              className={`slider-card-secod ${activeIndex === index ? 'active' : ''}`}
               onClick={() => handleClick(index)}
             >
               <div
-                className="slider-card-image"
+                className="slider-card-image-secod"
                 style={{
                   backgroundImage: `url(${slide.image})`,
                   backgroundSize: 'cover',
                 }}
               />
-              <p className="slider-card-title">{slide.name}</p>
+              <p>sss</p>
             </a>
           </Link>
         ))}
@@ -96,4 +96,4 @@ const ReactCardSlider = (props) => {
   );
 };
 
-export default ReactCardSlider;
+export default Slidersecod;

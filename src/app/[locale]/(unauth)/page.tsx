@@ -1,17 +1,21 @@
-"use client";
+'use client';
 
 import React from 'react';
-import SlieData from '@/components/slie/slie';
-import Pantiprealtime from '@/components/pantiprealtime/page';
-import PantipPickTag from '@/components/pantipink/page';
-import PantipTagreal from '@/components/pantiptagrealtime/page';
 import { Provider } from 'react-redux';
+
+import PantipPickTag from '@/components/pantipink/page';
+import Pantiprealtime from '@/components/pantiprealtime/page';
+import PantipTagreal from '@/components/pantiptagrealtime/page';
+import SecodSlie from '@/components/sliecod/data';
+
 import { store } from '../../../features/storemore';
 
 const ClientComponent = () => {
   return (
     <>
-      <SlieData />
+      {/* main secod */}
+      <SecodSlie />
+      {/* <SlieData /> old */}
       <Pantiprealtime />
       <PantipPickTag />
       <Provider store={store}>
