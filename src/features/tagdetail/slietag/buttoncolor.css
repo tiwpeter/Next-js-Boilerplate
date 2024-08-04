@@ -1,0 +1,59 @@
+  /* CSS for slider gradients and arrows */
+  .sliecolor {
+    position: relative;
+  }
+  
+  .sliecolor::before,
+  .sliecolor::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 15%;
+    z-index: 1;
+    top: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 1;
+    transition: opacity 0.3s ease; /* Smooth transition for fading */
+  }
+  
+  .sliecolor.hidden-left::before {
+    opacity: 0; /* Hide gradient on the left */
+  }
+  
+  .sliecolor.hidden-right::after {
+    opacity: 0; /* Hide gradient on the right */
+  }
+  
+  .sliecolor::before {
+    left: 0;
+  }
+  
+  .sliecolor::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  }
+  
+  .slider-icon.left, .slider-icon.right {
+    background: white;
+    border-radius: 100%;
+    position: absolute;
+    opacity: 0.5;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    z-index: 3; /* Ensure slider icons are above other content */
+  }
+  
+  .slider-icon.left {
+    left: 0;
+    top: 24px;
+  }
+  
+  .slider-icon.right {
+    right: 0;
+    top: 24px;
+  }
+  
+  .slider-icon.left:hover, .slider-icon.right:hover {
+    opacity: 1;
+  }
+  

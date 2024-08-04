@@ -1,0 +1,23 @@
+.slider-card {
+    height: 78px;
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .slider-card-image {
+    width: 24px;
+    height: 24px;
+    background-color: black; /* Ensure a solid background color */
+    background-size: cover;
+    background-position: center;
+  }
+  
