@@ -1,5 +1,7 @@
 'use client';
 
+import './font.css';
+
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import MessageIcon from '@mui/icons-material/Message';
 import { SvgIcon } from '@mui/material';
