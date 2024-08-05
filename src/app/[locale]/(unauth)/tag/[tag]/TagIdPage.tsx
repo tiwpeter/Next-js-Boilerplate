@@ -1,10 +1,11 @@
-"use client"
+"use client";
+
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchTags, fetchPantipData } from '@/features/tagsReducer'; // Ensure correct path
 
 const TagIdPage = ({ params }: { params: { tag: string } }) => {
-    const { tag } = params; // Use route params
+    const { tag } = params;
     const dispatch = useDispatch();
     const {
         bangrak,
@@ -21,23 +22,27 @@ const TagIdPage = ({ params }: { params: { tag: string } }) => {
         hasMoreAsmr,
         hasMoreSukui,
         hasMoreSme,
-        pantipData, // New state for Pantip data
+        pantipData,
     } = useSelector((state) => state.tags);
 
     useEffect(() => {
         if (tag) {
-            dispatch(fetchTags({ page: 1, perPage: perPage, reset: true }));
+            dispatch(fetchTags({ page: 1, perPage, reset: true }));
             if (tag === 'bangrak') {
                 dispatch(fetchPantipData(tag));
             }
         }
     }, [dispatch, tag, perPage]);
 
-    const displayData = tag === 'bangruk' ? bangruk : tag === 'bangrak' ? bangrak : tag === 'asmr' ? asmr : tag === 'sukui' ? sukui : tag === 'sme' ? sme : [];
+    const displayData = tag === 'bangruk' ? bangruk :
+                        tag === 'bangrak' ? bangrak :
+                        tag === 'asmr' ? asmr :
+                        tag === 'sukui' ? sukui :
+                        tag === 'sme' ? sme : [];
 
     const loadMore = () => {
         const nextPage = page + 1;
-        dispatch(fetchTags({ page: nextPage, perPage: perPage }));
+        dispatch(fetchTags({ page: nextPage, perPage }));
     };
 
     return (
@@ -47,8 +52,6 @@ const TagIdPage = ({ params }: { params: { tag: string } }) => {
             {status === 'failed' && <p>Error: {error}</p>}
             {status === 'succeeded' && (
                 <div>
-                   
-
                     <h2>Tags Data</h2>
                     <ul>
                         {displayData.map((item, index) => (
