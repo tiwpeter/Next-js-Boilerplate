@@ -47,22 +47,7 @@ const TagPage = ({ params }: { params: { tag: string } }) => {
             {status === 'failed' && <p>Error: {error}</p>}
             {status === 'succeeded' && (
                 <div>
-                    {tag === 'bangrak' && (
-                        <>
-                            <h2>Pantip Data</h2>
-                            {pantipData ? (
-                                <ul>
-                                    {pantipData.map((item, index) => (
-                                        <li key={index}>
-                                            <a href={item.href}>{item.title}</a> - {item.text}
-                                        </li>
-                                    ))}
-                                </ul>
-                            ) : (
-                                <p>Loading Pantip data...</p>
-                            )}
-                        </>
-                    )}
+                   
 
                     <h2>Tags Data</h2>
                     <ul>
