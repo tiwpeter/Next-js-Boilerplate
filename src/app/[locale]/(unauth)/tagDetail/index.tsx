@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import IconComponent from './page';
 import TagsComponent from './TagsComponent';
 
-const group = ["food", "bangrak", "korea", "horoscope", "isolate", "religious","rajdumnern"];
+const group = ["food", "bangrak", "korea"];
 
 const MainpageIcon = () => {
   const [currentTags, setCurrentTags] = useState([]);

@@ -52,10 +52,21 @@ const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
   }
 
   return (
-    <div>
+    <div
+      className="mt-5"
+      style={{
+        backgroundColor: '#7f99ff',
+        display: 'flex',
+        minHeight: '43px',
+        padding: '12px 16px',
+        position: 'relative',
+        whiteSpace: 'normal',
+        width:'713px'
+      }}
+    >
       <img
         src={icon.background_image_url}
-        style={{ width: '30px' }}
+        style={{ width: '48px', height: '48px' }}
         alt="Icon"
       />
       {icon.h2_text.map((text, index) => (
@@ -67,9 +78,11 @@ const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
           {text}
         </h2>
       ))}
-      <a href={icon.link}>More Info</a>
     </div>
   );
 };
 
 export default IconComponent;
+{
+  /* <a href={icon.link}>More Info</a> */
+}

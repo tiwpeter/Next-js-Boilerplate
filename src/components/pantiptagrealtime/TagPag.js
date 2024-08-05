@@ -1,18 +1,12 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
+import React, { useState } from 'react';
 import MessageIcon from '@mui/icons-material/Message';
-import { SvgIcon } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { SvgIcon } from '@mui/material';
 import LoadMoreButton from '../more/more';
-import { fetchData, increaseVisibleCount } from '../../features/old/moretag';
 import './font.css';
 
 const TagPage = ({ tag }) => {
-  const dispatch = useDispatch();
-  const { items, page, status, error, visibleCount } = useSelector(
-    (state) => state.data,
-  );
+  const [currentPage, setCurrentPage] = useState(1); // Local state for pagination
 
   const data = [
     {
@@ -42,42 +36,19 @@ const TagPage = ({ tag }) => {
     { id: 9, url: 'https://example.com/image9.jpg', name: 'Image 9' },
   ];
 
-  useEffect(() => {
-    // console.log('Fetching data for tag:', tag);
-    const currentPage = page[tag] || 1;
-    // console.log('Current page for tag:', tag, currentPage);
-    if (tag) {
-      dispatch(fetchData({ tag, page: currentPage }));
-    }
-  }, [dispatch, tag, page[tag]]);
+  const itemsPerPage = 4; // Adjust as per your requirement
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const visibleData = data.slice(startIndex, startIndex + itemsPerPage);
 
   const loadMoreData = () => {
-    // console.log('Load more data for tag:', tag);
-    const currentPage = page[tag] || 1;
-    // console.log('Current page before dispatch:', currentPage);
-    if (tag) {
-      dispatch(fetchData({ tag, page: currentPage + 1 }));
-      dispatch(increaseVisibleCount(tag));
-    } else {
-      //  console.error('Tag is undefined or invalid');
-    }
+    setCurrentPage(currentPage + 1);
   };
-
-  const itemsForTag = items[tag] || [];
-  // console.log('Items for tag:', tag, itemsForTag);
-
-  // Calculate section height based on number of items
-  const sectionHeight = `${itemsForTag.length * 86}px`; // Assuming each item height is 110px
 
   return (
     <div>
-      {status === 'loading' && <p>กำลังโหลด...</p>}
-      {status === 'failed' && <p>Error: {error}</p>}
-
       <section
         className="dw container mx-auto"
         style={{
-          height: sectionHeight,
           background: 'aliceblue',
           overflow: 'hidden',
         }}
@@ -86,7 +57,7 @@ const TagPage = ({ tag }) => {
           className="flex flex-wrap"
           style={{ width: '100%', padding: '0', listStyle: 'none' }}
         >
-          {data.map((item) => (
+          {visibleData.map((item) => (
             <li
               key={item.id}
               className="boxslie border p-2 "
@@ -159,7 +130,7 @@ const TagPage = ({ tag }) => {
           ))}
         </ul>
       </section>
-      {status !== 'loading' && <LoadMoreButton onClick={loadMoreData} />}
+      <LoadMoreButton onClick={loadMoreData} />
     </div>
   );
 };
