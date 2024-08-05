@@ -1,11 +1,14 @@
-'use client';
-
 import React from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchIcons } from '@/features/IconReducer';
 import type { AppDispatch, RootState } from '@/features/store/store';
+
+import './Slider.css';
+import './cuserlink.css';
+import './buttoncolor.css';
+
 
 const ReactCardSlider = () => {
   const [isAtStart, setIsAtStart] = React.useState(true);
@@ -95,9 +98,8 @@ const ReactCardSlider = () => {
                   backgroundSize: 'cover',
                 }}
                 onClick={() => handleClick(index)}
-              >
-                <p className="slider-card-title">{icon.text_eng}</p>
-              </div>
+              />
+              <p className="slider-card-title">{icon.text_eng}</p>
             </section>
           ))
         ) : (

@@ -49,13 +49,7 @@
   font-size: 13px;
 }
 
-.slider-card-image {
-  width: 24px; /* Adjust as needed */
-  height: 24px; /* Adjust as needed */
-  background-color: transparent;
-  background-size: cover;
-  background-position: center;
-}
+
 
 .slider-icon-secod.left, .slider-icon-secod.right {
   background: white;
