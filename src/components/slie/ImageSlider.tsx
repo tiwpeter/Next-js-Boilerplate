@@ -1,9 +1,12 @@
+import './Slider.css';
+
+import { useRouter } from 'next/navigation'; // ใช้ 'next/router' สำหรับเวอร์ชันที่ไม่ใช่ 13
 import React from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchIcons } from '@/features/IconReducer';
 import type { AppDispatch, RootState } from '@/features/store/store';
-import './Slider.css';
 
 const ReactCardSlider = () => {
   const [isAtStart, setIsAtStart] = React.useState(true);
@@ -11,7 +14,10 @@ const ReactCardSlider = () => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
   const dispatch: AppDispatch = useDispatch();
-  const { data: icons, status } = useSelector((state: RootState) => state.icons);
+  const router = useRouter(); // ใช้ useRouter จาก 'next/router'
+  const { data: icons, status } = useSelector(
+    (state: RootState) => state.icons,
+  );
 
   React.useEffect(() => {
     if (status === 'idle') {
@@ -46,13 +52,8 @@ const ReactCardSlider = () => {
     const sliderContainer = document.querySelector('.sliecolor');
 
     if (slider && sliderContainer) {
-      console.log("scrollLeft:", slider.scrollLeft);
-      console.log("clientWidth:", slider.clientWidth);
-      console.log("scrollWidth:", slider.scrollWidth);
-      console.log("isAtStart:", slider.scrollLeft === 0);
-      console.log("isAtEnd:", slider.scrollLeft + slider.clientWidth >= slider.scrollWidth);
-
-      const isEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth;
+      const isEnd =
+        slider.scrollLeft + slider.clientWidth >= slider.scrollWidth;
       setIsAtEnd(isEnd);
       setIsAtStart(slider.scrollLeft === 0);
 
@@ -72,6 +73,12 @@ const ReactCardSlider = () => {
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
+    const textEng = icons[index]?.text_eng; // Assume each icon has a text_eng
+    if (textEng) {
+      // Construct the URL based on text_eng
+      const url = `/tag/${encodeURIComponent(textEng)}`; // Adjust the path as needed
+      router.push(url); // Navigate to the URL
+    }
   };
 
   return (
@@ -92,6 +99,7 @@ const ReactCardSlider = () => {
             <section
               key={index}
               className={`slider-card ${index === activeIndex ? 'active' : ''}`}
+              onClick={() => handleClick(index)} // Add onClick handler
             >
               <div
                 className="slider-card-image"
@@ -99,7 +107,6 @@ const ReactCardSlider = () => {
                   backgroundImage: `url(${icon.background_image_url})`,
                   backgroundSize: 'cover',
                 }}
-                onClick={() => handleClick(index)}
               />
               <p className="slider-card-title">{icon.text_eng}</p>
             </section>
