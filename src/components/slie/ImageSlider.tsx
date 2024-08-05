@@ -1,14 +1,9 @@
 import React from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { fetchIcons } from '@/features/IconReducer';
 import type { AppDispatch, RootState } from '@/features/store/store';
-
 import './Slider.css';
-import './cuserlink.css';
-import './buttoncolor.css';
-
 
 const ReactCardSlider = () => {
   const [isAtStart, setIsAtStart] = React.useState(true);
@@ -16,9 +11,7 @@ const ReactCardSlider = () => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
   const dispatch: AppDispatch = useDispatch();
-  const { data: icons, status } = useSelector(
-    (state: RootState) => state.icons,
-  );
+  const { data: icons, status } = useSelector((state: RootState) => state.icons);
 
   React.useEffect(() => {
     if (status === 'idle') {
@@ -26,14 +19,26 @@ const ReactCardSlider = () => {
     }
   }, [dispatch, status]);
 
+  React.useEffect(() => {
+    if (status === 'succeeded' && icons.length > 0) {
+      checkScrollPosition();
+    }
+  }, [status, icons]);
+
   const slideLeft = () => {
     const slider = document.getElementById('slider');
-    if (slider) slider.scrollLeft -= 500;
+    if (slider) {
+      slider.scrollLeft -= 500;
+      setTimeout(checkScrollPosition, 300); // Delay to ensure scroll is complete
+    }
   };
 
   const slideRight = () => {
     const slider = document.getElementById('slider');
-    if (slider) slider.scrollLeft += 500;
+    if (slider) {
+      slider.scrollLeft += 500;
+      setTimeout(checkScrollPosition, 300); // Delay to ensure scroll is complete
+    }
   };
 
   const checkScrollPosition = () => {
@@ -41,21 +46,18 @@ const ReactCardSlider = () => {
     const sliderContainer = document.querySelector('.sliecolor');
 
     if (slider && sliderContainer) {
-      if (slider.scrollLeft === 0) {
-        setIsAtStart(true);
-        sliderContainer.classList.add('hidden-left');
-      } else {
-        setIsAtStart(false);
-        sliderContainer.classList.remove('hidden-left');
-      }
+      console.log("scrollLeft:", slider.scrollLeft);
+      console.log("clientWidth:", slider.clientWidth);
+      console.log("scrollWidth:", slider.scrollWidth);
+      console.log("isAtStart:", slider.scrollLeft === 0);
+      console.log("isAtEnd:", slider.scrollLeft + slider.clientWidth >= slider.scrollWidth);
 
-      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-        setIsAtEnd(true);
-        sliderContainer.classList.add('hidden-right');
-      } else {
-        setIsAtEnd(false);
-        sliderContainer.classList.remove('hidden-right');
-      }
+      const isEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth;
+      setIsAtEnd(isEnd);
+      setIsAtStart(slider.scrollLeft === 0);
+
+      sliderContainer.classList.toggle('hidden-right', isEnd);
+      sliderContainer.classList.toggle('hidden-left', slider.scrollLeft === 0);
     }
   };
 
