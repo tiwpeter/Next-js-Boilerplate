@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Nav from './nav/nav';
 import Nab from './nab/nab';
 import StickyNav from './scollnavstink/scollnavstink';
+import StoreProvider from '@/features/store/StoreProvider';
 
 /* main layout */
 
@@ -42,6 +43,7 @@ const BaseTemplate = (props: {
     <StickyNav/>
 
 {/*component*/}
+<StoreProvider>
         <main className="bg-blue-200 justify-center flex h-[3200px] ">
             <>
               <section className="flex w-[1078px] h-full">
@@ -50,7 +52,7 @@ const BaseTemplate = (props: {
             </>
 
         </main>
-
+        </StoreProvider>
 {/*component*/}
       </div>
     </div>

@@ -18,9 +18,10 @@ const ClientComponent = () => {
       <Pantiprealtime />
       <PantipPickTag />
 
-      <StoreProvider>
-        <MainpageIcon />
-      </StoreProvider>
+      
+      {/* nav icon  detail */}
+      <MainpageIcon />
+     
     </>
   );
 };
