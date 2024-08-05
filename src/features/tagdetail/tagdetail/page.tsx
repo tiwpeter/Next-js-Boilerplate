@@ -1,9 +1,10 @@
+import { useRouter } from 'next/navigation'; // Import useRouter from next/router
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIcons } from '../../redix/IconReducer';
-import { selectIconByTextEng } from '../../redix/selecIcon'; // Import the selector
-import { AppDispatch, RootState } from '../../../store/store'; // Import the types
-import { useRouter } from 'next/navigation'; // Import useRouter from next/router
+
+import { fetchIcons } from '@/features/IconReducer';
+import { selectIconByTextEng } from '@/features/selecIcon'; // Import the selector
+import type { AppDispatch, RootState } from '@/features/store/store'; // Import the types
 
 interface IconComponentProps {
   textEng: string; // Add a prop for textEng
@@ -23,13 +24,13 @@ const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
 
   // Log the status and any errors
   useEffect(() => {
-    //console.log('Status:', status);
-    //console.log('Error:', error);
+    // console.log('Status:', status);
+    // console.log('Error:', error);
   }, [status, error]);
 
   // Log the icon data if available
   useEffect(() => {
-    //console.log('Icon data:', icon);
+    // console.log('Icon data:', icon);
   }, [icon]);
 
   const handleClick = (text: string) => {
@@ -52,14 +53,21 @@ const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
 
   return (
     <div>
-      <img src={icon.background_image_url} style={{ width: "30px" }} alt="Icon" />
+      <img
+        src={icon.background_image_url}
+        style={{ width: '30px' }}
+        alt="Icon"
+      />
       {icon.h2_text.map((text, index) => (
-        <h2 key={index} onClick={() => handleClick(text)} style={{ cursor: 'pointer' }}>
+        <h2
+          key={index}
+          onClick={() => handleClick(text)}
+          style={{ cursor: 'pointer' }}
+        >
           {text}
         </h2>
       ))}
-     <a href={icon.link}>More Info</a>
-
+      <a href={icon.link}>More Info</a>
     </div>
   );
 };

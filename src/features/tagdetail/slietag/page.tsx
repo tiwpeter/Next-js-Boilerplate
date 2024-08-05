@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchIcons } from '../../redix/IconReducer'; // Ensure the path is correct
-import { RootState, AppDispatch } from '../../../store/store'; // Ensure the path is correct
+import { fetchIcons } from '@/features/IconReducer'; // Ensure the path is correct
+import { RootState, AppDispatch } from '@/features/store/store'; // Ensure the path is correct
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
 import './imageicon.css';

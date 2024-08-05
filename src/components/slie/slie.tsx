@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactCardSlider from './ImageSlider';
 import Product from "../../app/[locale]/(unauth)/room/taginslie/page"
+import StoreProvider from '@/features/store/StoreProvider';
 
 const data = [
   { id: 1, image: 'https://ptcdn.info/doodle/2024/66668549caac0a7c9b16ead7_8t0jwfcpbp.png', name: 'room ' ,link: '/'},
@@ -27,11 +28,12 @@ const data = [
 const Sli = () => (
 
   
-
+<StoreProvider>
   <div className="Slieroom">
       
     <ReactCardSlider slides={data} />
   </div>
+  </StoreProvider>
 );
 
 export default Sli;

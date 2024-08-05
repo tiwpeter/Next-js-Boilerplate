@@ -1,55 +1,71 @@
-import './Slider.css';
-import './cuserlink.css';
-import './buttoncolor.css';
+'use client';
 
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ReactCardSlider = (props) => {
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null); // State for active card
+import { fetchIcons } from '@/features/IconReducer';
+import type { AppDispatch, RootState } from '@/features/store/store';
+
+const ReactCardSlider = () => {
+  const [isAtStart, setIsAtStart] = React.useState(true);
+  const [isAtEnd, setIsAtEnd] = React.useState(false);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+
+  const dispatch: AppDispatch = useDispatch();
+  const { data: icons, status } = useSelector(
+    (state: RootState) => state.icons,
+  );
+
+  React.useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchIcons());
+    }
+  }, [dispatch, status]);
 
   const slideLeft = () => {
     const slider = document.getElementById('slider');
-    slider.scrollLeft -= 500;
+    if (slider) slider.scrollLeft -= 500;
   };
 
   const slideRight = () => {
     const slider = document.getElementById('slider');
-    slider.scrollLeft += 500;
+    if (slider) slider.scrollLeft += 500;
   };
 
   const checkScrollPosition = () => {
     const slider = document.getElementById('slider');
     const sliderContainer = document.querySelector('.sliecolor');
 
-    if (slider.scrollLeft === 0) {
-      setIsAtStart(true);
-      sliderContainer.classList.add('hidden-left');
-    } else {
-      setIsAtStart(false);
-      sliderContainer.classList.remove('hidden-left');
-    }
+    if (slider && sliderContainer) {
+      if (slider.scrollLeft === 0) {
+        setIsAtStart(true);
+        sliderContainer.classList.add('hidden-left');
+      } else {
+        setIsAtStart(false);
+        sliderContainer.classList.remove('hidden-left');
+      }
 
-    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-      setIsAtEnd(true);
-      sliderContainer.classList.add('hidden-right');
-    } else {
-      setIsAtEnd(false);
-      sliderContainer.classList.remove('hidden-right');
+      if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+        setIsAtEnd(true);
+        sliderContainer.classList.add('hidden-right');
+      } else {
+        setIsAtEnd(false);
+        sliderContainer.classList.remove('hidden-right');
+      }
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const slider = document.getElementById('slider');
-    slider.addEventListener('scroll', checkScrollPosition);
-    checkScrollPosition(); // Initial check
-    return () => slider.removeEventListener('scroll', checkScrollPosition);
+    if (slider) {
+      slider.addEventListener('scroll', checkScrollPosition);
+      checkScrollPosition(); // Initial check
+      return () => slider.removeEventListener('scroll', checkScrollPosition);
+    }
   }, []);
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     setActiveIndex(index);
   };
 
@@ -64,25 +80,31 @@ const ReactCardSlider = (props) => {
           />
         </div>
       )}
+
       <div className="sliecolor" id="slider">
-        {props.slides.map((slide, index) => (
-          <Link href={slide.link} key={index} legacyBehavior>
-            <a
-              className={`slider-card ${activeIndex === index ? 'active' : ''}`}
-              onClick={() => handleClick(index)}
+        {status === 'succeeded' && icons.length > 0 ? (
+          icons.map((icon, index) => (
+            <section
+              key={index}
+              className={`slider-card ${index === activeIndex ? 'active' : ''}`}
             >
               <div
                 className="slider-card-image"
                 style={{
-                  backgroundImage: `url(${slide.image})`,
+                  backgroundImage: `url(${icon.background_image_url})`,
                   backgroundSize: 'cover',
                 }}
-              />
-              <p className="slider-card-title">{slide.name}</p>
-            </a>
-          </Link>
-        ))}
+                onClick={() => handleClick(index)}
+              >
+                <p className="slider-card-title">{icon.text_eng}</p>
+              </div>
+            </section>
+          ))
+        ) : (
+          <p>No icons available</p>
+        )}
       </div>
+
       {!isAtEnd && (
         <div>
           <MdChevronRight
