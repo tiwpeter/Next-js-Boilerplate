@@ -5,60 +5,67 @@ import './font.css';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import MessageIcon from '@mui/icons-material/Message';
 import { SvgIcon } from '@mui/material';
-import React, { useEffect } from 'react';
+import { title } from 'process';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchPantipData, fetchTags } from '@/features/tagsReducer';
+import { fetchCamera, fetchFood, fetchTags } from '@/features/tagsReducer';
+
+const perPage = 10; // Example value
 
 const TagIdPage = ({ params }: { params: { tag: string } }) => {
   const { tag } = params;
   const dispatch = useDispatch();
-  const {
-    bangrak,
-    bangruk,
-    asmr,
-    sukui,
-    sme,
-    status,
-    error,
-    page,
-    perPage,
-    hasMoreBangrak,
-    hasMoreBangruk,
-    hasMoreAsmr,
-    hasMoreSukui,
-    hasMoreSme,
-    pantipData,
-  } = useSelector((state) => state.tags);
+  const { Fooddata, Cameradata } = useSelector((state) => state.tags);
+
+  // Loading and error states
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (tag) {
-      dispatch(fetchTags({ page: 1, perPage, reset: true }));
-      if (tag === 'bangrak') {
-        dispatch(fetchPantipData(tag));
+    setLoading(true); // Set loading to true at the start
+    setError(null); // Clear any previous errors
+
+    const fetchData = async () => {
+      try {
+        dispatch(fetchTags({ page: 1, perPage, reset: true }));
+
+        if (tag === 'Food') {
+          await dispatch(fetchFood(tag));
+        } else if (tag === 'Camera') {
+          await dispatch(fetchCamera(tag));
+        }
+      } catch (err) {
+        setError(`Failed to fetch ${tag.toLowerCase()} data`);
+        console.error(`Error fetching ${tag.toLowerCase()} data:`, err);
+      } finally {
+        setLoading(false);
       }
+    };
+
+    if (tag) {
+      fetchData();
+    } else {
+      setLoading(false); // No tag, stop loading
     }
-  }, [dispatch, tag, perPage]);
+  }, [dispatch, tag]);
 
+  // Log Fooddata and Cameradata during render
+  // Uncomment these lines for debugging
+  // console.log('Fooddata during render:', Fooddata);
+  // console.log('Cameradata during render:', Cameradata);
+
+  // Ensure displayData is always an array
   const displayData =
-    tag === 'bangruk'
-      ? bangruk
-      : tag === 'bangrak'
-        ? bangrak
-        : tag === 'asmr'
-          ? asmr
-          : tag === 'sukui'
-            ? sukui
-            : tag === 'sme'
-              ? sme
-              : [];
-
-  const loadMore = () => {
-    const nextPage = page + 1;
-    dispatch(fetchTags({ page: nextPage, perPage }));
-  };
-
-  // Handle cases where icons might be undefined
+    tag === 'Food'
+      ? Fooddata && Array.isArray(Fooddata)
+        ? Fooddata
+        : []
+      : tag === 'Camera'
+        ? Cameradata && Array.isArray(Cameradata)
+          ? Cameradata
+          : []
+        : [];
 
   return (
     <div>
@@ -77,112 +84,96 @@ const TagIdPage = ({ params }: { params: { tag: string } }) => {
         >
           <h3>Pantip Trend</h3>
         </div>
-
-        {status === 'loading' && <p>Loading...</p>}
-        {status === 'failed' && <p>Error: {error}</p>}
-        {status === 'succeeded' && (
-          <div>
-            <ul>
-              {tag === 'bangrak' && (
-                <section
-                  className="dw container mx-auto"
-                  style={{
-                    height: '418px',
-                    background: 'aliceblue',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    width: '1078px',
-                    overflow: 'hidden',
-                  }}
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error}</p>}
+        {!loading && !error && displayData.length > 0 && (
+          <section
+            className="dw container mx-auto"
+            style={{
+              height: '418px',
+              background: 'aliceblue',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '1078px',
+              overflow: 'hidden',
+            }}
+          >
+            <ul className="flex flex-wrap" style={{ width: '1080px' }}>
+              {displayData.map((item, index) => (
+                <li
+                  key={item.id}
+                  className="boxslie flex items-start border p-2"
+                  style={{ width: '50%' }}
                 >
-                  {pantipData ? (
-                    <ul className="flex flex-wrap" style={{ width: '1080px' }}>
-                      {pantipData.map((item, index) => (
-                        <li
-                          key={item.id}
-                          className="boxslie flex items-start border p-2"
-                          style={{ width: '50%' }}
+                  <img
+                    src={item.url}
+                    alt="Placeholder Image"
+                    className="mr-2 size-12"
+                    style={{ width: '86px', height: '64px' }}
+                  />
+                  <div
+                    className="flex h-full flex-col justify-between"
+                    style={{ width: '428px' }}
+                  >
+                    <div className="mb-4">
+                      <h2>{item.title}</h2>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-end">
+                        <h5 className="text-center">{item.user - title}</h5>
+                        <h5
+                          className="text-center"
+                          style={{ marginLeft: '6px' }}
                         >
-                          <img
-                            src={item.url}
-                            alt="Placeholder Image"
-                            className="mr-2 size-12"
-                            style={{ width: '86px', height: '64px' }}
+                          {item.time}
+                        </h5>
+                      </div>
+
+                      <div className="pt-list-item__stats flex">
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={MessageIcon}
+                            style={{
+                              fontSize: '1rem',
+                              marginRight: '8px',
+                            }}
                           />
+                          29
+                        </span>
 
-                          <div
-                            className="flex h-full flex-col justify-between"
-                            style={{ width: '428px' }}
-                          >
-                            <div className="mb-4">
-                              {' '}
-                              {/* Adjust the margin-bottom as needed */}
-                              <h2>{item.title}</h2>
-                            </div>
-
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-end">
-                                <h5 className="text-center">
-                                  สมาชิกหมายเลข 7793648
-                                </h5>
-                                <h5
-                                  className="text-center"
-                                  style={{ marginLeft: '6px' }}
-                                >
-                                  21 ชั่วโมง
-                                </h5>
-                              </div>
-
-                              <div className="pt-list-item__stats flex">
-                                <span
-                                  style={{
-                                    fontSize: '.75rem',
-                                    marginRight: '16px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <SvgIcon
-                                    component={MessageIcon}
-                                    style={{
-                                      fontSize: '1rem',
-                                      marginRight: '8px',
-                                    }}
-                                  />
-                                  29
-                                </span>
-
-                                <span
-                                  style={{
-                                    fontSize: '.75rem',
-                                    marginRight: '16px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <SvgIcon
-                                    component={AddBoxIcon}
-                                    style={{
-                                      fontSize: '1rem',
-                                      marginRight: '8px',
-                                    }}
-                                  />
-                                  7
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p>Loading Pantip data...</p>
-                  )}
-                </section>
-              )}
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={AddBoxIcon}
+                            style={{
+                              fontSize: '1rem',
+                              marginRight: '8px',
+                            }}
+                          />
+                          7
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
             </ul>
-          </div>
+          </section>
         )}
       </div>
     </div>
@@ -190,30 +181,3 @@ const TagIdPage = ({ params }: { params: { tag: string } }) => {
 };
 
 export default TagIdPage;
-
-{
-  /** 
-</// pantip Trend
-<///component TagIdPage
-<// pantip real
-*/
-}
-{
-  /*
-  {tag === 'bangruk' && hasMoreBangruk && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'bangrak' && hasMoreBangrak && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'asmr' && hasMoreAsmr && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'sukui' && hasMoreSukui && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'sme' && hasMoreSme && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-  */
-}

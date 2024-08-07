@@ -1,29 +1,41 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunk for fetching tags
+// Thunks for fetching data
 export const fetchTags = createAsyncThunk('tags/fetchTags', async ({ page, perPage, reset = false }) => {
-    //console.log('Fetching tags from API with page:', page, 'and perPage:', perPage);
     const response = await axios.get('http://localhost:5000/api/tags', { params: { page, per_page: perPage } });
-    //console.log('API response:', response.data);
     return { data: response.data, reset };
 });
 
-// Thunk for fetching Pantip data
+export const fetchFood = createAsyncThunk('tags/fetchFood', async (tag) => {
+  if (tag !== 'Food') return null;
+  const response = await axios.get('http://127.0.0.1:5000/api/food');
+  return response.data;
+});
+
+export const fetchCamera = createAsyncThunk('tags/fetchCamera', async (tag) => {
+  if (tag !== 'Camera') return null;
+  try {
+      const response = await axios.get('http://127.0.0.1:5000/api/camera');
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching Camera data:', error);
+      throw error;
+  }
+});
+
 export const fetchPantipData = createAsyncThunk('tags/fetchPantipData', async (tag) => {
-    if (tag !== 'Bangrak') {
-        return null; // Skip fetching if the tag is not 'Bangrak'
-    }
-    
-    //console.log('Fetching Pantip data from API');
+    if (tag !== 'Bangrak') return null;
     const response = await axios.get('http://127.0.0.1:5000/api/pantip_katoo');
-    //console.log('Pantip API response:', response.data);
     return response.data;
 });
+
 // Create Slice
 const tagsSlice = createSlice({
     name: 'tags',
     initialState: {
+        Camera: [],  // Fixed initialization
+        Food: [],
         Bangrak: [],
         bangruk: [],
         asmr: [],
@@ -43,7 +55,9 @@ const tagsSlice = createSlice({
         hasMoreAsmr: true,
         hasMoreSukui: true,
         hasMoreSme: true,
-        pantipData: null, // New state for Pantip data
+        pantipData: null,
+        Fooddata: null,
+        Cameradata: null,
     },
     reducers: {
         resetTags: (state) => {
@@ -108,12 +122,24 @@ const tagsSlice = createSlice({
             })
             .addCase(fetchPantipData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.pantipData = action.payload; // Update only if valid data is returned
+                state.pantipData = action.payload;
             })
+            .addCase(fetchFood.fulfilled, (state, action) => {
+              state.status = 'succeeded';
+              state.Fooddata = action.payload;
+          })
             .addCase(fetchPantipData.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            .addCase(fetchCamera.fulfilled, (state, action) => {
+              state.status = 'succeeded';
+              state.Cameradata = action.payload;
+          })
+            .addCase(fetchCamera.rejected, (state, action) => {
+              state.status = 'failed';
+              state.error = action.error.message;
+          });
     },
 });
 
