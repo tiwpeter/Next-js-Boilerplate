@@ -9,9 +9,9 @@ const SecodSlie = () => {
     {
       id: 1,
       image:
-        'https://ptcdn.info/doodle/2024/66668549caac0a7c9b16ead7_8t0jwfcpbp.png',
-      name: 'room ',
-      link: '/',
+        'https://ptcdn.info/home_highlight/2024-08/66ab0f05caac0a8b331e8faa_bw046w5xka_400.png',
+      name: '[Pantip Point] ชวนแชร์เรื่องราวประทับใจของสัตว์เลี้ยงแสนรัก 🐶🐱❤️ ',
+      link: 'https://pantip.com/s/tkQmv',
     },
     {
       id: 2,

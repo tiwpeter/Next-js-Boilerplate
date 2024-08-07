@@ -1,6 +1,7 @@
 import './Slidersecod.css';
 import './cuserlink.css';
 import './buttoncolor.css';
+import './fontSecod.css';
 
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -73,7 +74,7 @@ const Slidersecod = (props) => {
                   backgroundSize: 'cover',
                 }}
               />
-              <p>sss</p>
+              <p className="fontSecod">{slide.name}</p>
             </a>
           </Link>
         ))}

@@ -1,9 +1,10 @@
-"use client";
-import React, { useState, useEffect } from 'react';
-import IconComponent from './page';
-import TagsComponent from './TagsComponent';
+'use client';
 
-const group = ["food", "bangrak", "korea"];
+import React, { useEffect, useState } from 'react';
+
+import IconComponent from './page';
+
+const group = ['Food', 'Camera', 'Bangrak'];
 
 const MainpageIcon = () => {
   const [currentTags, setCurrentTags] = useState([]);
@@ -22,7 +23,7 @@ const MainpageIcon = () => {
         newTags = [
           group[nextIndex],
           group[(nextIndex + 1) % group.length],
-          group[(nextIndex + 2) % group.length]
+          group[(nextIndex + 2) % group.length],
         ];
       }
 
@@ -33,7 +34,7 @@ const MainpageIcon = () => {
     setCurrentTags(nextTags);
     // Save new tags to localStorage
     localStorage.setItem('currentTags', JSON.stringify(nextTags));
-  }, []); 
+  }, []);
 
   return (
     <div>
@@ -41,7 +42,7 @@ const MainpageIcon = () => {
       {currentTags.map((textEng, index) => (
         <React.Fragment key={index}>
           <IconComponent textEng={textEng} />
-          <TagsComponent tag={textEng} /> {/* Pass textEng as tag prop */}
+          {/*  <TagsComponent tag={textEng} />  */}
         </React.Fragment>
       ))}
     </div>
