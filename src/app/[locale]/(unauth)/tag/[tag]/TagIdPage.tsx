@@ -182,21 +182,6 @@ const TagIdPage = ({ params }: { params: { tag: string } }) => {
                 </section>
               )}
             </ul>
-            {tag === 'bangruk' && hasMoreBangruk && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'bangrak' && hasMoreBangrak && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'asmr' && hasMoreAsmr && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'sukui' && hasMoreSukui && (
-              <button onClick={loadMore}>Load More</button>
-            )}
-            {tag === 'sme' && hasMoreSme && (
-              <button onClick={loadMore}>Load More</button>
-            )}
           </div>
         )}
       </div>
@@ -212,4 +197,23 @@ export default TagIdPage;
 <///component TagIdPage
 <// pantip real
 */
+}
+{
+  /*
+  {tag === 'bangruk' && hasMoreBangruk && (
+              <button onClick={loadMore}>Load More</button>
+            )}
+            {tag === 'bangrak' && hasMoreBangrak && (
+              <button onClick={loadMore}>Load More</button>
+            )}
+            {tag === 'asmr' && hasMoreAsmr && (
+              <button onClick={loadMore}>Load More</button>
+            )}
+            {tag === 'sukui' && hasMoreSukui && (
+              <button onClick={loadMore}>Load More</button>
+            )}
+            {tag === 'sme' && hasMoreSme && (
+              <button onClick={loadMore}>Load More</button>
+            )}
+  */
 }

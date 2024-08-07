@@ -11,8 +11,8 @@ export const fetchTags = createAsyncThunk('tags/fetchTags', async ({ page, perPa
 
 // Thunk for fetching Pantip data
 export const fetchPantipData = createAsyncThunk('tags/fetchPantipData', async (tag) => {
-    if (tag !== 'bangrak') {
-        return null; // Skip fetching if the tag is not 'bangrak'
+    if (tag !== 'Bangrak') {
+        return null; // Skip fetching if the tag is not 'Bangrak'
     }
     
     //console.log('Fetching Pantip data from API');
@@ -24,7 +24,7 @@ export const fetchPantipData = createAsyncThunk('tags/fetchPantipData', async (t
 const tagsSlice = createSlice({
     name: 'tags',
     initialState: {
-        bangrak: [],
+        Bangrak: [],
         bangruk: [],
         asmr: [],
         sukui: [],
@@ -47,7 +47,7 @@ const tagsSlice = createSlice({
     },
     reducers: {
         resetTags: (state) => {
-            state.bangrak = [];
+            state.Bangrak = [];
             state.bangruk = [];
             state.asmr = [];
             state.sukui = [];
@@ -67,10 +67,10 @@ const tagsSlice = createSlice({
             })
             .addCase(fetchTags.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                const { page, per_page, total_bangrak, total_bangruk, total_asmr, total_sukui, total_sme, data } = action.payload.data;
+                const { page, per_page, total_Bangrak, total_bangruk, total_asmr, total_sukui, total_sme, data } = action.payload.data;
 
                 if (action.payload.reset) {
-                    state.bangrak = [];
+                    state.Bangrak = [];
                     state.bangruk = [];
                     state.asmr = [];
                     state.sukui = [];
@@ -79,15 +79,15 @@ const tagsSlice = createSlice({
 
                 state.page = page;
                 state.perPage = per_page;
-                state.totalBangrak = total_bangrak;
+                state.totalBangrak = total_Bangrak;
                 state.totalBangruk = total_bangruk;
                 state.totalAsmr = total_asmr;
                 state.totalSukui = total_sukui;
                 state.totalSme = total_sme;
 
-                if (data.bangrak.length > 0) {
-                    state.bangrak = [...state.bangrak, ...data.bangrak];
-                    state.hasMoreBangrak = data.bangrak.length >= per_page;
+                if (data.Bangrak.length > 0) {
+                    state.Bangrak = [...state.Bangrak, ...data.Bangrak];
+                    state.hasMoreBangrak = data.Bangrak.length >= per_page;
                 } else {
                     state.hasMoreBangrak = false;
                 }

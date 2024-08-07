@@ -61,7 +61,7 @@ const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
         padding: '12px 16px',
         position: 'relative',
         whiteSpace: 'normal',
-        width:'713px'
+        width: '713px',
       }}
     >
       <img
