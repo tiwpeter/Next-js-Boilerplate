@@ -79,15 +79,19 @@ const TagsComponent = ({ tagname }) => {
         </div>
         {currentTagData && (
           <div className="tag-details">
-            <div className="mt-3" style={{
-  background: "#7f99ff",
-  display: "flex",
-  minHeight: "43px",
-  padding: "12px 16px",
-  position: "relative",
-  whiteSpace: "normal",
-  width: "1078px"
-}}>
+            <div
+              className="mt-3"
+              style={{
+                background: '#7f99ff',
+                display: 'flex',
+                minHeight: '43px',
+                padding: '12px 16px',
+                position: 'relative',
+                whiteSpace: 'normal',
+                width: '713px',
+                marginTop: '0px',
+              }}
+            >
               <div
                 className="header-title"
                 style={{ left: hasItems ? '75px' : '22px' }}

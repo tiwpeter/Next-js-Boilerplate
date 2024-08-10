@@ -6,6 +6,7 @@
 .icon-data {
     position: relative;
     height: 0px;
+    z-index: 2;
   }
 
 .tags-container{
@@ -13,10 +14,10 @@
     width: 1078px;
     height: 52px;
 
-    min-height: 43px;
+   /* min-height: 43px;
   padding: 12px 16px;
   position: relative;
-  white-space: normal;
+  white-space: normal;*/
   /***/
   margin-top: 45px;
   width:713px;
@@ -27,12 +28,16 @@
 
 .tag-details{
   position: relative;
-  left: -18px;
+  //left: -18px;
+  width:713px;
 }
 
 .iconImage{
   width: 48px;
   height: 48px;
+  position: relative;
+  left: 20px;
+  top: 10px;
 }
 
 .h2textIcon{
