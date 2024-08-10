@@ -1,7 +1,6 @@
-// store/tagSlice.js
+// src/features/Icontag.js or src/features/Icontag.ts
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// สร้าง async thunk สำหรับดึงข้อมูลจาก API ตาม tag
 export const fetchIconData = createAsyncThunk(
   'tag/fetchIconData',
   async (tag) => {
@@ -9,14 +8,14 @@ export const fetchIconData = createAsyncThunk(
       `http://127.0.0.1:5000/api/roomtag?tag=${tag}`,
     );
     const data = await response.json();
-    return { tag, data }; // ส่งคืนข้อมูลและแท็กที่เกี่ยวข้อง
+    return { tag, data };
   },
 );
 
 const tagSlice = createSlice({
   name: 'tag',
   initialState: {
-    data: {}, // เปลี่ยนจาก array เป็น object สำหรับจัดเก็บข้อมูลแยกตาม tag
+    data: {},
     status: 'idle',
     error: null,
   },
@@ -29,7 +28,7 @@ const tagSlice = createSlice({
       .addCase(fetchIconData.fulfilled, (state, action) => {
         state.status = 'succeeded';
         const { tag, data } = action.payload;
-        state.data[tag] = data; // เก็บข้อมูลตาม tag
+        state.data[tag] = data;
       })
       .addCase(fetchIconData.rejected, (state, action) => {
         state.status = 'failed';

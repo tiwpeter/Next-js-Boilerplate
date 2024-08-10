@@ -1,32 +1,34 @@
+// src/app/[locale]/(unauth)/tagDetail/page.tsx
 import './icon.css';
 
+// Import useRouter from next/router
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchIconData } from '../../../../features/Icontag';
+import { fetchIconData } from '../../../../features/Icontag'; // Ensure the path is correct
 import { fetchTags } from '../../../../features/tagsReducer';
 
 const TagsComponent = ({ tagname }) => {
   const dispatch = useDispatch();
   const [hasItems, setHasItems] = useState(false);
 
-  const tagData = useSelector((state) => state.icontag.data[tagname] || []); // เข้าถึงข้อมูลตาม tagname
+  const tagData = useSelector((state) => state.icontag.data[tagname] || []);
   const status = useSelector((state) => state.icontag.status);
   const error = useSelector((state) => state.icontag.error);
 
   const tags = useSelector((state) => state.tags.tags);
   const tagsStatus = useSelector((state) => state.tags.status);
   const tagsError = useSelector((state) => state.tags.error);
-
-  // Log ข้อมูลที่เกี่ยวข้องกับการโหลดข้อมูล
   useEffect(() => {
-    // console.log("Fetching tags...");
+    // console.log('Tag Data:', tagData); // Log the data to verify its content
+  }, [tagData]);
+
+  useEffect(() => {
     dispatch(fetchTags({ page: 1, perPage: 10, reset: true }));
   }, [dispatch]);
 
   useEffect(() => {
     if (tagname) {
-      // console.log(`Fetching icon data for tag: ${tagname}`);
       dispatch(fetchIconData(tagname));
     }
   }, [dispatch, tagname]);
@@ -34,11 +36,6 @@ const TagsComponent = ({ tagname }) => {
   useEffect(() => {
     setHasItems(tagData.length > 0);
   }, [tagData]);
-
-  useEffect(() => {
-    console.log('Tag data:', tagData);
-    console.log('Current tag data:', tags[tagname]);
-  }, [tagData, tagname, tags]);
 
   if (tagsStatus === 'loading') return <p>Loading tags...</p>;
   if (tagsStatus === 'failed') return <p>Error loading tags: {tagsError}</p>;
@@ -73,7 +70,16 @@ const TagsComponent = ({ tagname }) => {
               className="header-title"
               style={{ left: hasItems ? '75px' : '22px' }}
             >
-              <h2 className="h2textIcon">{currentTagData.header_title}</h2>
+              <h2>{currentTagData.header_title}</h2>
+
+              <h2
+                style={{
+                  position: 'relative',
+                  top: '-8px',
+                }}
+              >
+                {currentTagData.span_header}
+              </h2>
             </div>
 
             <div className="titles-container">
