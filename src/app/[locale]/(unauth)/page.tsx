@@ -18,6 +18,7 @@ const ClientComponent = () => {
       <PantipPickTag />
 
       {/* nav icon  detail */}
+      
       <MainpageGroupTag />
     </>
   );

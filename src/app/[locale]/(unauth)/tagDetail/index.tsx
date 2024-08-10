@@ -1,7 +1,10 @@
-"use client"
-import React, { useState, useEffect } from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+
 import TagsComponent from './page';
-const tagname = ["โอลิมปิก 2024", "BLACKPINK (นักร้องนักดนตรี)", "บางขุนพรหม"];
+
+const tagname = ['โอลิมปิก 2024', 'BLACKPINK (นักร้องนักดนตรี)', 'บางขุนพรหม'];
 
 export default function MainpageGroupTag() {
   // ตั้งค่ารายการแท็กที่ต้องการส่งไปยัง component
@@ -20,7 +23,7 @@ export default function MainpageGroupTag() {
         newTags = [
           tagname[nextIndex],
           tagname[(nextIndex + 1) % tagname.length],
-          tagname[(nextIndex + 2) % tagname.length]
+          tagname[(nextIndex + 2) % tagname.length],
         ];
       }
 
@@ -32,16 +35,15 @@ export default function MainpageGroupTag() {
     setCurrentTags(nextTags);
   }, []);
 
-
   return (
-    <div>
+    <div style={{ width: '713px' }}>
       {currentTags.map((tagname, index) => (
-      <TagsComponent  key={index} tagname={tagname} />
-    ))}
+        <TagsComponent key={index} tagname={tagname} />
+      ))}
     </div>
   );
 }
 {
   /*      <IconDataDisplay tags={tags} />
- */
+   */
 }
