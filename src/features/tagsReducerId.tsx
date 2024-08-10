@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunks for fetching data
+// Thunks สำหรับการดึงข้อมูล
 export const fetchTags = createAsyncThunk(
   'tags/fetchTags',
   async ({ page, perPage, reset = false }) => {
@@ -20,30 +20,15 @@ export const fetchFood = createAsyncThunk('tags/fetchFood', async (tag) => {
 
 export const fetchCamera = createAsyncThunk('tags/fetchCamera', async (tag) => {
   if (tag !== 'Camera') return null;
-  try {
-    const response = await axios.get('http://127.0.0.1:5000/api/camera');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching Camera data:', error);
-    throw error;
-  }
+  const response = await axios.get('http://127.0.0.1:5000/api/camera');
+  return response.data;
 });
 
-export const fetchPantipData = createAsyncThunk(
-  'tags/fetchPantipData',
-  async (tag) => {
-    if (tag !== 'Bangrak') return null;
-    const response = await axios.get('http://127.0.0.1:5000/api/pantip_katoo');
-    return response.data;
-  },
-);
-
-// Create Slice
+// สร้าง Slice
 const tagsSlice = createSlice({
   name: 'tags',
-
   initialState: {
-    Camera: [], // Fixed initialization
+    Camera: [],
     Food: [],
     Bangrak: [],
     bangruk: [],
@@ -64,7 +49,6 @@ const tagsSlice = createSlice({
     hasMoreAsmr: true,
     hasMoreSukui: true,
     hasMoreSme: true,
-    pantipData: null,
     Fooddata: null,
     Cameradata: null,
   },
@@ -90,17 +74,7 @@ const tagsSlice = createSlice({
       })
       .addCase(fetchTags.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        const {
-          page,
-          per_page,
-          total_Bangrak,
-          total_bangruk,
-          total_asmr,
-          total_sukui,
-          total_sme,
-          data,
-        } = action.payload.data;
-
+        const { page, per_page, data } = action.payload;
         if (action.payload.reset) {
           state.Bangrak = [];
           state.bangruk = [];
@@ -108,25 +82,24 @@ const tagsSlice = createSlice({
           state.sukui = [];
           state.sme = [];
         }
-
         state.page = page;
         state.perPage = per_page;
-        state.totalBangrak = total_Bangrak;
-        state.totalBangruk = total_bangruk;
-        state.totalAsmr = total_asmr;
-        state.totalSukui = total_sukui;
-        state.totalSme = total_sme;
+        state.totalBangrak = data.total_Bangrak || 0;
+        state.totalBangruk = data.total_bangruk || 0;
+        state.totalAsmr = data.total_asmr || 0;
+        state.totalSukui = data.total_sukui || 0;
+        state.totalSme = data.total_sme || 0;
 
-        if (data.Bangrak.length > 0) {
+        if (data.Bangrak) {
           state.Bangrak = [...state.Bangrak, ...data.Bangrak];
-          state.hasMoreBangrak = data.Bangrak.length >= per_page;
+          state.hasMoreBangrak = data.Bangrak.length >= state.perPage;
         } else {
           state.hasMoreBangrak = false;
         }
 
-        if (data.bangruk.length > 0) {
+        if (data.bangruk) {
           state.bangruk = [...state.bangruk, ...data.bangruk];
-          state.hasMoreBangruk = data.bangruk.length >= per_page;
+          state.hasMoreBangruk = data.bangruk.length >= state.perPage;
         } else {
           state.hasMoreBangruk = false;
         }
@@ -135,24 +108,17 @@ const tagsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(fetchPantipData.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchPantipData.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.pantipData = action.payload;
-      })
       .addCase(fetchFood.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.Fooddata = action.payload;
       })
-      .addCase(fetchPantipData.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
       .addCase(fetchCamera.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.Cameradata = action.payload;
+      })
+      .addCase(fetchFood.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       })
       .addCase(fetchCamera.rejected, (state, action) => {
         state.status = 'failed';

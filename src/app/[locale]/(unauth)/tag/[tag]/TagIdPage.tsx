@@ -9,7 +9,7 @@ import { title } from 'process';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchCamera, fetchFood, fetchTags } from '@/features/tagsReducer';
+import { fetchCamera, fetchFood, fetchTags } from '@/features/tagsReducerId';
 
 const perPage = 10; // Example value
 

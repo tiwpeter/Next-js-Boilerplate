@@ -1,13 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
-
-import iconsReducer from '@/features/IconReducer'; 
-import tagsReducer from '@/features/tagsReducer'; 
-import IconReducer from '@/features/Icontag'; 
+import iconsReducer from '@/features/IconReducer';
+import IconReducer from '@/features/Icontag';
+import tagsReducerId from '@/features/tagsReducerId'; 
 
 const rootReducer = combineReducers({
-  tags: tagsReducer,
+  tags: tagsReducerId, // ใช้ tagsReducerId
   icons: iconsReducer,
-  icontag:IconReducer
+  icontag: IconReducer
 });
 
 export default rootReducer;
