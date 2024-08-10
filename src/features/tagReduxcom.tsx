@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunks for fetching data
+import { fetchPantipData } from './tagsReducerId';
+
 export const fetchTags = createAsyncThunk(
   'tags/fetchTags',
   async ({ page, perPage, reset = false }) => {
@@ -24,65 +25,20 @@ export const fetchCamera = createAsyncThunk('tags/fetchCamera', async (tag) => {
     const response = await axios.get('http://127.0.0.1:5000/api/camera');
     return response.data;
   } catch (error) {
-    console.error('Error fetching Camera data:', error);
     throw error;
   }
 });
 
-export const fetchPantipData = createAsyncThunk(
-  'tags/fetchPantipData',
-  async (tag) => {
-    if (tag !== 'Bangrak') return null;
-    const response = await axios.get('http://127.0.0.1:5000/api/pantip_katoo');
-    return response.data;
-  },
-);
-
-// Create Slice
 const tagsSlice = createSlice({
-  name: 'tagId',
-
+  name: 'tagname',
   initialState: {
+    tags: {}, // Initialize as an empty object
     Camera: [], // Fixed initialization
     Food: [],
-    Bangrak: [],
-    bangruk: [],
-    asmr: [],
-    sukui: [],
-    sme: [],
     status: 'idle',
     error: null,
-    page: 1,
-    perPage: 4,
-    totalBangrak: 0,
-    totalBangruk: 0,
-    totalAsmr: 0,
-    totalSukui: 0,
-    totalSme: 0,
-    hasMoreBangrak: true,
-    hasMoreBangruk: true,
-    hasMoreAsmr: true,
-    hasMoreSukui: true,
-    hasMoreSme: true,
-    pantipData: null,
-    Fooddata: null,
-    Cameradata: null,
   },
-  reducers: {
-    resetTags: (state) => {
-      state.Bangrak = [];
-      state.bangruk = [];
-      state.asmr = [];
-      state.sukui = [];
-      state.sme = [];
-      state.page = 1;
-      state.hasMoreBangrak = true;
-      state.hasMoreBangruk = true;
-      state.hasMoreAsmr = true;
-      state.hasMoreSukui = true;
-      state.hasMoreSme = true;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTags.pending, (state) => {
@@ -90,39 +46,17 @@ const tagsSlice = createSlice({
       })
       .addCase(fetchTags.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        const {
-          page,
-          per_page,
-          total_Bangrak,
-          total_bangruk,
-          total_asmr,
-          total_sukui,
-          total_sme,
-          data,
-        } = action.payload.data;
-
         if (action.payload.reset) {
-          state.Bangrak = [];
-          state.bangruk = [];
-          state.asmr = [];
-          state.sukui = [];
-          state.sme = [];
+          state.tags = action.payload.data;
+        } else {
+          state.tags = { ...state.tags, ...action.payload.data };
         }
-
-        state.page = page;
-        state.perPage = per_page;
-        state.totalBangrak = total_Bangrak;
-        state.totalBangruk = total_bangruk;
-        state.totalAsmr = total_asmr;
-        state.totalSukui = total_sukui;
-        state.totalSme = total_sme;
-
-        
       })
       .addCase(fetchTags.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
+
       .addCase(fetchPantipData.pending, (state) => {
         state.status = 'loading';
       })

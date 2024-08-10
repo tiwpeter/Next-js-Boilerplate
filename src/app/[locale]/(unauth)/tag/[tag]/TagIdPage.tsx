@@ -16,7 +16,7 @@ const perPage = 10; // Example value
 const TagIdPage = ({ params }: { params: { tag: string } }) => {
   const { tag } = params;
   const dispatch = useDispatch();
-  const { Fooddata, Cameradata } = useSelector((state) => state.tags);
+  const { Fooddata, Cameradata } = useSelector((state) => state.tagId);
 
   // Loading and error states
   const [loading, setLoading] = useState(true);

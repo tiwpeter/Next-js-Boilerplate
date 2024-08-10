@@ -1,12 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Thunk for fetching tags
-export const fetchTags = createAsyncThunk('tags/fetchTags', async ({ page, perPage, reset = false }) => {
-  const response = await axios.get('http://localhost:5000/api/tags', { params: { page, per_page: perPage } });
-  // Return the actual tags data directly
-  return { data: response.data.data, reset };
-});
+export const fetchTags = createAsyncThunk(
+  'tags/fetchTags',
+  async ({ page, perPage, reset = false }) => {
+    const response = await axios.get('http://localhost:5000/api/tags', {
+      params: { page, per_page: perPage },
+    });
+    // Return the actual tags data directly
+    return { data: response.data.data, reset };
+  },
+);
 
 const tagsSlice = createSlice({
   name: 'tagname',

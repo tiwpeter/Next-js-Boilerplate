@@ -6,7 +6,7 @@ import { fetchTags, resetTags } from '@/features/tagsReducer';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const TagsComponent = ({ tag }) => {
+const TagsComponent = ({ tagId }) => {
   const dispatch = useDispatch();
   const {
     bangrak,
@@ -23,13 +23,13 @@ const TagsComponent = ({ tag }) => {
     hasMoreAsmr,
     hasMoreSukui,
     hasMoreSme,
-  } = useSelector((state) => state.tags);
+  } = useSelector((state) => state.tagId);
 
   useEffect(() => {
     // Reset tags when the component mounts or the tag changes
     dispatch(resetTags());
     dispatch(fetchTags({ page: 1, perPage, reset: true }));
-  }, [dispatch, tag, perPage]);
+  }, [dispatch, tagId, perPage]);
 
   const loadMore = () => {
     const nextPage = page + 1;
@@ -53,13 +53,13 @@ const TagsComponent = ({ tag }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/tag/${tag}`);
+    router.push(`/tag/${tagId}`);
   };
 
   return (
     <div>
       {/* prothan */}
-      <button onClick={handleClick}>Go to {tag} Details</button>
+      <button onClick={handleClick}>Go to {tagId} Details</button>
 
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
