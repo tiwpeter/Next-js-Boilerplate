@@ -1,88 +1,101 @@
-import { useRouter } from 'next/navigation'; // Import useRouter from next/router
-import React, { useEffect } from 'react';
+import './icon.css';
+
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchIcons } from '../../../../features/IconReducer';
-import { selectIconByTextEng } from '../../../../features/selecIcon'; // Import the selector
-import type { AppDispatch, RootState } from '../../../../features/store/store'; // Import the types
+import { fetchIconData } from '../../../../features/Icontag';
+import { fetchTags } from '../../../../features/tagsReducer';
 
-interface IconComponentProps {
-  textEng: string; // Add a prop for textEng
-}
+const TagsComponent = ({ tagname }) => {
+  const dispatch = useDispatch();
+  const [hasItems, setHasItems] = useState(false);
 
-const IconComponent: React.FC<IconComponentProps> = ({ textEng }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const router = useRouter(); // Initialize the useRouter hook
-  const selectIcon = selectIconByTextEng(textEng); // Create the selector instance with the passed textEng
-  const icon = useSelector((state: RootState) => selectIcon(state));
-  const status = useSelector((state: RootState) => state.icons.status);
-  const error = useSelector((state: RootState) => state.icons.error);
+  const tagData = useSelector((state) => state.icontag.data[tagname] || []); // เข้าถึงข้อมูลตาม tagname
+  const status = useSelector((state) => state.icontag.status);
+  const error = useSelector((state) => state.icontag.error);
 
+  const tags = useSelector((state) => state.tags.tags);
+  const tagsStatus = useSelector((state) => state.tags.status);
+  const tagsError = useSelector((state) => state.tags.error);
+
+  // Log ข้อมูลที่เกี่ยวข้องกับการโหลดข้อมูล
   useEffect(() => {
-    dispatch(fetchIcons());
+    // console.log("Fetching tags...");
+    dispatch(fetchTags({ page: 1, perPage: 10, reset: true }));
   }, [dispatch]);
 
-  // Log the status and any errors
   useEffect(() => {
-    // console.log('Status:', status);
-    // console.log('Error:', error);
-  }, [status, error]);
+    if (tagname) {
+      // console.log(`Fetching icon data for tag: ${tagname}`);
+      dispatch(fetchIconData(tagname));
+    }
+  }, [dispatch, tagname]);
 
-  // Log the icon data if available
   useEffect(() => {
-    // console.log('Icon data:', icon);
-  }, [icon]);
+    setHasItems(tagData.length > 0);
+  }, [tagData]);
 
-  const handleClick = (text: string) => {
-    // Assuming you want to navigate to a route based on h2_text
-    // e.g., /icons/[text]
-    router.push(`/icons/${encodeURIComponent(text)}`);
-  };
+  useEffect(() => {
+    console.log('Tag data:', tagData);
+    console.log('Current tag data:', tags[tagname]);
+  }, [tagData, tagname, tags]);
 
-  if (status === 'loading') {
-    return <div>Loading...</div>;
+  if (tagsStatus === 'loading') return <p>Loading tags...</p>;
+  if (tagsStatus === 'failed') return <p>Error loading tags: {tagsError}</p>;
+
+  if (!tags || typeof tags !== 'object') {
+    return <p>Unexpected data format for tags</p>;
   }
 
-  if (status === 'failed') {
-    return <div>Error: {error}</div>;
-  }
+  const currentTagData = tags[tagname] || null;
 
-  if (!icon) {
-    return <div>No data available</div>;
-  }
+  if (status === 'loading') return <p>Loading icon data...</p>;
+  if (status === 'failed') return <p>Error loading icon data: {error}</p>;
 
   return (
-    <div
-      className="mt-5"
-      style={{
-        backgroundColor: '#7f99ff',
-        display: 'flex',
-        minHeight: '43px',
-        padding: '12px 16px',
-        position: 'relative',
-        whiteSpace: 'normal',
-        width: '713px',
-      }}
-    >
-      <img
-        src={icon.background_image_url}
-        style={{ width: '48px', height: '48px' }}
-        alt="Icon"
-      />
-      {icon.h2_text.map((text, index) => (
-        <h2
-          key={index}
-          onClick={() => handleClick(text)}
-          style={{ cursor: 'pointer' }}
-        >
-          {text}
-        </h2>
-      ))}
+    <div style={{ height: '430px' }}>
+      <div className="tags-container">
+        <div className="icon-data">
+          {tagData.length > 0 &&
+            tagData.map((item) => (
+              <div key={item.id} className="icon-item">
+                <img
+                  src={item.background_image_url}
+                  alt=""
+                  className="iconImage"
+                />
+              </div>
+            ))}
+        </div>
+        {currentTagData && (
+          <div className="tag-details">
+            <div
+              className="header-title"
+              style={{ left: hasItems ? '75px' : '22px' }}
+            >
+              <h2 className="h2textIcon">{currentTagData.header_title}</h2>
+            </div>
+
+            <div className="titles-container">
+              <ul className="titles-list">
+                {currentTagData.titles.map((item, index) => (
+                  <li key={index}>
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.text_title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default IconComponent;
-{
-  /* <a href={icon.link}>More Info</a> */
-}
+export default TagsComponent;

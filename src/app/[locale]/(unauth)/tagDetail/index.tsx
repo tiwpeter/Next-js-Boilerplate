@@ -1,12 +1,10 @@
-'use client';
+"use client"
+import React, { useState, useEffect } from 'react';
+import TagsComponent from './page';
+const tagname = ["โอลิมปิก 2024", "BLACKPINK (นักร้องนักดนตรี)", "บางขุนพรหม"];
 
-import React, { useEffect, useState } from 'react';
-
-import IconComponent from './page';
-
-const group = ['Food', 'Camera', 'Bangrak'];
-
-const MainpageIcon = () => {
+export default function MainpageGroupTag() {
+  // ตั้งค่ารายการแท็กที่ต้องการส่งไปยัง component
   const [currentTags, setCurrentTags] = useState([]);
 
   useEffect(() => {
@@ -15,38 +13,35 @@ const MainpageIcon = () => {
 
       let newTags = [];
       if (storedTags.length === 0) {
-        newTags = group.slice(0, 3);
+        newTags = tagname.slice(0, 3);
       } else {
-        const lastTag = storedTags[storedTags.length - 1];
-        const currentIndex = group.indexOf(lastTag);
-        const nextIndex = (currentIndex + 1) % group.length;
+        const currentIndex = tagname.indexOf(storedTags[storedTags.length - 1]);
+        const nextIndex = (currentIndex + 1) % tagname.length;
         newTags = [
-          group[nextIndex],
-          group[(nextIndex + 1) % group.length],
-          group[(nextIndex + 2) % group.length],
+          tagname[nextIndex],
+          tagname[(nextIndex + 1) % tagname.length],
+          tagname[(nextIndex + 2) % tagname.length]
         ];
       }
 
+      localStorage.setItem('currentTags', JSON.stringify(newTags));
       return newTags;
     };
 
     const nextTags = determineNextTags();
     setCurrentTags(nextTags);
-    // Save new tags to localStorage
-    localStorage.setItem('currentTags', JSON.stringify(nextTags));
   }, []);
+
 
   return (
     <div>
-      {/* Loop through currentTags and render IconComponent and TagsComponent */}
-      {currentTags.map((textEng, index) => (
-        <React.Fragment key={index}>
-          <IconComponent textEng={textEng} />
-          {/*  <TagsComponent tag={textEng} />  */}
-        </React.Fragment>
-      ))}
+      {currentTags.map((tagname, index) => (
+      <TagsComponent  key={index} tagname={tagname} />
+    ))}
     </div>
   );
-};
-
-export default MainpageIcon;
+}
+{
+  /*      <IconDataDisplay tags={tags} />
+ */
+}

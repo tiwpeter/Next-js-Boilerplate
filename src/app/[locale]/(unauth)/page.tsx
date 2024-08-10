@@ -5,9 +5,8 @@ import React from 'react';
 import PantipPickTag from '@/components/pantipink/page';
 import Pantiprealtime from '@/components/pantiprealtime/page';
 import SecodSlie from '@/components/sliecod/data';
-import StoreProvider from '@/features/store/StoreProvider';
 
-import MainpageIcon from './tagDetail';
+import MainpageGroupTag from './tagDetail';
 
 const ClientComponent = () => {
   return (
@@ -18,10 +17,8 @@ const ClientComponent = () => {
       <Pantiprealtime />
       <PantipPickTag />
 
-      
       {/* nav icon  detail */}
-      <MainpageIcon />
-     
+      <MainpageGroupTag />
     </>
   );
 };
