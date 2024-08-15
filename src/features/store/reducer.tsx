@@ -3,6 +3,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import IconTag from '@/features/forTagWithIcon/IconTag';
 import itemsReducer from '@/features/forTagWithIcon/itemsSlice';
 import iconsReducer from '@/features/IconReducer';
+import tagsReducerId from '@/features/tagsReducerId';
 
 const rootReducer = combineReducers({
   //  tags: tagsReducer,
@@ -10,7 +11,7 @@ const rootReducer = combineReducers({
   data: itemsReducer,
   iconfortag: IconTag,
   //  icontag: IconReducer,
-  //  tagId: tagsReducerId,
+  tagId: tagsReducerId,
 });
 
 export default rootReducer;
