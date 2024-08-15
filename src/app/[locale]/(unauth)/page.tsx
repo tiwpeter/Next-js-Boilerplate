@@ -1,17 +1,21 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
 
-export async function generateMetadata(props: { params: { locale: string } }) {
-  const t = await getTranslations({
-    locale: props.params.locale,
-    namespace: 'Index',
-  });
+import React from 'react';
 
-  return {
-    title: t('meta_title'),
-    description: t('meta_description'),
-  };
-}
+import PantipPickTag from '@/components/pantipink/page';
+import Pantiprealtime from '@/components/pantiprealtime/page';
+import SecodSlie from '@/components/sliecod/data';
 
-export default function Index() {
-  return <p>s</p>;
-}
+const ClientComponent = () => {
+  return (
+    <>
+      {/* main secod */}
+      <SecodSlie />
+
+      <Pantiprealtime />
+      <PantipPickTag />
+    </>
+  );
+};
+
+export default ClientComponent;
