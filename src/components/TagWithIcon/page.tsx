@@ -9,36 +9,25 @@ import type { RootState } from '@/features/store/store';
 
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
-
-  // Extract data from Redux store
   const { items, status, error, pages, totalPages } = useSelector(
     (state: RootState) => state.data,
   );
-  const iconData = useSelector((state: RootState) => {
-    return tags.reduce(
+  const iconData = useSelector((state: RootState) =>
+    tags.reduce(
       (acc, tag) => {
         acc[tag] = state.iconfortag.data[tag] || [];
-        // tags{ราชดำเนิน}  => find api data[tag] =   api data[ราชดำเนิน]
         return acc;
       },
       {} as Record<string, any[]>,
-    );
-  });
-  // useSelector ซึ่งเป็น hook ของ react-redux เพื่อดึงข้อมูลจาก store ของ Redux
-  /*
-  โดยรวม, โค้ดนี้จะสร้าง object ที่มี key เป็น tag จาก array tags และ value 
-  เป็นข้อมูลที่ดึงมาจาก state.iconfortag.data ตาม tag นั้น ๆ หรือจะเป็น array เปล่าถ้าข้อมูลไม่พบ.
-  */
+    ),
+  );
 
-  const [perPage] = useState(1); // Page size; adjust if needed
+  const [perPage] = useState(1);
 
   useEffect(() => {
     if (tags.length > 0) {
-      // console.log('Fetching data for tags:', tags);
       dispatch(fetchData({ tagX: tags, page: 1, perPage }));
-      // tagX{api ราชดำเนิน} = tags={ราชดำเนิน}
       tags.forEach((tag) => {
-        // tags{ราชดำเนิน} find => apiIcon
         dispatch(fetchIconData(tag));
       });
     }
@@ -50,8 +39,6 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 
   const loadMoreData = (tag: string) => {
     const currentPage = pages[tag] || 1;
-
-    // incrementPage =  action.payload +1 =+ 1 perPage
     if (currentPage < (totalPages[tag] || 1)) {
       dispatch(incrementPage(tag));
       dispatch(fetchData({ tagX: [tag], page: currentPage + 1, perPage }));
@@ -67,56 +54,62 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const renderContent = (tag: string) => {
     const iconfortag = iconData[tag] || [];
     const tagItems = items[tag] || [];
-    // tagItems = item{ราชดำเนิน}
 
-    if (iconfortag.length > 0 && tagItems.length > 0) {
-      return (
-        <>
-          <h3>iconfortag</h3>
-          {iconfortag.map((item, index) => (
-            <img
-              key={index}
-              src={item.background_image_url}
-              alt={`Icon for ${item.text_eng}`}
-              style={{ width: '100px', height: '60px' }} // You can adjust the styling as needed
-            />
-          ))}
-          <h3>Tags</h3>
-          {tagItems.map((item, index) => (
-            <li key={index}>
-              <a href={item.link}>{item.title}</a>
-            </li>
-          ))}
-        </>
-      );
-    }
-
-    if (iconfortag.length > 0) {
-      return iconfortag.map((item, index) => (
-        <li key={index}>
-          <a href={item.link}>{item.title}</a>
-        </li>
-      ));
-    }
-
-    if (tagItems.length > 0) {
-      return tagItems.map((item, index) => (
-        <li key={index}>
-          <a href={item.link}>{item.title}</a>
-        </li>
-      ));
-    }
-
-    return <li>No items available for this tag</li>;
+    return (
+      <div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            // marginBottom: '20px',  Spacing below the heading
+            width: '150px',
+          }}
+        >
+          <section
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            {iconfortag.map((item, index) => (
+              <img
+                key={index}
+                src={item.background_image_url}
+                alt={`Icon for ${item.text_eng}`}
+                style={{ width: '100px', height: '60px' }}
+              />
+            ))}
+          </section>
+          <div>
+            <h2 style={{ margin: 0 }}>{tag}</h2>
+          </div>
+        </div>
+        {tagItems.length > 0 && (
+          <div style={{ marginTop: '20px' }}>
+            <h3>Tags</h3>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              {tagItems.map((item, index) => (
+                <li key={index}>
+                  <a href={item.link}>{item.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {iconfortag.length === 0 && tagItems.length === 0 && (
+          <div>No items available for this tag</div>
+        )}
+      </div>
+    );
   };
 
   if (status === 'loading') {
-    console.log('Loading data...');
     return <div>Loading...</div>;
   }
 
   if (status === 'failed') {
-    console.log('Error occurred', { error });
     return <div>Error: {error}</div>;
   }
 
@@ -124,8 +117,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
     <div>
       {tags.map((tag) => (
         <div key={tag}>
-          <h2>{tag}</h2>
-          <ul>{renderContent(tag)}</ul>
+          {renderContent(tag)}
           {shouldShowLoadMoreButton(tag) && (
             <button
               onClick={() => loadMoreData(tag)}
@@ -137,6 +129,20 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
         </div>
       ))}
     </div>
+  );
+};
+
+// If you need to export combined data
+export const getCombinedData = (state: RootState) => {
+  return tags.reduce(
+    (acc, tag) => {
+      acc[tag] = {
+        icons: state.iconfortag.data[tag] || [],
+        items: state.data.items[tag] || [],
+      };
+      return acc;
+    },
+    {} as Record<string, { icons: any[]; items: any[] }>,
   );
 };
 
