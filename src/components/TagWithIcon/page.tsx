@@ -7,8 +7,6 @@ import { fetchIconData } from '@/features/forTagWithIcon/IconTag';
 import { fetchData, incrementPage } from '@/features/forTagWithIcon/itemsSlice';
 import type { RootState } from '@/features/store/store';
 
-// import type { RootState } from '../../store/store';
-
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
 
@@ -19,7 +17,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const iconData = useSelector((state: RootState) => {
     return tags.reduce(
       (acc, tag) => {
-        acc[tag] = state.icons.data[tag] || [];
+        acc[tag] = state.iconfortag.data[tag] || [];
         // tags{ราชดำเนิน}  => find api data[tag] =   api data[ราชดำเนิน]
         return acc;
       },
@@ -29,7 +27,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   // useSelector ซึ่งเป็น hook ของ react-redux เพื่อดึงข้อมูลจาก store ของ Redux
   /*
   โดยรวม, โค้ดนี้จะสร้าง object ที่มี key เป็น tag จาก array tags และ value 
-  เป็นข้อมูลที่ดึงมาจาก state.icons.data ตาม tag นั้น ๆ หรือจะเป็น array เปล่าถ้าข้อมูลไม่พบ.
+  เป็นข้อมูลที่ดึงมาจาก state.iconfortag.data ตาม tag นั้น ๆ หรือจะเป็น array เปล่าถ้าข้อมูลไม่พบ.
   */
 
   const [perPage] = useState(1); // Page size; adjust if needed
@@ -67,20 +65,20 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   };
 
   const renderContent = (tag: string) => {
-    const icons = iconData[tag] || [];
+    const iconfortag = iconData[tag] || [];
     const tagItems = items[tag] || [];
     // tagItems = item{ราชดำเนิน}
 
-    if (icons.length > 0 && tagItems.length > 0) {
+    if (iconfortag.length > 0 && tagItems.length > 0) {
       return (
         <>
-          <h3>Icons</h3>
-          {icons.map((item, index) => (
+          <h3>iconfortag</h3>
+          {iconfortag.map((item, index) => (
             <img
               key={index}
               src={item.background_image_url}
               alt={`Icon for ${item.text_eng}`}
-              style={{ width: '100px', height: 'auto' }} // You can adjust the styling as needed
+              style={{ width: '100px', height: '60px' }} // You can adjust the styling as needed
             />
           ))}
           <h3>Tags</h3>
@@ -93,8 +91,8 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
       );
     }
 
-    if (icons.length > 0) {
-      return icons.map((item, index) => (
+    if (iconfortag.length > 0) {
+      return iconfortag.map((item, index) => (
         <li key={index}>
           <a href={item.link}>{item.title}</a>
         </li>
