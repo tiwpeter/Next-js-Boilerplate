@@ -9,7 +9,7 @@ import type { RootState } from '@/features/store/store';
 
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
-  const { items, status, error, pages, totalPages } = useSelector(
+  const { items, status, error, pages, totalPages, spanHeaders } = useSelector(
     (state: RootState) => state.data,
   );
 
@@ -52,7 +52,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
     return currentPage < totalPagesForTag;
   };
 
-  const renderContent = (tag: string) => {
+  const renderContent = (tag: string, spanHeader: string[]) => {
     const iconfortag = iconData[tag] || [];
     const tagItems = items[tag] || [];
 
@@ -65,7 +65,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              width: '150px',
+              width: '711px',
             }}
           >
             <section
@@ -84,8 +84,14 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                 />
               ))}
             </section>
-            <div>
+            <div style={{ width: '100%' }}>
               <h2 style={{ margin: 0 }}>{tag}</h2>
+              {/* Displaying span_header if available */}
+              {spanHeader.length > 0 && (
+                <p style={{ marginTop: '0rem', marginBottom: '0rem' }}>
+                  {spanHeader.join(', ')}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -102,25 +108,22 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                   <div className="ml-2">
                     <h2>
                       {item.title}{' '}
-                      {/* Assuming 'Title-Topic' should be 'title' */}
                       <div className="pt-list-item__title">
                         <a className="pick-link" href="">
                           <i className="pantip-icon" />
-                          {item.timePost}
+                          45 years
                         </a>
                       </div>
                     </h2>
                     <div className="list_tag">
-                      {tagItems.map((item, index) => (
-                        <a
-                          key={index}
-                          className="pick-link"
-                          href={item.pantipTrendLinkTopic}
-                        >
-                          <i className="pantip-icon" />
-                          {item.tag} {/* Assuming 'tag' should be used here */}
-                        </a>
-                      ))}
+                      {/* Adjust this part if needed */}
+                      {item.tags &&
+                        item.tags.map((tag, index) => (
+                          <a key={index} className="pick-link" href={item.link}>
+                            <i className="pantip-icon" />
+                            {tag}
+                          </a>
+                        ))}
                     </div>
                   </div>
                 </li>
@@ -144,19 +147,22 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 
   return (
     <div>
-      {tags.map((tag) => (
-        <div key={tag}>
-          {renderContent(tag)}
-          {shouldShowLoadMoreButton(tag) && (
-            <button
-              onClick={() => loadMoreData(tag)}
-              disabled={status === 'loading'}
-            >
-              {status === 'loading' ? 'Loading more...' : 'Load More'}
-            </button>
-          )}
-        </div>
-      ))}
+      {tags.map((tag) => {
+        const spanHeader = spanHeaders[tag] || [];
+        return (
+          <div key={tag}>
+            {renderContent(tag, spanHeader)}
+            {shouldShowLoadMoreButton(tag) && (
+              <button
+                onClick={() => loadMoreData(tag)}
+                disabled={status === 'loading'}
+              >
+                {status === 'loading' ? 'Loading more...' : 'Load More'}
+              </button>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };
