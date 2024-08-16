@@ -1,32 +1,55 @@
 'use client';
 
-// TagTrend.js หรือคอมโพเนนต์ที่คุณต้องการใช้
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import MessageIcon from '@mui/icons-material/Message';
+import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { RootState } from '@/features/store/store';
-import { fetchfood } from '@/features/tagsReducerId';
+import { fetchTred } from '@/features/tagsReducerId';
 
-const TestID = ({ params }: { params: { tag: string } }) => {
+// Define the TitleItem interface with the correct structure
+interface TitleItem {
+  id: string;
+  url: string;
+  'Title-Topic': string;
+  user?: string;
+  time?: string;
+  comments?: {
+    message?: string; // message is now nested within comments
+  };
+  votes?: number;
+}
+
+interface LocalData {
+  header: string;
+  titles: TitleItem[];
+}
+
+interface TestIDProps {
+  params: {
+    tag: string;
+  };
+}
+
+const TestID: React.FC<TestIDProps> = ({ params }) => {
   const dispatch = useDispatch();
-  const { tag } = params; // Extract tag from props
-  const [localData, setLocalData] = useState<{
-    header: string;
-    titles: any[];
-  } | null>(null);
-  const fetchStatus = useSelector((state: RootState) => state.tags.status); // Access fetch status
-  const fetchError = useSelector((state: RootState) => state.tags.error); // Access fetch error
+  const { tag } = params;
+  const [localData, setLocalData] = useState<LocalData | null>(null);
+  const fetchStatus = useSelector((state: RootState) => state.tags.status);
+  const fetchError = useSelector((state: RootState) => state.tags.error);
 
   useEffect(() => {
     if (tag) {
-      dispatch(fetchfood(tag))
+      dispatch(fetchTred(tag))
         .unwrap()
         .then((data) => {
-          console.log('fetchfood data:', data); // Log fetched data
-          setLocalData(data); // Set the local state with fetched data
+          console.log('fetchfood data:', data);
+          setLocalData(data);
         })
         .catch((error) => {
-          console.error('fetchfood error:', error); // Log error
+          console.error('fetchfood error:', error);
         });
     }
   }, [dispatch, tag]);
@@ -34,18 +57,109 @@ const TestID = ({ params }: { params: { tag: string } }) => {
   return (
     <div>
       {fetchStatus === 'loading' && <p>Loading...</p>}
-      {fetchStatus === 'failed' && <p>Error: {fetchError}</p>}
+      {fetchStatus === 'failed' && fetchError && <p>Error: {fetchError}</p>}
       {fetchStatus === 'succeeded' && localData && (
-        <>
-          <h2>{localData.header}</h2>
-          <ul>
-            {localData.titles.map((item, index) => (
-              <li key={index}>
-                <a href={item.img_url || '#'}>{item['Title-Topic']}</a>
-              </li>
-            ))}
-          </ul>
-        </>
+        <div className="copmain" style={{ width: '1078px' }}>
+          <div
+            className="mt-3"
+            style={{
+              background: '#7f99ff',
+              display: 'flex',
+              minHeight: '43px',
+              padding: '12px 16px',
+              position: 'relative',
+              whiteSpace: 'normal',
+              width: '1078px',
+            }}
+          >
+            <h3>{localData.header}</h3>
+          </div>
+          <section
+            className="dw container mx-auto"
+            style={{
+              height: '418px',
+              background: 'aliceblue',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '1078px',
+              overflow: 'hidden',
+            }}
+          >
+            <ul className="flex flex-wrap" style={{ width: '1080px' }}>
+              {localData.titles.map((item) => (
+                <li
+                  key={item.id}
+                  className="boxslie flex items-start border p-2"
+                  style={{ width: '50%' }}
+                >
+                  <img
+                    src={item.url}
+                    alt="Placeholder Image"
+                    className="mr-2 size-12"
+                    style={{ width: '86px', height: '64px' }}
+                  />
+                  <div
+                    className="flex h-full flex-col justify-between"
+                    style={{ width: '428px' }}
+                  >
+                    <div className="mb-4">
+                      <h2>{item['Title-Topic']}</h2>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      {/* User Info */}
+                      <div className="flex items-end">
+                        {item.user && (
+                          <h5 className="text-center">{item.user}</h5>
+                        )}
+                        {item.time && (
+                          <h5
+                            className="text-center"
+                            style={{ marginLeft: '6px' }}
+                          >
+                            {item.time}
+                          </h5>
+                        )}
+                      </div>
+                      {/* User Stats */}
+                      <div className="pt-list-item__stats flex">
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={MessageIcon}
+                            style={{ fontSize: '1rem', marginRight: '8px' }}
+                          />
+                          {item.comments?.message || 'No messages'}{' '}
+                          {/* Access nested message */}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={AddBoxIcon}
+                            style={{ fontSize: '1rem', marginRight: '8px' }}
+                          />
+                          {item.votes || 0} {/* Display votes or a fallback */}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
       )}
     </div>
   );

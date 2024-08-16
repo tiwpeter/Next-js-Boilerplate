@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunks for fetching data
+// Thunks for fetching data MOre
 export const fetchTags = createAsyncThunk(
   'tags/fetchTags',
   async ({ page, perPage, reset = false }) => {
@@ -13,7 +13,7 @@ export const fetchTags = createAsyncThunk(
 );
 
 // สร้าง createAsyncThunk สำหรับการดึงข้อมูล
-export const fetchfood = createAsyncThunk(
+export const fetchTred = createAsyncThunk(
   'tags/fetchfood', // ชื่อ action
   async (tag, { rejectWithValue }) => {
     try {
@@ -21,33 +21,13 @@ export const fetchfood = createAsyncThunk(
       const response = await axios.get(
         `http://localhost:5000/api/${tag}/recommendations`,
       );
-      console.log('fetchfood response:', response.data); // Log response
+      console.log('fetchTred response:', response.data); // Log response
       // ส่งข้อมูลที่ได้จาก API กลับไปยัง Redux store
       return response.data;
     } catch (error) {
       // ใช้ rejectWithValue เพื่อส่งข้อความแสดงข้อผิดพลาด
       return rejectWithValue(error.response.data);
     }
-  },
-);
-
-export const fetchCamera = createAsyncThunk('tags/fetchCamera', async (tag) => {
-  if (tag !== 'Camera') return null;
-  try {
-    const response = await axios.get('http://127.0.0.1:5000/api/camera');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching Camera data:', error);
-    throw error;
-  }
-});
-
-export const fetchPantipData = createAsyncThunk(
-  'tags/fetchPantipData',
-  async (tag) => {
-    if (tag !== 'Bangrak') return null;
-    const response = await axios.get('http://127.0.0.1:5000/api/pantip_katoo');
-    return response.data;
   },
 );
 
@@ -134,29 +114,11 @@ const tagsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message;
       })
-      .addCase(fetchPantipData.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchPantipData.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.pantipData = action.payload;
-      })
-      .addCase(fetchfood.fulfilled, (state, action) => {
+
+      .addCase(fetchTred.fulfilled, (state, action) => {
         // Corrected
         state.status = 'succeeded';
         state.Fooddata = action.payload;
-      })
-      .addCase(fetchPantipData.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      })
-      .addCase(fetchCamera.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.Cameradata = action.payload;
-      })
-      .addCase(fetchCamera.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
       });
   },
 });
