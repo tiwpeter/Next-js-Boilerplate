@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   data: itemsReducer,
   iconfortag: IconTag,
   //  icontag: IconReducer,
-  tagId: tagsReducerId,
+  tags: tagsReducerId,
 });
 
 export default rootReducer;

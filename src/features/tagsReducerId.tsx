@@ -12,11 +12,24 @@ export const fetchTags = createAsyncThunk(
   },
 );
 
-export const fetchFood = createAsyncThunk('tags/fetchFood', async (tag) => {
-  if (tag !== 'Food') return null;
-  const response = await axios.get('http://127.0.0.1:5000/api/food');
-  return response.data;
-});
+// สร้าง createAsyncThunk สำหรับการดึงข้อมูล
+export const fetchfood = createAsyncThunk(
+  'tags/fetchfood', // ชื่อ action
+  async (tag, { rejectWithValue }) => {
+    try {
+      // ส่งคำขอ GET ไปยัง API
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/recommendations`,
+      );
+      console.log('fetchfood response:', response.data); // Log response
+      // ส่งข้อมูลที่ได้จาก API กลับไปยัง Redux store
+      return response.data;
+    } catch (error) {
+      // ใช้ rejectWithValue เพื่อส่งข้อความแสดงข้อผิดพลาด
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
 export const fetchCamera = createAsyncThunk('tags/fetchCamera', async (tag) => {
   if (tag !== 'Camera') return null;
@@ -116,8 +129,6 @@ const tagsSlice = createSlice({
         state.totalAsmr = total_asmr;
         state.totalSukui = total_sukui;
         state.totalSme = total_sme;
-
-        
       })
       .addCase(fetchTags.rejected, (state, action) => {
         state.status = 'failed';
@@ -130,7 +141,8 @@ const tagsSlice = createSlice({
         state.status = 'succeeded';
         state.pantipData = action.payload;
       })
-      .addCase(fetchFood.fulfilled, (state, action) => {
+      .addCase(fetchfood.fulfilled, (state, action) => {
+        // Corrected
         state.status = 'succeeded';
         state.Fooddata = action.payload;
       })
