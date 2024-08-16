@@ -12,6 +12,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const { items, status, error, pages, totalPages } = useSelector(
     (state: RootState) => state.data,
   );
+
   const iconData = useSelector((state: RootState) =>
     tags.reduce(
       (acc, tag) => {
@@ -56,51 +57,79 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
     const tagItems = items[tag] || [];
 
     return (
-      <div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            // marginBottom: '20px',  Spacing below the heading
-            width: '150px',
-          }}
-        >
-          <section
+      <div style={{ width: '711px' }}>
+        {/* nav tag */}
+        <div style={{ background: '#7f99ff' }}>
+          <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '10px',
+              justifyContent: 'space-between',
+              width: '150px',
             }}
           >
-            {iconfortag.map((item, index) => (
-              <img
-                key={index}
-                src={item.background_image_url}
-                alt={`Icon for ${item.text_eng}`}
-                style={{ width: '100px', height: '60px' }}
-              />
-            ))}
-          </section>
-          <div>
-            <h2 style={{ margin: 0 }}>{tag}</h2>
+            <section
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              {iconfortag.map((item, index) => (
+                <img
+                  key={index}
+                  src={item.background_image_url}
+                  alt={`Icon for ${item.text_eng}`}
+                  style={{ width: '100px', height: '60px' }}
+                />
+              ))}
+            </section>
+            <div>
+              <h2 style={{ margin: 0 }}>{tag}</h2>
+            </div>
           </div>
         </div>
-        {tagItems.length > 0 && (
-          <div style={{ marginTop: '20px' }}>
-            <h3>Tags</h3>
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
-              {tagItems.map((item, index) => (
-                <li key={index}>
-                  <a href={item.link}>{item.title}</a>
+        {/* nav tag */}
+        <div className="titles-container">
+          <ul className="titles-list">
+            {tagItems.length > 0 ? (
+              tagItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="boxslie border p-2"
+                  style={{ width: '100%', height: '86px' }}
+                >
+                  <div className="ml-2">
+                    <h2>
+                      {item.title}{' '}
+                      {/* Assuming 'Title-Topic' should be 'title' */}
+                      <div className="pt-list-item__title">
+                        <a className="pick-link" href="">
+                          <i className="pantip-icon" />
+                          {item.timePost}
+                        </a>
+                      </div>
+                    </h2>
+                    <div className="list_tag">
+                      {tagItems.map((item, index) => (
+                        <a
+                          key={index}
+                          className="pick-link"
+                          href={item.pantipTrendLinkTopic}
+                        >
+                          <i className="pantip-icon" />
+                          {item.tag} {/* Assuming 'tag' should be used here */}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
                 </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {iconfortag.length === 0 && tagItems.length === 0 && (
-          <div>No items available for this tag</div>
-        )}
+              ))
+            ) : (
+              <div>No items available for this tag</div>
+            )}
+          </ul>
+        </div>
       </div>
     );
   };
@@ -129,20 +158,6 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
         </div>
       ))}
     </div>
-  );
-};
-
-// If you need to export combined data
-export const getCombinedData = (state: RootState) => {
-  return tags.reduce(
-    (acc, tag) => {
-      acc[tag] = {
-        icons: state.iconfortag.data[tag] || [],
-        items: state.data.items[tag] || [],
-      };
-      return acc;
-    },
-    {} as Record<string, { icons: any[]; items: any[] }>,
   );
 };
 
