@@ -47,3 +47,19 @@ h5{
   font-weight: 400;
   line-height: 1.5;
 }
+
+.mainPageTag{
+  word-wrap: break-word;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  max-height: 24px;
+  overflow: hidden;
+  padding: 0;
+
+  max-height: none;
+  color: rgba(233,229,246,.87);
+  color: inherit;
+  font-family: inherit;
+}

@@ -141,7 +141,9 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                     style={{ width: 'calc(100% - 96px)' }} // Adjust width based on image size
                   >
                     <div>
-                      <h2 style={{ marginTop: '-7px' }}>{item.title}</h2>
+                      <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
+                        {item.title}
+                      </h2>
                     </div>
                     {/* tag */}
                     <div
