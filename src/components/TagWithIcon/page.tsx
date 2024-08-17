@@ -128,15 +128,19 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                   className="boxslie flex items-start border p-2"
                   style={{ width: '100%', marginBottom: '8px' }} // Full width and space between items
                 >
-                  <img
-                    src={item.img_url}
-                    alt="Placeholder Image"
-                    className="mr-2 size-12"
-                    style={{ width: '86px', height: '64px' }}
-                  />
+                  {item.img_url ? (
+                    <img
+                      src={item.img_url}
+                      alt=""
+                      className="mr-2 size-12"
+                      style={{ width: '86px', height: '64px' }}
+                    />
+                  ) : (
+                    <div className="" /> // Placeholder if no image
+                  )}
                   <div
                     className="flex h-full flex-col justify-between"
-                    style={{ width: 'calc(100% - 96px)' }} // Adjust width based on image size
+                    style={{ width: 'calc(100% - 0px)' }} // Adjust width based on image size
                   >
                     <div>
                       <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
