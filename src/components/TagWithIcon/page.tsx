@@ -5,6 +5,7 @@ import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import LoadMoreButton from '@/components/more/more';
 import { fetchIconData } from '@/features/forTagWithIcon/IconTag';
 import { fetchData, incrementPage } from '@/features/forTagWithIcon/itemsSlice';
 import type { RootState } from '@/features/store/store';
@@ -126,7 +127,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                 <li
                   key={item.id}
                   className="boxslie flex items-start border p-2"
-                  style={{ width: '100%', marginBottom: '8px' }} // Full width and space between items
+                  style={{ width: '100%', height: '84px' }} // Full width and space between items
                 >
                   {item.img_url ? (
                     <img
@@ -216,19 +217,18 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   }
 
   return (
-    <div>
+    <div style={{ width: '711px' }}>
       {tags.map((tag) => {
         const spanHeader = spanHeaders[tag] || [];
         return (
           <div key={tag}>
             {renderContent(tag, spanHeader)}
             {shouldShowLoadMoreButton(tag) && (
-              <button
+              <LoadMoreButton
                 onClick={() => loadMoreData(tag)}
                 disabled={status === 'loading'}
-              >
-                {status === 'loading' ? 'Loading more...' : 'Load More'}
-              </button>
+                isLoading={status === 'loading'}
+              />
             )}
           </div>
         );
