@@ -36,11 +36,12 @@ const dataSlice = createSlice({
   name: 'data',
   initialState: {
     items: {},
-    spanHeaders: {}, // Track span headers per tag
+    spanHeaders: {},
     status: 'idle',
     error: null,
     pages: {},
     totalPages: {},
+    tagsDetails: {}, // Add this to track tags details
   },
   reducers: {
     incrementPage: (state, action) => {
@@ -70,10 +71,12 @@ const dataSlice = createSlice({
               titles = [],
               span_header = [],
               total_pages = 1,
+              tagsDetail = {}, // Extract tagsDetail
             } = dataX[index];
             state.items[tag] = [...state.items[tag], ...titles];
             state.spanHeaders[tag] = span_header;
             state.totalPages[tag] = total_pages;
+            state.tagsDetails[tag] = tagsDetail; // Update state with tagsDetail
           }
         });
 

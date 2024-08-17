@@ -1,5 +1,8 @@
 'use client';
 
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import MessageIcon from '@mui/icons-material/Message';
+import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -36,6 +39,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 
   useEffect(() => {
     console.log('Data changed', { items, status, error, pages, totalPages });
+    console.log('tagItems:', items);
   }, [items, status, error, pages, totalPages]);
 
   const loadMoreData = (tag: string) => {
@@ -96,34 +100,97 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
           </div>
         </div>
         {/* nav tag */}
-        <div className="titles-container">
-          <ul className="titles-list">
+        {/* title tag */}
+        <section
+          className="dw container mx-auto"
+          style={{
+            height: '418px',
+            background: 'aliceblue',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '711px',
+            overflow: 'hidden',
+          }}
+        >
+          <ul
+            className="flex flex-col"
+            style={{
+              display: 'flex',
+              flexDirection: 'column', // Stack items vertically
+              margin: 0,
+              padding: 0,
+              listStyleType: 'none',
+              width: '100%',
+            }}
+          >
             {tagItems.length > 0 ? (
               tagItems.map((item, index) => (
                 <li
-                  key={index}
-                  className="boxslie border p-2"
-                  style={{ width: '100%', height: '86px' }}
+                  key={item.id}
+                  className="boxslie flex items-start border p-2"
+                  style={{ width: '100%', marginBottom: '8px' }} // Full width and space between items
                 >
-                  <div className="ml-2">
-                    <h2>
-                      {item.title}{' '}
-                      <div className="pt-list-item__title">
-                        <a className="pick-link" href="">
-                          <i className="pantip-icon" />
-                          45 years
-                        </a>
+                  <img
+                    src={item.url}
+                    alt="Placeholder Image"
+                    className="mr-2 size-12"
+                    style={{ width: '86px', height: '64px' }}
+                  />
+                  <div
+                    className="flex h-full flex-col justify-between"
+                    style={{ width: 'calc(100% - 96px)' }} // Adjust width based on image size
+                  >
+                    <div className="mb-4">
+                      <h2>{item.title}</h2>
+                    </div>
+                    {/* tag */}
+                    <div className="flex items-center justify-between" />
+
+                    {/* end poind */}
+                    <div className="flex items-center justify-between">
+                      {/* User Info */}
+                      <div className="flex items-end">
+                        <h5 className="text-center">{item.user}</h5>
+                        <h5
+                          className="text-center"
+                          style={{ marginLeft: '6px' }}
+                        >
+                          {item.timePost}
+                        </h5>
                       </div>
-                    </h2>
-                    <div className="list_tag">
-                      {/* Adjust this part if needed */}
-                      {item.tags &&
-                        item.tags.map((tag, index) => (
-                          <a key={index} className="pick-link" href={item.link}>
-                            <i className="pantip-icon" />
-                            {tag}
-                          </a>
-                        ))}
+                      {/* User Stats */}
+                      <div className="pt-list-item__stats flex">
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={MessageIcon}
+                            style={{ fontSize: '1rem', marginRight: '8px' }}
+                          />
+                          {item.comments.message}
+                          {/* Access nested message */}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: '.75rem',
+                            marginRight: '16px',
+                            display: 'flex',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <SvgIcon
+                            component={AddBoxIcon}
+                            style={{ fontSize: '1rem', marginRight: '8px' }}
+                          />
+                          {item.votes}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -132,7 +199,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               <div>No items available for this tag</div>
             )}
           </ul>
-        </div>
+        </section>
       </div>
     );
   };
@@ -168,3 +235,46 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 };
 
 export default CombinedComponent;
+/*
+<ul className="flex flex-wrap" style={{ width: '1080px' }}>
+            {tagItems.length > 0 ? (
+              tagItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="boxslie border p-2"
+                  style={{ width: '100%', height: '86px' }}
+                >
+                  <img
+                    src={item.url}
+                    alt="Placeholder Image"
+                    className="mr-2 size-12"
+                    style={{ width: '86px', height: '64px' }}
+                  />
+                  <div className="ml-2">
+                    <h2>
+                      {item.title}{' '}
+                      <div className="pt-list-item__title">
+                        <a className="pick-link" href="">
+                          <i className="pantip-icon" />
+                          45 years
+                        </a>
+                      </div>
+                    </h2>
+                    <div className="list_tag">
+                      {/* Adjust this part if needed 
+                      {item.tags &&
+                        item.tags.map((tag, index) => (
+                          <a key={index} className="pick-link" href={item.link}>
+                            <i className="pantip-icon" />
+                            {tag}
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                </li>
+              ))
+            ) : (
+              <div>No items available for this tag</div>
+            )}
+          </ul>
+*/
