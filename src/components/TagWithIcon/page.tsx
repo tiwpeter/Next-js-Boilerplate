@@ -149,7 +149,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       style={{ gap: '5px', marginTop: '3px' }}
                     >
                       {' '}
-                      {item.tagsDetail.map((tag, index) => (
+                      {(item.tagsDetail || []).map((tag, index) => (
                         <a key={index} href={tag.href} className="tag-link">
                           <h2 className="list_font_tag">
                             {tag.text || 'No text'}
@@ -158,7 +158,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       ))}
                     </div>
 
-                    {/* end poind */}
+                    {/* end point */}
                     <div className="flex items-center justify-between">
                       {/* User Info */}
                       <div className="flex items-end" style={{ gap: '0px' }}>
@@ -186,7 +186,8 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                             component={MessageIcon}
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
-                          {item.comments.message}
+                          {(item.comments && item.comments.message) ||
+                            'No comments'}
                           {/* Access nested message */}
                         </span>
                       </div>
