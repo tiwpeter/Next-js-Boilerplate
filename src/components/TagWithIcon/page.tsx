@@ -1,7 +1,7 @@
 'use client';
 
-import MessageIcon from '@mui/icons-material/Message';
-import { SvgIcon } from '@mui/material';
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,21 +10,23 @@ import { fetchIconData } from '@/features/forTagWithIcon/IconTag';
 import { fetchData, incrementPage } from '@/features/forTagWithIcon/itemsSlice';
 import type { RootState } from '@/features/store/store';
 
+import styles from './CombinedComponent.module.css'; // ใช้ CSS Modules
+
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
-  const { items, status, error, pages, totalPages, spanHeaders } = useSelector(
+
+  const { items, status, error, pages, totalPages } = useSelector(
     (state: RootState) => state.data,
   );
-
-  const iconData = useSelector((state: RootState) =>
-    tags.reduce(
+  const iconData = useSelector((state: RootState) => {
+    return tags.reduce(
       (acc, tag) => {
-        acc[tag] = state.iconfortag.data[tag] || [];
+        acc[tag] = state.icons.data[tag] || [];
         return acc;
       },
       {} as Record<string, any[]>,
-    ),
-  );
+    );
+  });
 
   const [perPage] = useState(1);
 
@@ -39,7 +41,6 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 
   useEffect(() => {
     console.log('Data changed', { items, status, error, pages, totalPages });
-    console.log('tagItems:', items);
   }, [items, status, error, pages, totalPages]);
 
   const loadMoreData = (tag: string) => {
@@ -56,156 +57,49 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
     return currentPage < totalPagesForTag;
   };
 
-  const renderContent = (tag: string, spanHeader: string[]) => {
-    const iconfortag = iconData[tag] || [];
+  const renderContent = (tag: string) => {
+    const icons = iconData[tag] || [];
     const tagItems = items[tag] || [];
 
-    return (
-      <div style={{ width: '711px' }}>
-        {/* nav tag */}
-        <div style={{ background: '#7f99ff' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '711px',
-            }}
-          >
-            <section
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-              }}
-            >
-              {iconfortag.map((item, index) => (
-                <img
-                  key={index}
-                  src={item.background_image_url}
-                  alt={`Icon for ${item.text_eng}`}
-                  style={{ width: '100px', height: '60px' }}
-                />
-              ))}
-            </section>
-            <div style={{ width: '100%' }}>
-              <h2 style={{ margin: 0 }}>{tag}</h2>
-              {/* Displaying span_header if available */}
-              {spanHeader.length > 0 && (
-                <div className="font_TagSecod">{spanHeader.join(', ')}</div>
-              )}
-            </div>
-          </div>
-        </div>
-        {/* nav tag */}
-        {/* title tag */}
-        <section
-          className="dw container mx-auto"
-          style={{
-            height: '418px',
-            background: 'aliceblue',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '711px',
-            overflow: 'hidden',
-          }}
-        >
-          <ul
-            className="flex flex-col"
-            style={{
-              display: 'flex',
-              flexDirection: 'column', // Stack items vertically
-              margin: 0,
-              padding: 0,
-              listStyleType: 'none',
-              width: '100%',
-            }}
-          >
-            {tagItems.length > 0 ? (
-              tagItems.map((item, index) => (
-                <li
-                  key={item.id}
-                  className="boxslie flex items-start border p-2"
-                  style={{ width: '100%', height: '84px' }} // Full width and space between items
-                >
-                  {item.img_url ? (
-                    <img
-                      src={item.img_url}
-                      alt=""
-                      className="mr-2 size-12"
-                      style={{ width: '86px', height: '64px' }}
-                    />
-                  ) : (
-                    <div className="" /> // Placeholder if no image
-                  )}
-                  <div
-                    className="flex h-full flex-col justify-between"
-                    style={{ width: 'calc(100% - 0px)' }} // Adjust width based on image size
-                  >
-                    <div>
-                      <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
-                        {item.title}
-                      </h2>
-                    </div>
-                    {/* tag */}
-                    <div
-                      className="flex items-center"
-                      style={{ gap: '5px', marginTop: '3px' }}
-                    >
-                      {' '}
-                      {(item.tagsDetail || []).map((tag, index) => (
-                        <a key={index} href={tag.href} className="tag-link">
-                          <h2 className="list_font_tag">
-                            {tag.text || 'No text'}
-                          </h2>
-                        </a>
-                      ))}
-                    </div>
+    if (icons.length > 0 && tagItems.length > 0) {
+      return (
+        <>
+          <h3>Icons</h3>
+          {icons.map((item, index) => (
+            <img
+              key={index}
+              src={item.background_image_url}
+              alt={`Icon for ${item.text_eng}`}
+              className={styles.iconImage}
+            />
+          ))}
+          <h3>Tags</h3>
+          {tagItems.map((item, index) => (
+            <li key={index} className={styles.tagItem}>
+              <a href={item.link}>{item.title}</a>
+            </li>
+          ))}
+        </>
+      );
+    }
 
-                    {/* end point */}
-                    <div className="flex items-center justify-between">
-                      {/* User Info */}
-                      <div className="flex items-end" style={{ gap: '0px' }}>
-                        <h5 style={{ margin: '0' }} className="text-center">
-                          {item.user}
-                        </h5>
-                        <h5
-                          style={{ margin: '0', marginLeft: '6px' }} // Corrected inline styles
-                          className="text-center"
-                        >
-                          {item.timePost}
-                        </h5>
-                      </div>
-                      {/* User Stats */}
-                      <div className="pt-list-item__stats flex">
-                        <span
-                          style={{
-                            fontSize: '.75rem',
-                            marginRight: '16px',
-                            display: 'flex',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <SvgIcon
-                            component={MessageIcon}
-                            style={{ fontSize: '1rem', marginRight: '8px' }}
-                          />
-                          {(item.comments && item.comments.message) || '0'}
-                          {/* Access nested message */}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <div>No items available for this tag</div>
-            )}
-          </ul>
-        </section>
-      </div>
-    );
+    if (icons.length > 0) {
+      return icons.map((item, index) => (
+        <li key={index} className={styles.tagItem}>
+          <a href={item.link}>{item.title}</a>
+        </li>
+      ));
+    }
+
+    if (tagItems.length > 0) {
+      return tagItems.map((item, index) => (
+        <li key={index} className={styles.tagItem}>
+          <a href={item.link}>{item.title}</a>
+        </li>
+      ));
+    }
+
+    return <li>No items available for this tag</li>;
   };
 
   if (status === 'loading') {
@@ -217,67 +111,21 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   }
 
   return (
-    <div style={{ width: '711px' }}>
-      {tags.map((tag) => {
-        const spanHeader = spanHeaders[tag] || [];
-        return (
-          <div key={tag}>
-            {renderContent(tag, spanHeader)}
-            {shouldShowLoadMoreButton(tag) && (
-              <LoadMoreButton
-                onClick={() => loadMoreData(tag)}
-                disabled={status === 'loading'}
-                isLoading={status === 'loading'}
-              />
-            )}
-          </div>
-        );
-      })}
+    <div className={styles.container}>
+      {tags.map((tag) => (
+        <div key={tag} className={styles.tagContainer}>
+          <h2>{tag}</h2>
+          <ul className={styles.itemList}>{renderContent(tag)}</ul>
+          {shouldShowLoadMoreButton(tag) && (
+            <LoadMoreButton
+              onClick={() => loadMoreData(tag)}
+              loading={status === 'loading'}
+            />
+          )}
+        </div>
+      ))}
     </div>
   );
 };
 
 export default CombinedComponent;
-/*
-<ul className="flex flex-wrap" style={{ width: '1080px' }}>
-            {tagItems.length > 0 ? (
-              tagItems.map((item, index) => (
-                <li
-                  key={index}
-                  className="boxslie border p-2"
-                  style={{ width: '100%', height: '86px' }}
-                >
-                  <img
-                    src={item.url}
-                    alt="Placeholder Image"
-                    className="mr-2 size-12"
-                    style={{ width: '86px', height: '64px' }}
-                  />
-                  <div className="ml-2">
-                    <h2>
-                      {item.title}{' '}
-                      <div className="pt-list-item__title">
-                        <a className="pick-link" href="">
-                          <i className="pantip-icon" />
-                          45 years
-                        </a>
-                      </div>
-                    </h2>
-                    <div className="list_tag">
-                      {/* Adjust this part if needed 
-                      {item.tags &&
-                        item.tags.map((tag, index) => (
-                          <a key={index} className="pick-link" href={item.link}>
-                            <i className="pantip-icon" />
-                            {tag}
-                          </a>
-                        ))}
-                    </div>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <div>No items available for this tag</div>
-            )}
-          </ul>
-*/
