@@ -1,6 +1,5 @@
 'use client';
 
-import AddBoxIcon from '@mui/icons-material/AddBox';
 import MessageIcon from '@mui/icons-material/Message';
 import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -132,7 +131,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                   style={{ width: '100%', marginBottom: '8px' }} // Full width and space between items
                 >
                   <img
-                    src={item.url}
+                    src={item.img_url}
                     alt="Placeholder Image"
                     className="mr-2 size-12"
                     style={{ width: '86px', height: '64px' }}
@@ -145,7 +144,13 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       <h2>{item.title}</h2>
                     </div>
                     {/* tag */}
-                    <div className="flex items-center justify-between" />
+                    <div className="flex items-center ">
+                      {item.tagsDetail.map((tag, index) => (
+                        <a key={index} href={tag.href} className="tag-link">
+                          <h2>{tag.text || 'No text'}</h2>
+                        </a>
+                      ))}
+                    </div>
 
                     {/* end poind */}
                     <div className="flex items-center justify-between">
@@ -175,20 +180,6 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                           />
                           {item.comments.message}
                           {/* Access nested message */}
-                        </span>
-                        <span
-                          style={{
-                            fontSize: '.75rem',
-                            marginRight: '16px',
-                            display: 'flex',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <SvgIcon
-                            component={AddBoxIcon}
-                            style={{ fontSize: '1rem', marginRight: '8px' }}
-                          />
-                          {item.votes}
                         </span>
                       </div>
                     </div>
