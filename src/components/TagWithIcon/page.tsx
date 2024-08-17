@@ -91,9 +91,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               <h2 style={{ margin: 0 }}>{tag}</h2>
               {/* Displaying span_header if available */}
               {spanHeader.length > 0 && (
-                <p style={{ marginTop: '0rem', marginBottom: '0rem' }}>
-                  {spanHeader.join(', ')}
-                </p>
+                <div className="font_TagSecod">{spanHeader.join(', ')}</div>
               )}
             </div>
           </div>
