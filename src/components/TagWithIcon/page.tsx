@@ -140,14 +140,20 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                     className="flex h-full flex-col justify-between"
                     style={{ width: 'calc(100% - 96px)' }} // Adjust width based on image size
                   >
-                    <div className="mb-4">
-                      <h2>{item.title}</h2>
+                    <div>
+                      <h2 style={{ marginTop: '-7px' }}>{item.title}</h2>
                     </div>
                     {/* tag */}
-                    <div className="flex items-center ">
+                    <div
+                      className="flex items-center"
+                      style={{ gap: '5px', marginTop: '3px' }}
+                    >
+                      {' '}
                       {item.tagsDetail.map((tag, index) => (
                         <a key={index} href={tag.href} className="tag-link">
-                          <h2>{tag.text || 'No text'}</h2>
+                          <h2 className="list_font_tag">
+                            {tag.text || 'No text'}
+                          </h2>
                         </a>
                       ))}
                     </div>
@@ -155,11 +161,13 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                     {/* end poind */}
                     <div className="flex items-center justify-between">
                       {/* User Info */}
-                      <div className="flex items-end">
-                        <h5 className="text-center">{item.user}</h5>
+                      <div className="flex items-end" style={{ gap: '0px' }}>
+                        <h5 style={{ margin: '0' }} className="text-center">
+                          {item.user}
+                        </h5>
                         <h5
+                          style={{ margin: '0', marginLeft: '6px' }} // Corrected inline styles
                           className="text-center"
-                          style={{ marginLeft: '6px' }}
                         >
                           {item.timePost}
                         </h5>
