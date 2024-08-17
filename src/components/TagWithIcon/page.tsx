@@ -190,8 +190,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                             component={MessageIcon}
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
-                          {(item.comments && item.comments.message) ||
-                            'No comments'}
+                          {(item.comments && item.comments.message) || '0'}
                           {/* Access nested message */}
                         </span>
                       </div>
