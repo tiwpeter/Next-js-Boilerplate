@@ -1,4 +1,6 @@
 import './Slider.css';
+import './cuserlink.css';
+import './buttoncolor.css';
 
 import { useRouter } from 'next/navigation'; // ใช้ 'next/router' สำหรับเวอร์ชันที่ไม่ใช่ 13
 import React from 'react';
@@ -14,7 +16,7 @@ const ReactCardSlider = () => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
 
   const dispatch: AppDispatch = useDispatch();
-  const router = useRouter(); // ใช้ useRouter จาก 'next/router'
+  const router = useRouter();
   const { data: icons, status } = useSelector(
     (state: RootState) => state.icons,
   );
@@ -28,6 +30,13 @@ const ReactCardSlider = () => {
   React.useEffect(() => {
     if (status === 'succeeded' && icons.length > 0) {
       checkScrollPosition();
+      // Check URL and set active index if necessary
+      const path = window.location.pathname;
+      const tag = path.split('/tag/')[1];
+      const index = icons.findIndex((icon) => icon.text_eng === tag);
+      if (index !== -1) {
+        setActiveIndex(index);
+      }
     }
   }, [status, icons]);
 
@@ -73,11 +82,10 @@ const ReactCardSlider = () => {
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
-    const textEng = icons[index]?.text_eng; // Assume each icon has a text_eng
+    const textEng = icons[index]?.text_eng;
     if (textEng) {
-      // Construct the URL based on text_eng
-      const url = `/tag/${encodeURIComponent(textEng)}`; // Adjust the path as needed
-      router.push(url); // Navigate to the URL
+      const url = `/tag/${encodeURIComponent(textEng)}`;
+      router.push(url);
     }
   };
 
@@ -99,7 +107,7 @@ const ReactCardSlider = () => {
             <section
               key={index}
               className={`slider-card ${index === activeIndex ? 'active' : ''}`}
-              onClick={() => handleClick(index)} // Add onClick handler
+              onClick={() => handleClick(index)}
             >
               <div
                 className="slider-card-image"

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import CombinedComponent from './page';
 
-const tags = ['ราชดำเนิน', 'บางขุนพรหม', 'bankok'];
+const tags = ['ราชดำเนิน'];
 /* , 'บางขุนพรหม', 'bankok' */
 
 export default function MainpageGroupTag() {
@@ -16,12 +16,19 @@ export default function MainpageGroupTag() {
         localStorage.getItem('currentTags') || '[]',
       );
 
-      const currentIndex = tags.indexOf(storedTags[storedTags.length - 1]);
-      const newTagsCount = Math.min(storedTags.length + 1, tags.length);
-      const newTags = [];
-
-      for (let i = 0; i < newTagsCount; i++) {
-        newTags.push(tags[(currentIndex + i) % tags.length]);
+      let newTags = [];
+      if (storedTags.length === 0) {
+        newTags = tags.slice(0, 3);
+      } else {
+        const currentIndex = tags.indexOf(storedTags[storedTags.length - 1]);
+        const nextIndex = (currentIndex + 1) % tags.length;
+        newTags = [
+          tags[nextIndex],
+          /*
+          tags[(nextIndex + 1) % tags.length],
+          tags[(nextIndex + 2) % tags.length],
+          */
+        ];
       }
 
       localStorage.setItem('currentTags', JSON.stringify(newTags));
