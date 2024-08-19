@@ -1,0 +1,3 @@
+ต่อไปนี้คือการปรับแต่ง Flask API ให้รองรับการเลือกไฟล์ JSON ตามพารามิเตอร์:
+
+http://localhost:5000/api/food/trends สำหรับข้อมูล Pantip Trend จากไฟล์ food.json
