@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import PantipIndexSecond from '@/components/Pantip/page';
 import PantipPickTag from '@/components/pantipink/page';
 import PantipIndex from '@/components/pantiprealtime/page';
 import SecodSlie from '@/components/sliecod/data';
@@ -16,7 +15,7 @@ const ClientComponent = () => {
 
       {/* <Pantiprealtime /> */}
       <PantipIndex />
-      <PantipIndexSecond />
+      {/* <PantipIndexSecond /> */}
       <PantipPickTag />
 
       <MainpageGroupTag />
