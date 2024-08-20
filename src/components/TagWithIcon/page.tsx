@@ -220,16 +220,25 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
       {tags.map((tag) => {
         const spanHeader = spanHeaders[tag] || [];
         return (
-          <div key={tag}>
-            {renderContent(tag, spanHeader)}
-            {shouldShowLoadMoreButton(tag) && (
-              <button
-                onClick={() => loadMoreData(tag)}
-                disabled={status === 'loading'}
-              >
-                {status === 'loading' ? 'Loading more...' : 'Load More'}
-              </button>
-            )}
+          <div>
+            {tags.map((tag) => {
+              const spanHeader = spanHeaders[tag] || [];
+              return (
+                <div key={tag}>
+                  {renderContent(tag, spanHeader)}
+                  {shouldShowLoadMoreButton(tag) && (
+                    <button
+                      onClick={() =>
+                        (window.location.href = `http://localhost:3000/tag/${tag}`)
+                      }
+                      disabled={status === 'loading'}
+                    >
+                      {status === 'loading' ? 'Loading more...' : 'ดูทั้งหมด'}
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         );
       })}
