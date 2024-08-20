@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// Define the fetchData async thunk
+// tag more
 export const fetchData = createAsyncThunk(
   'data/fetchData',
   async ({ tagX, page, perPage }) => {

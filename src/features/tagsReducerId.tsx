@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Thunks for fetching data MOre
+// Thunks for fetching data
 export const fetchTags = createAsyncThunk(
   'tags/fetchTags',
   async ({ page, perPage, reset = false }) => {
@@ -12,31 +12,95 @@ export const fetchTags = createAsyncThunk(
   },
 );
 
-// สร้าง createAsyncThunk สำหรับการดึงข้อมูล
 export const fetchTred = createAsyncThunk(
-  'tags/fetchfood', // ชื่อ action
+  'tags/fetchTred',
   async (tag, { rejectWithValue }) => {
     try {
-      // ส่งคำขอ GET ไปยัง API
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/recommendations`,
+        `http://localhost:5000/api/${tag}/กระทู้แนะนำโดยสมาชิก`,
       );
-      console.log('fetchTred response:', response.data); // Log response
-      // ส่งข้อมูลที่ได้จาก API กลับไปยัง Redux store
       return response.data;
     } catch (error) {
-      // ใช้ rejectWithValue เพื่อส่งข้อความแสดงข้อผิดพลาด
       return rejectWithValue(error.response.data);
     }
   },
 );
 
-// Create Slice
-const tagsSlice = createSlice({
-  name: 'tagId',
+export const fetchAnnounce = createAsyncThunk(
+  'tags/fetchAnnounce',
+  async (tag, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/Announce`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
+// ตรวจสอบ API response
+export const fetchRecommendations = createAsyncThunk(
+  'tags/fetchRecommendations',
+  async (tag: string, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/กระทู้แนะนำโดยสมาชิก`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || 'An error occurred');
+    }
+  },
+);
+
+export const fetchLatestPosts = createAsyncThunk(
+  'tags/fetchLatestPosts',
+  async (tag, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/กระทู้ล่าสุด`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+export const fetchPantipPick = createAsyncThunk(
+  'tags/fetchPantipPick',
+  async (tag, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/Pantip Pick`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+export const fetchPantipTrend = createAsyncThunk(
+  'tags/fetchPantipTrend',
+  async (tag, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/${tag}/Pantip Trend`,
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
+const tagsSlice = createSlice({
+  name: 'tags',
   initialState: {
-    Camera: [], // Fixed initialization
+    Camera: [],
     Food: [],
     Bangrak: [],
     bangruk: [],
@@ -60,6 +124,11 @@ const tagsSlice = createSlice({
     pantipData: null,
     Fooddata: null,
     Cameradata: null,
+    announceData: null,
+    recommendationsData: null,
+    latestPostsData: null,
+    pantipPickData: null,
+    pantipTrendData: null,
   },
   reducers: {
     resetTags: (state) => {
@@ -116,9 +185,57 @@ const tagsSlice = createSlice({
       })
 
       .addCase(fetchTred.fulfilled, (state, action) => {
-        // Corrected
         state.status = 'succeeded';
         state.Fooddata = action.payload;
+      })
+      .addCase(fetchTred.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchAnnounce.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.announceData = action.payload;
+      })
+      .addCase(fetchAnnounce.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchRecommendations.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.recommendationsData = action.payload;
+      })
+      .addCase(fetchRecommendations.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchLatestPosts.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.latestPostsData = action.payload;
+      })
+      .addCase(fetchLatestPosts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchPantipPick.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.pantipPickData = action.payload;
+      })
+      .addCase(fetchPantipPick.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchPantipTrend.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.pantipTrendData = action.payload;
+      })
+      .addCase(fetchPantipTrend.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });

@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { RootState } from '@/features/store/store';
-import { fetchTred } from '@/features/tagsReducerId';
+import { fetchRecommendations } from '@/features/tagsReducerId';
 
 // Define the TitleItem interface with the correct structure
 interface TitleItem {
@@ -27,13 +27,13 @@ interface LocalData {
   titles: TitleItem[];
 }
 
-interface TestIDProps {
+interface RecommendationsProps {
   params: {
     tag: string;
   };
 }
 
-const TestID: React.FC<TestIDProps> = ({ params }) => {
+const Recommendations: React.FC<RecommendationsProps> = ({ params }) => {
   const dispatch = useDispatch();
   const { tag } = params;
   const [localData, setLocalData] = useState<LocalData | null>(null);
@@ -42,14 +42,14 @@ const TestID: React.FC<TestIDProps> = ({ params }) => {
 
   useEffect(() => {
     if (tag) {
-      dispatch(fetchTred(tag))
+      dispatch(fetchRecommendations(tag))
         .unwrap()
         .then((data) => {
-          console.log('fetchfood data:', data);
+          console.log('fetchRecommendations data:', data);
           setLocalData(data);
         })
         .catch((error) => {
-          console.error('fetchfood error:', error);
+          console.error('fetchRecommendations error:', error);
         });
     }
   }, [dispatch, tag]);
@@ -165,4 +165,4 @@ const TestID: React.FC<TestIDProps> = ({ params }) => {
   );
 };
 
-export default TestID;
+export default Recommendations;

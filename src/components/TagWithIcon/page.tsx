@@ -144,7 +144,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                   >
                     <div>
                       <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
-                        {item.title}
+                        {item.text_title}
                       </h2>
                     </div>
                     {/* tag */}

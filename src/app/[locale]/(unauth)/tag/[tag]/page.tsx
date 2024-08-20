@@ -2,7 +2,8 @@ import React from 'react';
 
 import AnnouncePage from '@/app/[locale]/(unauth)/RoomDetail/componet/DetailAnuo';
 
-import TestID from './Test';
+import Recommendations from './Recommendations/Recommendations';
+import TredPage from './TredPage/TredPage';
 
 const TagIdLayout = ({ params }: { params: { tag: string } }) => {
   return (
@@ -10,7 +11,8 @@ const TagIdLayout = ({ params }: { params: { tag: string } }) => {
       Layout Link
       <AnnouncePage />
       {/* <TagIdPage params={params} />  ส่ง params ไปยัง TagIdPage */}
-      <TestID params={params} />
+      <TredPage params={params} />
+      <Recommendations params={params} />
     </div>
   );
 };
