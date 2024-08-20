@@ -11,8 +11,8 @@ const TagIdLayout = ({ params }: { params: { tag: string } }) => {
       Layout Link
       <AnnouncePage />
       {/* <TagIdPage params={params} />  ส่ง params ไปยัง TagIdPage */}
-      <TredPage params={params} />
       <Recommendations params={params} />
+      <TredPage params={params} />
     </div>
   );
 };

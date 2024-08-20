@@ -17,7 +17,7 @@ export const fetchTred = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/กระทู้แนะนำโดยสมาชิก`,
+        `http://localhost:5000/api/${tag}/Pantip Trend`,
       );
       return response.data;
     } catch (error) {
