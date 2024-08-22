@@ -12,6 +12,8 @@ import { selectAllIcons } from '@/store/select/selectIconData';
 import { selectData } from '@/store/select/selectors';
 import type { RootState } from '@/store/store';
 
+import MoreButton from '../more/more';
+
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -76,7 +78,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               ) : null}
             </section>
             <div style={{ width: '100%' }}>
-              <h2 style={{ marginLeft: '18px' }}>{tag}</h2>
+              <h2 style={{ marginLeft: iconfortag ? '18px' : '0px' }}>{tag}</h2>
             </div>
           </div>
         </div>
@@ -118,8 +120,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       className="mr-2 size-12"
                       style={{ width: '86px', height: '64px' }}
                     />
-                  ) : null}{' '}
-                  {/* Render nothing if no image URL */}
+                  ) : null}
                   <div
                     className="flex h-full flex-col justify-between"
                     style={{ width: 'calc(100% - 0px)' }}
@@ -221,7 +222,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
       {tags.map((tag) => (
         <div key={tag}>
           {renderContent(tag)}
-          <button onClick={() => handleTagClick(tag)}>Go to Tag Page</button>
+          <MoreButton onClick={() => handleTagClick(tag)} />
         </div>
       ))}
     </div>

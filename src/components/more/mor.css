@@ -1,5 +1,5 @@
 /* ในไฟล์ CSS */
-.load-more-button {
+.load-more-buttonF {
     background-color: #007bff;
     color: white;
     border: none;
@@ -7,10 +7,10 @@
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
-    width: 100%;
+    width: 711px;
   }
   
-  .load-more-button:hover {
+  .load-more-buttonF:hover {
     background-color: #0056b3;
   }
   

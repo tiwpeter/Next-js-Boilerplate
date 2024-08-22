@@ -1,12 +1,12 @@
 import React from 'react';
-import './mor.css'
+import './mor.css';
 
-const LoadMoreButton = ({ onClick }) => {
+const MoreButton = ({ onClick }) => {
   return (
-    <button onClick={onClick} className="load-more-button">
-      เพิ่มเติม
+    <button onClick={onClick} className="load-more-buttonF">
+      ดูทั้งหมด
     </button>
   );
 };
 
-export default LoadMoreButton;
+export default MoreButton;
