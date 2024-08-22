@@ -6,20 +6,20 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoadMoreButton from '@/components/more/more';
-import { fetchData, incrementPage } from '@/features/forTagWithIcon/itemsSlice';
+import { fetchPantip, incrementPage } from '@/features/pantipSlie';
 
 import styles from './PantipSecondary.module.css'; // Assuming you have some CSS module for styling
 
 const PantipSecondary = ({ tag }) => {
   const dispatch = useDispatch();
   const { items, pages, totalPages, status } = useSelector(
-    (state) => state.data,
+    (state) => state.pantip,
   );
 
   useEffect(() => {
     if (tag) {
       console.log(`Fetching data for tag: ${tag}`);
-      dispatch(fetchData({ tagX: [tag], page: 1, perPage: 5 }));
+      dispatch(fetchPantip({ tagX: [tag], page: 1, perPage: 5 }));
     }
   }, [dispatch, tag]);
 
@@ -30,7 +30,7 @@ const PantipSecondary = ({ tag }) => {
     const currentPage = pages[tag] || 1;
     if (currentPage < (totalPages[tag] || 1)) {
       dispatch(incrementPage(tag));
-      dispatch(fetchData({ tagX: [tag], page: currentPage + 1, perPage: 5 }));
+      dispatch(fetchPantip({ tagX: [tag], page: currentPage + 1, perPage: 5 }));
     }
   };
 
