@@ -113,16 +113,15 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                   className="boxslie flex items-start border p-2"
                   style={{ width: '100%' }}
                 >
-                  {item.img_url ? (
+                  {item.img_url && item.img_url !== 'not found url' ? (
                     <img
                       src={item.img_url}
-                      alt=""
+                      alt="Pantip item"
                       className="mr-2 size-12"
                       style={{ width: '86px', height: '64px' }}
                     />
-                  ) : (
-                    <div className="" />
-                  )}
+                  ) : null}{' '}
+                  {/* Render nothing if no image URL */}
                   <div
                     className="flex h-full flex-col justify-between"
                     style={{ width: 'calc(100% - 0px)' }}

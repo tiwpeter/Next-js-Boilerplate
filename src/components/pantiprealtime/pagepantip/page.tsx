@@ -7,15 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchPantip } from '@/features/pantipSlie';
 
-// tag = currentTags
-
-const PantipRealtime = ({ tag }) => {
+const PantipRealtime: React.FC<{ tag: string }> = ({ tag }) => {
   const dispatch = useDispatch();
-  const { items, page, status, error } = useSelector((state) => state.pantip);
-  // items / keep in store // pull store
-  // pull api
-
-  // start = tag{pagarams}
+  const { items, status, error } = useSelector((state: any) => state.pantip);
 
   useEffect(() => {
     if (tag) {
@@ -23,14 +17,9 @@ const PantipRealtime = ({ tag }) => {
       dispatch(fetchPantip({ tagX: [tag], page: 1, perPage: 10 }));
     }
   }, [dispatch, tag]);
-  // tag = sting param fetchData{loop} * api
-  //
 
-  // item  = api
-  // tag = parm
-  // item + tag = http send
+  // Get the items for the specific tag
   const itemsForTag = items[tag] || [];
-  //  console.log('Items for tag:', tag, itemsForTag);
 
   return (
     <section
@@ -45,47 +34,44 @@ const PantipRealtime = ({ tag }) => {
       }}
     >
       <ul className="flex flex-wrap" style={{ width: '1080px' }}>
-        {itemsForTag.map((item, index) => (
+        {itemsForTag.map((item: any, index: number) => (
           <li
             key={item.id}
             className="boxslie flex items-start border p-2"
             style={{ width: '50%', height: '86px' }}
           >
-            {item.img_url ? (
+            {/* Conditional rendering for image */}
+            {item.img_url && item.img_url !== 'not found url' ? (
               <img
                 src={item.img_url}
-                alt=""
+                alt="Pantip item"
                 className="mr-2 size-12"
                 style={{ width: '86px', height: '64px' }}
               />
-            ) : (
-              <div className="" /> // Placeholder if no image
-            )}
+            ) : null}{' '}
+            {/* Render <img> only if item.img_url exists and is not 'not found url' */}
             <div
               className="flex h-full flex-col justify-between"
-              style={{ width: 'calc(100% - 0px)' }} // Adjust width based on image size
+              style={{ width: item.img_url ? 'calc(100% - 86px)' : '100%' }} // Adjust width based on image presence
             >
               <div>
                 <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
                   {item.text_title}
                 </h2>
               </div>
-              {/* tag */}
               <div
                 className="flex items-center"
                 style={{ gap: '5px', marginTop: '3px' }}
               >
-                {' '}
-                {(item.tags || []).map((tagItem, index) => (
+                {(item.tags || []).map((tagItem: any, index: number) => (
                   <a key={index} href={tagItem.link_tag} className="tag-link">
                     <h2 className="list_font_tag">{tagItem.tag_title || ''}</h2>
                   </a>
                 ))}
               </div>
-              {/* end point */}
               <div className="flex items-center justify-between">
                 <div className="flex items-end" style={{ gap: '0px' }}>
-                  {(item.User || []).map((userItem, index) => (
+                  {(item.User || []).map((userItem: any, index: number) => (
                     <a
                       key={index}
                       href={userItem.link_user}
@@ -99,15 +85,13 @@ const PantipRealtime = ({ tag }) => {
                       <h5 style={{ margin: '0' }}>{userItem.text_user}</h5>
                     </a>
                   ))}
-                  {/* User Info */}
                   <h5
-                    style={{ margin: '0', marginLeft: '6px' }} // Corrected inline styles
+                    style={{ margin: '0', marginLeft: '6px' }}
                     className="text-center"
                   >
                     {item.info}
                   </h5>
                 </div>
-                {/* User Stats */}
                 <div className="pt-list-item__stats flex">
                   <span
                     style={{
@@ -122,13 +106,12 @@ const PantipRealtime = ({ tag }) => {
                       style={{ fontSize: '1rem', marginRight: '8px' }}
                     />
                     {item.comments && item.comments.length > 0
-                      ? item.comments.map((comment, index) => (
+                      ? item.comments.map((comment: any, index: number) => (
                           <span key={index} style={{ marginRight: '4px' }}>
                             {comment.message}
                           </span>
                         ))
                       : '0'}
-                    {/* Access nested message */}
                   </span>
                 </div>
               </div>
@@ -141,10 +124,3 @@ const PantipRealtime = ({ tag }) => {
 };
 
 export default PantipRealtime;
-/*
- <ul>
-        {itemsForTag.map((item, index) => (
-          <li key={`${item.text_title}-${index}`}>{item.text_title}</li>
-        ))}
-      </ul>
-*/

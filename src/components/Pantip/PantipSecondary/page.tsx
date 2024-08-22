@@ -10,10 +10,10 @@ import { fetchPantip, incrementPage } from '@/features/pantipSlie';
 
 import styles from './PantipSecondary.module.css'; // Assuming you have some CSS module for styling
 
-const PantipSecondary = ({ tag }) => {
+const PantipSecondary: React.FC<{ tag: string }> = ({ tag }) => {
   const dispatch = useDispatch();
   const { items, pages, totalPages, status } = useSelector(
-    (state) => state.pantip,
+    (state: any) => state.pantip,
   );
 
   useEffect(() => {
@@ -24,9 +24,8 @@ const PantipSecondary = ({ tag }) => {
   }, [dispatch, tag]);
 
   const itemsForTag = items[tag] || [];
-  // console.log('Items for tag:', tag, itemsForTag);
 
-  const loadMoreData = (tag) => {
+  const loadMoreData = (tag: string) => {
     const currentPage = pages[tag] || 1;
     if (currentPage < (totalPages[tag] || 1)) {
       dispatch(incrementPage(tag));
@@ -34,7 +33,7 @@ const PantipSecondary = ({ tag }) => {
     }
   };
 
-  const shouldShowLoadMoreButton = (tag) => {
+  const shouldShowLoadMoreButton = (tag: string) => {
     const currentPage = pages[tag] || 1;
     const totalPagesForTag = totalPages[tag] || 1;
     return currentPage < totalPagesForTag;
@@ -64,25 +63,25 @@ const PantipSecondary = ({ tag }) => {
             width: '100%',
           }}
         >
-          {itemsForTag.map((item, index) => (
+          {itemsForTag.map((item: any) => (
             <li
               key={item.id}
               className="boxslie flex items-start border p-2"
               style={{ width: '100%' }}
             >
-              {item.img_url ? (
+              {/* Render <img> only if item.img_url is present and not empty */}
+              {item.img_url && item.img_url !== 'not found url' ? (
                 <img
                   src={item.img_url}
-                  alt=""
+                  alt="Pantip item"
                   className="mr-2 size-12"
                   style={{ width: '86px', height: '64px' }}
                 />
-              ) : (
-                <div className="" />
-              )}
+              ) : null}{' '}
+              {/* Render nothing if no image URL */}
               <div
                 className="flex h-full flex-col justify-between"
-                style={{ width: 'calc(100% - 0px)' }}
+                style={{ width: item.img_url ? 'calc(100% - 86px)' : '100%' }} // Adjust width if image is present
               >
                 <div>
                   <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
@@ -93,7 +92,7 @@ const PantipSecondary = ({ tag }) => {
                   className="flex items-center"
                   style={{ gap: '5px', marginTop: '3px' }}
                 >
-                  {(item.tags || []).map((tagItem, index) => (
+                  {(item.tags || []).map((tagItem: any, index: number) => (
                     <a key={index} href={tagItem.link_tag} className="tag-link">
                       <h2 className="list_font_tag">
                         {tagItem.tag_title || ''}
@@ -103,7 +102,7 @@ const PantipSecondary = ({ tag }) => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-end" style={{ gap: '0px' }}>
-                    {(item.User || []).map((userItem, index) => (
+                    {(item.User || []).map((userItem: any, index: number) => (
                       <a
                         key={index}
                         href={userItem.link_user}
@@ -138,7 +137,7 @@ const PantipSecondary = ({ tag }) => {
                         style={{ fontSize: '1rem', marginRight: '8px' }}
                       />
                       {item.comments && item.comments.length > 0
-                        ? item.comments.map((comment, index) => (
+                        ? item.comments.map((comment: any, index: number) => (
                             <span key={index} style={{ marginRight: '4px' }}>
                               {comment.message}
                             </span>
