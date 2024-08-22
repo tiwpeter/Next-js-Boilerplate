@@ -51,7 +51,14 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
     const tagItems = items[tag] || [];
 
     return (
-      <div style={{ width: '711px' }}>
+      <div
+        style={{
+          width: '100%',
+          flexDirection: 'column',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         {/* nav tag */}
         <div style={{ background: '#7f99ff' }}>
           <div

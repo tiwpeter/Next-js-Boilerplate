@@ -18,7 +18,10 @@ const PantipPickTag = () => {
   const [currentTags, setCurrentTags] = useState<string[]>(tags);
 
   return (
-    <section className="flex w-[711px]">
+    <section
+      className="flex "
+      style={{ justifyContent: 'center', width: '100%' }}
+    >
       {/* <!--startmore--> */}
       <div style={{ width: '713px' }}>
         <div

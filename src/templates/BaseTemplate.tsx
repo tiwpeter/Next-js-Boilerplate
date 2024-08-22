@@ -11,23 +11,20 @@ import StickyNav from './scollnavstink/scollnavstink';
 const BaseTemplate = (props) => {
   return (
     <div className="w-full px-1 text-gray-700 antialiased">
-      <div className="mx-auto">
-        {/* Nav   */}
+      <div className="mx-auto flex min-h-screen flex-col bg-blue-200">
+        {/* Nav */}
         <Nav />
 
-        {/* Nab 2 */}
+        {/* Nab */}
         <Nab />
 
-        {/* StickyNav  */}
+        {/* StickyNav */}
         <StickyNav />
+
         <StoreProvider>
           {/* component */}
-          <main className="flex h-[3200px] justify-center bg-blue-200 ">
-            <div>
-              <h1>RootLayout</h1>
-            </div>
-
-            <section className="flex h-full w-[1078px]">
+          <main className="flex grow justify-center bg-blue-200">
+            <section className="w-[1078px] grow justify-center">
               {/* connect page unauth = layout */}
               {props.children}
             </section>
