@@ -1,5 +1,3 @@
-'use client';
-
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -8,7 +6,7 @@ import CombinedComponent from './page';
 
 const LIMIT = 10; // Adjust the number of items per load as needed
 
-export default function MainpageGroupScollTag() {
+export default function MainpageGroupScrollTag() {
   const [tags, setTags] = useState<string[]>([]);
   const [start, setStart] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -42,7 +40,10 @@ export default function MainpageGroupScollTag() {
   }, [inView, loadItems]);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
       <h1>My App</h1>
       <CombinedComponent tags={tags} />
       {loading && <div>Loading...</div>} {/* Show loading indicator */}
