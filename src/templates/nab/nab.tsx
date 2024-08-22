@@ -100,47 +100,58 @@ const Nab = () => {
   }, [isScrolled]);
 
   return (
-    <div className="copcentered" id="copcentered">
-      <div className="centered" id="centered">
-        <div className="cop1 visible" id="cop1" style={{ background: '#fff' }}>
-          <div className="borderkick">
-            <div className="grid">
-              <h5>Myfeed</h5>
-              <h5 style={{ color: '#808080' }}>รวบรวมเรื่องราวที่คุณต้องการ</h5>
+    <div
+      className="IMGdisplay"
+      style={{ width: '100%', height: '96px', background: 'aliceblue' }}
+    >
+      <div className="copcentered" id="copcentered">
+        <div className="centered" id="centered">
+          <div
+            className="cop1 visible"
+            id="cop1"
+            style={{ background: '#fff' }}
+          >
+            <div className="borderkick">
+              <div className="grid">
+                <h5>Myfeed</h5>
+                <h5 style={{ color: '#808080' }}>
+                  รวบรวมเรื่องราวที่คุณต้องการ
+                </h5>
+              </div>
             </div>
-          </div>
-          <div className="borderkick">
-            <div className="grid">
-              <h5>Pantip Pick</h5>
-              <h5 style={{ color: '#808080' }}>กระทู้คุณภาพโดยทีมงาน</h5>
+            <div className="borderkick">
+              <div className="grid">
+                <h5>Pantip Pick</h5>
+                <h5 style={{ color: '#808080' }}>กระทู้คุณภาพโดยทีมงาน</h5>
+              </div>
             </div>
-          </div>
-          <div className="borderkick">
-            <div className="grid">
-              <h5>Pantip Hitz</h5>
-              <h5 style={{ color: '#808080' }}>
-                กระทู้ฮิตติดเทรนด์ทุก 10 นาที
-              </h5>
+            <div className="borderkick">
+              <div className="grid">
+                <h5>Pantip Hitz</h5>
+                <h5 style={{ color: '#808080' }}>
+                  กระทู้ฮิตติดเทรนด์ทุก 10 นาที
+                </h5>
+              </div>
             </div>
-          </div>
-          <div className="borderkick">
-            <div className="grid">
-              <h5>Explore</h5>
-              <h5 style={{ color: '#808080' }}>สำรวจ</h5>
+            <div className="borderkick">
+              <div className="grid">
+                <h5>Explore</h5>
+                <h5 style={{ color: '#808080' }}>สำรวจ</h5>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="centered1">
-        <div className="cop hidden" id="cop2">
-          <div className="borderkick">
-            <h5>เรื่องราว</h5>
-          </div>
-          <div className="borderkick">
-            <h5>กระทู้</h5>
-          </div>
-          <div className="borderkick">
-            <h5>ฮิตติดเทรนด์</h5>
+        <div className="centered1">
+          <div className="cop hidden" id="cop2">
+            <div className="borderkick">
+              <h5>เรื่องราว</h5>
+            </div>
+            <div className="borderkick">
+              <h5>กระทู้</h5>
+            </div>
+            <div className="borderkick">
+              <h5>ฮิตติดเทรนด์</h5>
+            </div>
           </div>
         </div>
       </div>

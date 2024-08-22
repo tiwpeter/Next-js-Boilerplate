@@ -12,7 +12,7 @@ const StickyNav = () => {
     const stickyTop = document.getElementById('sticky-top');
     if (stickyTop) {
       stickyTop.style.position = 'fixed';
-      stickyTop.style.top = '-25px';
+      stickyTop.style.top = '80px';
       stickyTop.style.zIndex = '9'; // Use camel case for zIndex
     } else {
       console.error("Element with id 'sticky-top' not found.");
