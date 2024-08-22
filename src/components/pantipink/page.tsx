@@ -20,11 +20,10 @@ const PantipPickTag = () => {
 
   return (
     <section
-      className="flex "
+      className="flex"
       style={{ justifyContent: 'center', width: '100%' }}
     >
-      {/* <!--startmore--> */}
-      <div style={{ width: '713px' }}>
+      <div style={{ width: '1000px' }}>
         <div
           className="mt-5"
           style={{
@@ -35,30 +34,32 @@ const PantipPickTag = () => {
             position: 'relative',
             whiteSpace: 'normal',
           }}
-        >
-          <h3>Pantip Pick </h3>
-        </div>
+        />
         <StoreProvider>
-          <h2>{currentTags[0]}</h2>
-          <PantipSecondary tag={currentTags[0]} />
-          <h2>{currentTags[1]}</h2>
-          <PantipSecondary tag={currentTags[1]} />
-        </StoreProvider>
-      </div>
-
-      {/* Tag Section */}
-      <div className="foder" style={{ marginLeft: '40px' }}>
-        <div style={{ marginTop: '20px' }}>
-          <div className="tagbox">
-            <div className="nav1">
-              <ul className="ww">
-                <li className="jow1">แท็กฮิต</li>
-                {/* สามารถเพิ่ม li อื่น ๆ ตามต้องการได้ */}
-              </ul>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
+            <section className="Detail" style={{ flex: 2 }}>
+              <h2>{currentTags[0]}</h2>
+              <PantipSecondary tag={currentTags[0]} />
+              <h2>{currentTags[1]}</h2>
+              <PantipSecondary tag={currentTags[1]} />
+            </section>
+            <section className="TagHiz" style={{ flex: 1 }}>
+              <div className="foder" style={{ marginLeft: '40px' }}>
+                <div style={{ marginTop: '20px' }}>
+                  <div className="tagbox">
+                    <div className="nav1">
+                      <ul className="ww">
+                        <li className="jow1">แท็กฮิต</li>
+                        {/* สามารถเพิ่ม li อื่น ๆ ตามต้องการได้ */}
+                      </ul>
+                    </div>
+                  </div>
+                  <TagpanTag />
+                </div>
+              </div>
+            </section>
           </div>
-          <TagpanTag />
-        </div>
+        </StoreProvider>
       </div>
     </section>
   );
