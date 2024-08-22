@@ -5,7 +5,7 @@ import { SvgIcon } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import LoadMoreButton from '@/components/more/more';
+import LoadMoreButton from '@/components/LoadMoreButton/LoadMoreButton';
 import { fetchPantip, incrementPage } from '@/features/pantipSlie';
 
 import styles from './PantipSecondary.module.css'; // Assuming you have some CSS module for styling

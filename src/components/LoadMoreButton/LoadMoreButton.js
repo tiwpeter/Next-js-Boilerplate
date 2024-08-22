@@ -1,5 +1,5 @@
 import React from 'react';
-import './mor.css'
+import './mor.css';
 
 const LoadMoreButton = ({ onClick }) => {
   return (
