@@ -44,12 +44,9 @@ const SecodSlie = () => {
 
   return (
     <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
+      style={{ flexDirection: 'column', display: 'flex', alignItems: 'center' }}
     >
-      SecodSlie
+      <div style={{ width: '1078px' }}>Highlight</div>
       <Slidersecod slides={datasli} />
     </div>
   );

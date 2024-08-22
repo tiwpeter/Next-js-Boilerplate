@@ -50,44 +50,56 @@ const Slidersecod = (props) => {
   };
 
   return (
-    <div id="main-slider-Secod" style={{ background: 'aliceblue' }}>
-      {!isAtStart && (
-        <div>
-          <MdChevronLeft
-            size={40}
-            className="slider-icon-secod left"
-            onClick={slideLeftsecod}
-          />
+    <div
+      className="CopSecod"
+      style={{
+        margin: '0 222px',
+        overflow: 'hidden',
+        // padding: '8px 38px',
+        width: 'calc(100% - 497px)',
+        border: '1px solid #000', // กำหนดกรอบเป็นเส้นดำขนาด 1px
+        background: 'aliceblue',
+      }}
+    >
+      <div id="main-slider-Secod" style={{}}>
+        {!isAtStart && (
+          <div>
+            <MdChevronLeft
+              size={40}
+              className="slider-icon-secod left"
+              onClick={slideLeftsecod}
+            />
+          </div>
+        )}
+        <div className="sliecolor" id="slider-secod" ref={sliderRef}>
+          {props.slides.map((slide, index) => (
+            <Link href={slide.link} key={index} legacyBehavior>
+              <a
+                className={`slider-card-secod ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => handleClick(index)}
+              >
+                <div
+                  className="slider-card-image-secod"
+                  style={{
+                    backgroundImage: `url(${slide.image})`,
+                    backgroundSize: 'cover',
+                  }}
+                />
+                <p className="fontSecod">{slide.name}</p>
+              </a>
+            </Link>
+          ))}
         </div>
-      )}
-      <div className="sliecolor" id="slider-secod" ref={sliderRef}>
-        {props.slides.map((slide, index) => (
-          <Link href={slide.link} key={index} legacyBehavior>
-            <a
-              className={`slider-card-secod ${activeIndex === index ? 'active' : ''}`}
-              onClick={() => handleClick(index)}
-            >
-              <div
-                className="slider-card-image-secod"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                  backgroundSize: 'cover',
-                }}
-              />
-              <p className="fontSecod">{slide.name}</p>
-            </a>
-          </Link>
-        ))}
+        {!isAtEnd && (
+          <div>
+            <MdChevronRight
+              size={40}
+              className="slider-icon-secod right"
+              onClick={slideRightsecod}
+            />
+          </div>
+        )}
       </div>
-      {!isAtEnd && (
-        <div>
-          <MdChevronRight
-            size={40}
-            className="slider-icon-secod right"
-            onClick={slideRightsecod}
-          />
-        </div>
-      )}
     </div>
   );
 };
