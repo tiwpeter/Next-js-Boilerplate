@@ -1,51 +1,55 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import CombinedComponent from './page';
 
-const tags = ['กรุงโซล', 'พรชีวัน (ดวงใจเทวพรหม)'];
-/* , '', 'bankok' */
+const LIMIT = 10; // Adjust the number of items per load as needed
 
-export default function MainpageGroupTag() {
-  const [currentTags, setCurrentTags] = useState<string[]>([]);
+export default function MainpageGroupScollTag() {
+  const [tags, setTags] = useState<string[]>([]);
+  const [start, setStart] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false); // Define the loading state
+  const { ref, inView } = useInView();
+
+  const loadItems = useCallback(async () => {
+    if (!hasMore || loading) return;
+
+    setLoading(true); // Set loading to true when fetching data
+
+    try {
+      const response = await axios.get('http://localhost:5000/api/dataHeader', {
+        params: { start, limit: LIMIT },
+      });
+
+      setTags((prevTags) => [...prevTags, ...response.data.items]);
+      setHasMore(response.data.hasMore);
+      setStart((prevStart) => prevStart + LIMIT); // Move the increment here
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false); // Reset loading state after data fetching
+    }
+  }, [start, hasMore, loading]);
 
   useEffect(() => {
-    const determineNextTags = () => {
-      const storedTags = JSON.parse(
-        localStorage.getItem('currentTags') || '[]',
-      );
-
-      let newTags = [];
-      if (storedTags.length === 0) {
-        newTags = tags.slice(0, 3);
-      } else {
-        const currentIndex = tags.indexOf(storedTags[storedTags.length - 1]);
-        const nextIndex = (currentIndex + 1) % tags.length;
-        newTags = [
-          tags[nextIndex],
-
-          tags[(nextIndex + 1) % tags.length],
-          /*
-          tags[(nextIndex + 2) % tags.length],
-          */
-        ];
-      }
-
-      localStorage.setItem('currentTags', JSON.stringify(newTags));
-      return newTags;
-    };
-
-    const nextTags = determineNextTags();
-    setCurrentTags(nextTags);
-  }, []);
+    if (inView && hasMore) {
+      loadItems();
+    }
+  }, [inView, loadItems]);
 
   return (
     <div className="App">
-      <h1>CombinedComponent</h1>
-      <CombinedComponent tags={currentTags} />
-      {/* <IconComponent tags={currentTags} />
-      <DataComponent tags={currentTags} /> */}
+      <h1>My App</h1>
+      <CombinedComponent tags={tags} />
+      {loading && <div>Loading...</div>} {/* Show loading indicator */}
+      {hasMore && !loading && (
+        <div ref={ref} style={{ height: '100px', background: 'transparent' }} />
+      )}{' '}
+      {/* Sentinel */}
     </div>
   );
 }

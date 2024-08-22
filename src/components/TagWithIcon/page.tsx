@@ -2,61 +2,50 @@
 
 import MessageIcon from '@mui/icons-material/Message';
 import { SvgIcon } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { RootState } from '@';
 import { fetchIconData } from '@/features/forTagWithIcon/IconTag';
-import { fetchData, incrementPage } from '@/features/forTagWithIcon/itemsSlice';
+import { fetchData } from '@/features/forTagWithIcon/TagSlice';
+import { selectAllIcons } from '@/store/select/selectIconData';
+import { selectData } from '@/store/select/selectors';
+import type { RootState } from '@/store/store';
 
 const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
   const dispatch = useDispatch();
-  const { items, status, error, pages, totalPages, spanHeaders } = useSelector(
-    (state: RootState) => state.data,
-  );
+  const router = useRouter();
+  const { items, status, error } = useSelector(selectData);
+  const icons = useSelector(selectAllIcons);
 
-  const iconData = useSelector((state: RootState) =>
-    tags.reduce(
+  // Safeguard to ensure the selector does not fail
+  const iconData = useSelector((state: RootState) => {
+    const data = state.iconfortag?.data || {}; // Ensure data is defined
+    return tags.reduce(
       (acc, tag) => {
-        acc[tag] = state.iconfortag.data[tag] || [];
+        acc[tag] = data[tag] || []; // Safeguard for undefined tag
         return acc;
       },
       {} as Record<string, any[]>,
-    ),
-  );
-
-  const [perPage] = useState(1);
+    );
+  });
 
   useEffect(() => {
     if (tags.length > 0) {
-      dispatch(fetchData({ tagX: tags, page: 1, perPage }));
+      dispatch(fetchData({ tagX: tags }));
       tags.forEach((tag) => {
         dispatch(fetchIconData(tag));
       });
     }
-  }, [dispatch, tags, perPage]);
+  }, [dispatch, tags]);
 
-  useEffect(() => {
-    console.log('Data changed', { items, status, error, pages, totalPages });
-    console.log('tagItems:', items);
-  }, [items, status, error, pages, totalPages]);
-
-  const loadMoreData = (tag: string) => {
-    const currentPage = pages[tag] || 1;
-    if (currentPage < (totalPages[tag] || 1)) {
-      dispatch(incrementPage(tag));
-      dispatch(fetchData({ tagX: [tag], page: currentPage + 1, perPage }));
-    }
+  const handleTagClick = (tag: string) => {
+    router.push(`/tag/${tag}`);
   };
 
-  const shouldShowLoadMoreButton = (tag: string) => {
-    const currentPage = pages[tag] || 1;
-    const totalPagesForTag = totalPages[tag] || 1;
-    return currentPage < totalPagesForTag;
-  };
-
-  const renderContent = (tag: string, spanHeader: string[]) => {
-    const iconfortag = iconData[tag] || [];
+  const renderContent = (tag: string) => {
+    const iconfortag =
+      icons[tag] && icons[tag].length > 0 ? icons[tag][0] : null;
     const tagItems = items[tag] || [];
 
     return (
@@ -78,25 +67,21 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                 gap: '10px',
               }}
             >
-              {iconfortag.map((item, index) => (
+              {iconfortag ? (
                 <img
-                  key={index}
-                  src={item.background_image_url}
-                  alt={`Icon for ${item.text_eng}`}
+                  src={iconfortag.background_image_url}
+                  alt={`Icon for ${iconfortag.text_eng}`}
                   style={{ width: '100px', height: '60px' }}
                 />
-              ))}
+              ) : (
+                <div>No icon available</div>
+              )}
             </section>
             <div style={{ width: '100%' }}>
               <h2 style={{ margin: 0 }}>{tag}</h2>
-              {/* Displaying span_header if available */}
-              {spanHeader.length > 0 && (
-                <div className="font_TagSecod">{spanHeader.join(', ')}</div>
-              )}
             </div>
           </div>
         </div>
-        {/* nav tag */}
         {/* title tag */}
         <section
           className="dw container mx-auto"
@@ -114,7 +99,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
             className="flex flex-col"
             style={{
               display: 'flex',
-              flexDirection: 'column', // Stack items vertically
+              flexDirection: 'column',
               margin: 0,
               padding: 0,
               listStyleType: 'none',
@@ -122,11 +107,11 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
             }}
           >
             {tagItems.length > 0 ? (
-              tagItems.map((item, index) => (
+              tagItems.map((item) => (
                 <li
                   key={item.id}
                   className="boxslie flex items-start border p-2"
-                  style={{ width: '100%', marginBottom: '8px' }} // Full width and space between items
+                  style={{ width: '100%', marginBottom: '8px' }}
                 >
                   {item.img_url ? (
                     <img
@@ -136,23 +121,21 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       style={{ width: '86px', height: '64px' }}
                     />
                   ) : (
-                    <div className="" /> // Placeholder if no image
+                    <div className="" />
                   )}
                   <div
                     className="flex h-full flex-col justify-between"
-                    style={{ width: 'calc(100% - 0px)' }} // Adjust width based on image size
+                    style={{ width: 'calc(100% - 0px)' }}
                   >
                     <div>
                       <h2 className="mainPageTag" style={{ marginTop: '-7px' }}>
                         {item.text_title}
                       </h2>
                     </div>
-                    {/* tag */}
                     <div
                       className="flex items-center"
                       style={{ gap: '5px', marginTop: '3px' }}
                     >
-                      {' '}
                       {(item.tagsDetail || []).map((tag, index) => (
                         <a key={index} href={tag.href} className="tag-link">
                           <h2 className="list_font_tag">
@@ -161,22 +144,18 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                         </a>
                       ))}
                     </div>
-
-                    {/* end point */}
                     <div className="flex items-center justify-between">
-                      {/* User Info */}
                       <div className="flex items-end" style={{ gap: '0px' }}>
                         <h5 style={{ margin: '0' }} className="text-center">
                           {item.user}
                         </h5>
                         <h5
-                          style={{ margin: '0', marginLeft: '6px' }} // Corrected inline styles
+                          style={{ margin: '0', marginLeft: '6px' }}
                           className="text-center"
                         >
                           {item.timePost}
                         </h5>
                       </div>
-                      {/* User Stats */}
                       <div className="pt-list-item__stats flex">
                         <span
                           style={{
@@ -191,7 +170,6 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
                           {(item.comments && item.comments.message) || '0'}
-                          {/* Access nested message */}
                         </span>
                       </div>
                     </div>
@@ -217,31 +195,12 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
 
   return (
     <div>
-      {tags.map((tag) => {
-        const spanHeader = spanHeaders[tag] || [];
-        return (
-          <div>
-            {tags.map((tag) => {
-              const spanHeader = spanHeaders[tag] || [];
-              return (
-                <div key={tag}>
-                  {renderContent(tag, spanHeader)}
-                  {shouldShowLoadMoreButton(tag) && (
-                    <button
-                      onClick={() =>
-                        (window.location.href = `http://localhost:3000/tag/${tag}`)
-                      }
-                      disabled={status === 'loading'}
-                    >
-                      {status === 'loading' ? 'Loading more...' : 'ดูทั้งหมด'}
-                    </button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
+      {tags.map((tag) => (
+        <div key={tag}>
+          {renderContent(tag)}
+          <button onClick={() => handleTagClick(tag)}>Go to Tag Page</button>
+        </div>
+      ))}
     </div>
   );
 };
