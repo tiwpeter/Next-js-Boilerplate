@@ -64,21 +64,19 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '10px',
+                height: '60px',
               }}
             >
-              {iconfortag ? (
+              {iconfortag && iconfortag.background_image_url ? (
                 <img
                   src={iconfortag.background_image_url}
                   alt={`Icon for ${iconfortag.text_eng}`}
                   style={{ width: '100px', height: '60px' }}
                 />
-              ) : (
-                <div>No icon available</div>
-              )}
+              ) : null}
             </section>
             <div style={{ width: '100%' }}>
-              <h2 style={{ margin: 0 }}>{tag}</h2>
+              <h2 style={{ marginLeft: '18px' }}>{tag}</h2>
             </div>
           </div>
         </div>
