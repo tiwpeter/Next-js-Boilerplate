@@ -50,7 +50,7 @@ const Slidersecod = (props) => {
   };
 
   return (
-    <div id="main-slider-Secod">
+    <div id="main-slider-Secod" style={{ background: 'aliceblue' }}>
       {!isAtStart && (
         <div>
           <MdChevronLeft

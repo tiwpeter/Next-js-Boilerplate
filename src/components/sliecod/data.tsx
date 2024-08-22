@@ -43,7 +43,12 @@ const SecodSlie = () => {
   ];
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       SecodSlie
       <Slidersecod slides={datasli} />
     </div>
