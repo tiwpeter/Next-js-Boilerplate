@@ -111,7 +111,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                 <li
                   key={item.id}
                   className="boxslie flex items-start border p-2"
-                  style={{ width: '100%', marginBottom: '8px' }}
+                  style={{ width: '100%' }}
                 >
                   {item.img_url ? (
                     <img
@@ -136,24 +136,41 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                       className="flex items-center"
                       style={{ gap: '5px', marginTop: '3px' }}
                     >
-                      {(item.tagsDetail || []).map((tag, index) => (
-                        <a key={index} href={tag.href} className="tag-link">
+                      {(item.tags || []).map((tagItem, index) => (
+                        <a
+                          key={index}
+                          href={tagItem.link_tag}
+                          className="tag-link"
+                        >
                           <h2 className="list_font_tag">
-                            {tag.text || 'No text'}
+                            {tagItem.tag_title || ''}
                           </h2>
                         </a>
                       ))}
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-end" style={{ gap: '0px' }}>
-                        <h5 style={{ margin: '0' }} className="text-center">
-                          {item.user}
-                        </h5>
+                        {(item.User || []).map((userItem, index) => (
+                          <a
+                            key={index}
+                            href={userItem.link_user}
+                            className="text-center"
+                            style={{
+                              margin: '0',
+                              textDecoration: 'none',
+                              color: 'inherit',
+                            }}
+                          >
+                            <h5 style={{ margin: '0' }}>
+                              {userItem.text_user}
+                            </h5>
+                          </a>
+                        ))}
                         <h5
                           style={{ margin: '0', marginLeft: '6px' }}
                           className="text-center"
                         >
-                          {item.timePost}
+                          {item.info}
                         </h5>
                       </div>
                       <div className="pt-list-item__stats flex">
@@ -169,7 +186,16 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
                             component={MessageIcon}
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
-                          {(item.comments && item.comments.message) || '0'}
+                          {item.comments && item.comments.length > 0
+                            ? item.comments.map((comment, index) => (
+                                <span
+                                  key={index}
+                                  style={{ marginRight: '4px' }}
+                                >
+                                  {comment.message}
+                                </span>
+                              ))
+                            : '0'}
                         </span>
                       </div>
                     </div>
