@@ -6,8 +6,8 @@ import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { RootState } from '@/features/store/store';
 import { fetchRecommendations } from '@/features/tagsReducerId';
+import type { RootState } from '@/store/store';
 
 // Define the TitleItem interface with the correct structure
 interface TitleItem {
@@ -94,7 +94,7 @@ const Recommendations: React.FC<RecommendationsProps> = ({ params }) => {
                   style={{ width: '50%' }}
                 >
                   <img
-                    src={item.url}
+                    src={item.img_url}
                     alt="Placeholder Image"
                     className="mr-2 size-12"
                     style={{ width: '86px', height: '64px' }}

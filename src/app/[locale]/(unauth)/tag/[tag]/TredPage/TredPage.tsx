@@ -6,8 +6,8 @@ import { SvgIcon } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import type { RootState } from '@/features/store/store';
 import { fetchTred } from '@/features/tagsReducerId';
+import type { RootState } from '@/store/store';
 
 // Define the TitleItem interface with the correct structure
 interface TitleItem {
@@ -20,6 +20,7 @@ interface TitleItem {
     message?: string; // message is now nested within comments
   };
   votes?: number;
+  img_url?: string; // Optional image URL
 }
 
 interface LocalData {
@@ -93,12 +94,15 @@ const TredPage: React.FC<TredPageProps> = ({ params }) => {
                   className="boxslie flex items-start border p-2"
                   style={{ width: '50%' }}
                 >
-                  <img
-                    src={item.url}
-                    alt="Placeholder Image"
-                    className="mr-2 size-12"
-                    style={{ width: '86px', height: '64px' }}
-                  />
+                  {item.img_url && item.img_url !== 'not found url' && (
+                    <img
+                      src={item.img_url}
+                      alt=""
+                      className="mr-2 size-12"
+                      style={{ width: '86px', height: '64px' }}
+                    />
+                  )}
+
                   <div
                     className="flex h-full flex-col justify-between"
                     style={{ width: '428px' }}
@@ -135,7 +139,7 @@ const TredPage: React.FC<TredPageProps> = ({ params }) => {
                             component={MessageIcon}
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
-                          {item.comments?.message || 'No messages'}{' '}
+                          {item.comments?.message || 'No messages'}
                           {/* Access nested message */}
                         </span>
                         <span
