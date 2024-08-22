@@ -20,6 +20,7 @@ interface TitleItem {
     message?: string; // message is now nested within comments
   };
   votes?: number;
+  img_url?: string; // Optional image URL
 }
 
 interface LocalData {
@@ -93,12 +94,15 @@ const Recommendations: React.FC<RecommendationsProps> = ({ params }) => {
                   className="boxslie flex items-start border p-2"
                   style={{ width: '50%' }}
                 >
-                  <img
-                    src={item.img_url}
-                    alt="Placeholder Image"
-                    className="mr-2 size-12"
-                    style={{ width: '86px', height: '64px' }}
-                  />
+                  {item.img_url && item.img_url !== 'not found url' && (
+                    <img
+                      src={item.img_url}
+                      alt="Recommendation Image"
+                      className="mr-2 size-12"
+                      style={{ width: '86px', height: '64px' }}
+                    />
+                  )}
+
                   <div
                     className="flex h-full flex-col justify-between"
                     style={{ width: '428px' }}
@@ -135,7 +139,7 @@ const Recommendations: React.FC<RecommendationsProps> = ({ params }) => {
                             component={MessageIcon}
                             style={{ fontSize: '1rem', marginRight: '8px' }}
                           />
-                          {item.comments?.message || 'No messages'}{' '}
+                          {item.comments?.message || 'No messages'}
                           {/* Access nested message */}
                         </span>
                         <span
