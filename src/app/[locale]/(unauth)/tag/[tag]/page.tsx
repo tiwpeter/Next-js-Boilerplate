@@ -7,10 +7,18 @@ import TredPage from './TredPage/TredPage';
 
 const TagIdLayout = ({ params }: { params: { tag: string } }) => {
   return (
-    <div className="tag-id-layout">
-      Layout Link
+    <div
+      className="tag-id-layout"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center', // Center the text inside
+      }}
+    >
+      <div style={{ marginBottom: '20px' }}>Layout Link</div>
       <AnnouncePage />
-      {/* <TagIdPage params={params} />  ส่ง params ไปยัง TagIdPage */}
       <Recommendations params={params} />
       <TredPage params={params} />
     </div>
