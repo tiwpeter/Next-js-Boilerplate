@@ -2,10 +2,11 @@
 
 import React from 'react';
 
-import PantipPickTag from '@/components/pantipink/page';
 import PantipIndex from '@/components/pantiprealtime/page';
 import SecodSlie from '@/components/sliecod/data';
-import MainpageGroupTag from '@/components/TagWithIcon';
+
+import PantipMain from './Pantip';
+import MainTagHiz from './TagHiz';
 
 const ClientComponent = () => {
   return (
@@ -13,12 +14,11 @@ const ClientComponent = () => {
       {/* main secod */}
       <SecodSlie />
 
-      {/* <Pantiprealtime /> */}
       <PantipIndex />
-      {/* <PantipIndexSecond /> */}
-      <PantipPickTag />
-
-      <MainpageGroupTag />
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <PantipMain />
+        <MainTagHiz />
+      </div>
     </>
   );
 };

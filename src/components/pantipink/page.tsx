@@ -11,7 +11,6 @@ import React, { useState } from 'react';
 import StoreProvider from '@/store/StoreProvider';
 
 import PantipSecondary from '../Pantip/PantipSecondary/page';
-import TagpanTag from './pagetag/page';
 
 const tags = ['Pantip Pick', 'Pantip Hitz'];
 
@@ -23,7 +22,7 @@ const PantipPickTag = () => {
       className="flex"
       style={{ justifyContent: 'center', width: '100%' }}
     >
-      <div style={{ width: '1000px' }}>
+      <div style={{ width: '711px' }}>
         <div
           className="mt-5"
           style={{
@@ -37,26 +36,11 @@ const PantipPickTag = () => {
         />
         <StoreProvider>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
-            <section className="Detail" style={{ flex: 2 }}>
+            <section>
               <h2>{currentTags[0]}</h2>
               <PantipSecondary tag={currentTags[0]} />
               <h2>{currentTags[1]}</h2>
               <PantipSecondary tag={currentTags[1]} />
-            </section>
-            <section className="TagHiz" style={{ flex: 1 }}>
-              <div className="foder" style={{ marginLeft: '40px' }}>
-                <div style={{ marginTop: '20px' }}>
-                  <div className="tagbox">
-                    <div className="nav1">
-                      <ul className="ww">
-                        <li className="jow1">แท็กฮิต</li>
-                        {/* สามารถเพิ่ม li อื่น ๆ ตามต้องการได้ */}
-                      </ul>
-                    </div>
-                  </div>
-                  <TagpanTag />
-                </div>
-              </div>
             </section>
           </div>
         </StoreProvider>
