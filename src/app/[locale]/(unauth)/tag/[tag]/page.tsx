@@ -14,7 +14,7 @@ const TagIdLayout = ({ params }: { params: { tag: string } }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center', // Center the text inside
+        // textAlign: 'center', // Center the text inside
       }}
     >
       <div style={{ marginBottom: '20px' }}>Layout Link</div>
