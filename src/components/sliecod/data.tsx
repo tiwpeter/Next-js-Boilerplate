@@ -46,7 +46,20 @@ const SecodSlie = () => {
     <div
       style={{ flexDirection: 'column', display: 'flex', alignItems: 'center' }}
     >
-      <div style={{ width: '1078px' }}>Highlight</div>
+      <div
+        className="mt-3"
+        style={{
+          background: '#7f99ff',
+          display: 'flex',
+          minHeight: '43px',
+          padding: '12px 16px',
+          position: 'relative',
+          whiteSpace: 'normal',
+          width: '1078px',
+        }}
+      >
+        <h3>Highlight</h3>
+      </div>
       <Slidersecod slides={datasli} />
     </div>
   );

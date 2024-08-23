@@ -23,23 +23,38 @@ const PantipPickTag = () => {
       style={{ justifyContent: 'center', width: '100%' }}
     >
       <div style={{ width: '711px' }}>
-        <div
-          className="mt-5"
-          style={{
-            backgroundColor: '#7f99ff',
-            display: 'flex',
-            minHeight: '43px',
-            padding: '12px 16px',
-            position: 'relative',
-            whiteSpace: 'normal',
-          }}
-        />
         <StoreProvider>
           <div style={{ display: 'flex', flexDirection: 'row', gap: '20px' }}>
             <section>
-              <h2>{currentTags[0]}</h2>
+              <div
+                className="mt-5"
+                style={{
+                  backgroundColor: '#7f99ff',
+                  display: 'flex',
+                  minHeight: '43px',
+                  padding: '12px 16px',
+                  position: 'relative',
+                  whiteSpace: 'normal',
+                }}
+              >
+                {' '}
+                <h2>{currentTags[0]}</h2>
+              </div>
               <PantipSecondary tag={currentTags[0]} />
-              <h2>{currentTags[1]}</h2>
+              <div
+                className="mt-5"
+                style={{
+                  backgroundColor: '#7f99ff',
+                  display: 'flex',
+                  minHeight: '43px',
+                  padding: '12px 16px',
+                  position: 'relative',
+                  whiteSpace: 'normal',
+                }}
+              >
+                {' '}
+                <h2>{currentTags[1]}</h2>
+              </div>
               <PantipSecondary tag={currentTags[1]} />
             </section>
           </div>

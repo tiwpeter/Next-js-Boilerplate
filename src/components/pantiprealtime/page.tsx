@@ -42,8 +42,23 @@ export default function PantipIndex() {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Pantip</h1>
+    <div
+      style={{ flexDirection: 'column', display: 'flex', alignItems: 'center' }}
+    >
+      <div
+        className="mt-3"
+        style={{
+          background: '#7f99ff',
+          display: 'flex',
+          minHeight: '43px',
+          padding: '12px 16px',
+          position: 'relative',
+          whiteSpace: 'normal',
+          width: '1078px',
+        }}
+      >
+        <h3>Pantip Realtime</h3>
+      </div>
       <StoreProvider>
         <PantipRealtime tag={currentTags} />
         {/* sting tag param */}
