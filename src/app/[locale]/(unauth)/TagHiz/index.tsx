@@ -1,3 +1,4 @@
+import ImgStick from './imgStick/imgStick';
 import TagHiz from './page';
 
 const MainTagHiz = () => {
@@ -6,7 +7,9 @@ const MainTagHiz = () => {
       <div>
         <TagHiz />
       </div>
-      <div>wss</div>
+      <div>
+        <ImgStick />
+      </div>
     </div>
   );
 };

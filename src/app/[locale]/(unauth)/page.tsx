@@ -17,12 +17,14 @@ const ClientComponent = () => {
       <SecodSlie />
 
       <PantipIndex />
-      <div className="container">
-        <div className="pantip-main">
-          <PantipMain />
-        </div>
-        <div className="main-tag-hiz">
-          <MainTagHiz />
+      <div className="contaimain">
+        <div className="container">
+          <div className="pantip-main">
+            <PantipMain />
+          </div>
+          <div className="main-tag-hiz">
+            <MainTagHiz />
+          </div>
         </div>
       </div>
     </>
