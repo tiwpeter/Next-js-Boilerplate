@@ -78,7 +78,7 @@ const CombinedComponent: React.FC<{ tags: string[] }> = ({ tags }) => {
               ) : null}
             </section>
             <div style={{ width: '100%' }}>
-              <h2 style={{ marginLeft: iconfortag ? '18px' : '0px' }}>{tag}</h2>
+              <h2 style={{ marginLeft: iconfortag ? '0px' : '18px' }}>{tag}</h2>
             </div>
           </div>
         </div>
