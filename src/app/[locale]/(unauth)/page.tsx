@@ -1,5 +1,7 @@
 'use client';
 
+import './stick.css';
+
 import React from 'react';
 
 import PantipIndex from '@/components/pantiprealtime/page';
@@ -15,9 +17,13 @@ const ClientComponent = () => {
       <SecodSlie />
 
       <PantipIndex />
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <PantipMain />
-        <MainTagHiz />
+      <div className="container">
+        <div className="pantip-main">
+          <PantipMain />
+        </div>
+        <div className="main-tag-hiz">
+          <MainTagHiz />
+        </div>
       </div>
     </>
   );

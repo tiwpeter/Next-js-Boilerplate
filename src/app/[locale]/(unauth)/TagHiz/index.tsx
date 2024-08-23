@@ -3,7 +3,10 @@ import TagHiz from './page';
 const MainTagHiz = () => {
   return (
     <div>
-      <TagHiz />
+      <div>
+        <TagHiz />
+      </div>
+      <div>wss</div>
     </div>
   );
 };
