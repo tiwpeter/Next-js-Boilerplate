@@ -14,16 +14,16 @@ const initialState = {
 
 // Create an async thunk for fetching data
 export const fetchPantip = createAsyncThunk(
-  'data/fetchPantip', // Updated action type to match the slice name
+  'data/fetchPantip',
   async ({ tagX, page, perPage }) => {
     try {
       const responses = await Promise.all(
         tagX.map((tag) =>
           fetch(
-            `http://localhost:3000/MainSearch?tag=${tag}&page=${page}&per_page=${perPage}`,
+            `https://deploy-web-cap-api-node-newapinode.vercel.app/api/mainSearch?tag=${tag}&page=${page}&per_page=${perPage}`,
           ).then((res) => {
             if (!res.ok) {
-              throw new Error('Network response was not ok');
+              throw new Error(`Network response was not ok for tag ${tag}`);
             }
             return res.json();
           }),
@@ -32,7 +32,8 @@ export const fetchPantip = createAsyncThunk(
       console.log('Fetched data:', responses); // Debug line
       return { tagX, dataX: responses };
     } catch (error) {
-      return Promise.reject(error.message); // Use Promise.reject to properly handle errors
+      console.error('Fetch error:', error.message); // Log the error message
+      return Promise.reject(error.message);
     }
   },
 );

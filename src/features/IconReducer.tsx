@@ -5,7 +5,9 @@ import axios from 'axios';
 // Thunk for fetching Icons
 export const fetchIcons = createAsyncThunk('icons/fetchIcons', async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/room3');
+    const response = await axios.get(
+      'https://deploy-web-cap-api-node.vercel.app/api/room3',
+    );
     // console.log('API Response:', response.data); // Log API response
     return response.data;
   } catch (error) {

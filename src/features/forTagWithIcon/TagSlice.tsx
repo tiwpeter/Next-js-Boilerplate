@@ -8,7 +8,7 @@ export const fetchData = createAsyncThunk(
       const responses = await Promise.all(
         tagX.map((tag) =>
           fetch(
-            `http://localhost:3000/MainSearch?tag=${encodeURIComponent(tag)}`,
+            `https://deploy-web-cap-api-node.vercel.app/MainSearch?tag=${encodeURIComponent(tag)}`,
           ).then((res) => {
             if (!res.ok) {
               throw new Error('Network response was not ok');

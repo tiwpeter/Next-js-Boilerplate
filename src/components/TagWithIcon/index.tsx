@@ -19,9 +19,12 @@ export default function MainpageGroupScrollTag() {
     setLoading(true); // Set loading to true when fetching data
 
     try {
-      const response = await axios.get('http://localhost:3000/api/dataHeader', {
-        params: { start, limit: LIMIT },
-      });
+      const response = await axios.get(
+        'https://deploy-web-cap-api-node.vercel.app/api/namesHeder',
+        {
+          params: { start, limit: LIMIT },
+        },
+      );
 
       setTags((prevTags) => [...prevTags, ...response.data.items]);
       setHasMore(response.data.hasMore);

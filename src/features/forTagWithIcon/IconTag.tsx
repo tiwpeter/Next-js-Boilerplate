@@ -7,7 +7,7 @@ export const fetchIconData = createAsyncThunk(
   async (tag) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/roomtag?tag=${tag}`,
+        `https://deploy-web-cap-api-node.vercel.app/api/roomtag?tag=${tag}`,
       );
       const data = await response.json();
       console.log('Fetched Icon:', { tag, data });
