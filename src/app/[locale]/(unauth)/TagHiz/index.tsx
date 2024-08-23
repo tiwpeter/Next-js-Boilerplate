@@ -3,11 +3,11 @@ import TagHiz from './page';
 
 const MainTagHiz = () => {
   return (
-    <div>
+    <div style={{ marginTop: '-16px' }}>
       <div>
         <TagHiz />
       </div>
-      <div>
+      <div style={{ marginTop: '20px' }}>
         <ImgStick />
       </div>
     </div>

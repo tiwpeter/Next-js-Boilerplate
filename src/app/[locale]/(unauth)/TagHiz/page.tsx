@@ -2,7 +2,7 @@ import TagpanTag from '@/components/pantipink/pagetag/page';
 
 const TagHiz = () => {
   return (
-    <section className="TagHiz" style={{ flex: 1 }}>
+    <section className="TagHiz" style={{ flex: 1, marginLeft: '4px' }}>
       <div className="foder">
         <div style={{ marginTop: '20px' }}>
           <div className="tagbox">
