@@ -19,7 +19,7 @@ export default function MainpageGroupScrollTag() {
     setLoading(true); // Set loading to true when fetching data
 
     try {
-      const response = await axios.get('http://localhost:5000/api/dataHeader', {
+      const response = await axios.get('http://localhost:3000/api/dataHeader', {
         params: { start, limit: LIMIT },
       });
 

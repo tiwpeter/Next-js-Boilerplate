@@ -6,7 +6,9 @@ export const fetchIconData = createAsyncThunk(
   'icon/fetchIconData',
   async (tag) => {
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/roomtag?tag=${tag}`);
+      const response = await fetch(
+        `http://localhost:3000/api/roomtag?tag=${tag}`,
+      );
       const data = await response.json();
       console.log('Fetched Icon:', { tag, data });
       // Ensure data is parsed correctly
@@ -15,7 +17,7 @@ export const fetchIconData = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 // Slice to manage icon-related state

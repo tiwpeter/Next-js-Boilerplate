@@ -1,6 +1,6 @@
 // features/itemsSlice.js
 
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Define the initial state
 const initialState = {
@@ -20,21 +20,21 @@ export const fetchPantip = createAsyncThunk(
       const responses = await Promise.all(
         tagX.map((tag) =>
           fetch(
-            `http://localhost:5000/MainSearch?tag=${tag}&page=${page}&per_page=${perPage}`
+            `http://localhost:3000/MainSearch?tag=${tag}&page=${page}&per_page=${perPage}`,
           ).then((res) => {
             if (!res.ok) {
               throw new Error('Network response was not ok');
             }
             return res.json();
-          })
-        )
+          }),
+        ),
       );
       console.log('Fetched data:', responses); // Debug line
       return { tagX, dataX: responses };
     } catch (error) {
       return Promise.reject(error.message); // Use Promise.reject to properly handle errors
     }
-  }
+  },
 );
 
 // Create the slice

@@ -5,7 +5,7 @@ import axios from 'axios';
 export const fetchTags = createAsyncThunk(
   'tags/fetchTags',
   async ({ page, perPage, reset = false }) => {
-    const response = await axios.get('http://localhost:5000/api/tags', {
+    const response = await axios.get('http://localhost:3000/api/tags', {
       params: { page, per_page: perPage },
     });
     return { data: response.data, reset };
@@ -17,7 +17,7 @@ export const fetchTred = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/Pantip Trend`,
+        `http://localhost:3000/api/${tag}/Pantip Trend`,
       );
       return response.data;
     } catch (error) {
@@ -31,7 +31,7 @@ export const fetchAnnounce = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/Announce`,
+        `http://localhost:3000/api/${tag}/Announce`,
       );
       return response.data;
     } catch (error) {
@@ -46,7 +46,7 @@ export const fetchRecommendations = createAsyncThunk(
   async (tag: string, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/กระทู้แนะนำโดยสมาชิก`,
+        `http://localhost:3000/api/${tag}/กระทู้แนะนำโดยสมาชิก`,
       );
       return response.data;
     } catch (error) {
@@ -60,7 +60,7 @@ export const fetchLatestPosts = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/กระทู้ล่าสุด`,
+        `http://localhost:3000/api/${tag}/กระทู้ล่าสุด`,
       );
       return response.data;
     } catch (error) {
@@ -74,7 +74,7 @@ export const fetchPantipPick = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/Pantip Pick`,
+        `http://localhost:3000/api/${tag}/Pantip Pick`,
       );
       return response.data;
     } catch (error) {
@@ -88,7 +88,7 @@ export const fetchPantipTrend = createAsyncThunk(
   async (tag, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/${tag}/Pantip Trend`,
+        `http://localhost:3000/api/${tag}/Pantip Trend`,
       );
       return response.data;
     } catch (error) {
