@@ -1,4 +1,3 @@
-// features/icon/iconSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // Async thunk to fetch icon data
@@ -7,15 +6,17 @@ export const fetchIconData = createAsyncThunk(
   async (tag) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/rooms3/roomtag?tag=${tag}`,
+        `http://localhost:3000/api/room3/roomtag?tag=${tag}`,
       );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const data = await response.json();
       console.log('Fetched Icon:', { tag, data });
       // Ensure data is parsed correctly
-      const parsedData = Array.isArray(data) ? data : JSON.parse(data);
-      return { tag, data: parsedData };
+      return { tag, data }; // Directly return data if it's already in the expected format
     } catch (error) {
-      throw error;
+      throw new Error(`Failed to fetch icon data: ${error.message}`);
     }
   },
 );

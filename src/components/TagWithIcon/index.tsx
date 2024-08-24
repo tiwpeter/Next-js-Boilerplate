@@ -19,39 +19,48 @@ export default function MainpageGroupScrollTag() {
     setLoading(true); // Set loading to true when fetching data
 
     try {
-      const response = await axios.get(
-        'http://localhost:5000/api/name-header',
-        {
-          params: { start, limit: LIMIT },
-        },
-      );
+      const response = await axios.get('http://localhost:3000/api/name-header');
+      const { data } = response;
 
-      setTags((prevTags) => [...prevTags, ...response.data.items]);
-      setHasMore(response.data.hasMore);
-      setStart((prevStart) => prevStart + LIMIT); // Move the increment here
+      // ตรวจสอบว่า response.data และ response.data.items มีอยู่จริง
+      if (data && Array.isArray(data.items)) {
+        setTags((prevTags) => [...prevTags, ...data.items]);
+        setHasMore(data.hasMore); // ใช้ข้อมูล hasMore จาก API
+        setStart((prevStart) => prevStart + LIMIT); // Move the increment here
+      } else {
+        console.error('Invalid response structure:', data);
+        setHasMore(false); // หยุดการโหลดหากข้อมูลมีปัญหา
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false); // Reset loading state after data fetching
     }
-  }, [start, hasMore, loading]);
+  }, [hasMore, loading]);
 
   useEffect(() => {
-    if (inView && hasMore) {
+    if (inView && hasMore && !loading) {
       loadItems();
     }
-  }, [inView, loadItems]);
+  }, [inView, hasMore, loading, loadItems]);
 
   return (
     <div
       className="App"
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+      }}
     >
       <h1>My App</h1>
       <CombinedComponent tags={tags} />
       {loading && <div>Loading...</div>} {/* Show loading indicator */}
+      {!hasMore && !loading && <div>No more items</div>}{' '}
+      {/* Optional: Show a message when no more items */}
       {hasMore && !loading && (
-        <div ref={ref} style={{ height: '100px', background: 'transparent' }} />
+        <div ref={ref} style={{ height: '20px', background: 'transparent' }} />
       )}{' '}
       {/* Sentinel */}
     </div>
